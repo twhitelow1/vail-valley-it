@@ -5,10 +5,12 @@
 
 export type Faq = { q: string; a: string };
 export type Section = { h2: string; html: string };
+export const serviceGroups = ['Managed IT', 'Security & Compliance', 'Networks & Communication', 'Support & Projects', 'Automation & AI', 'Digital Marketing'] as const;
+export type ServiceGroup = (typeof serviceGroups)[number];
 export type Service = {
   slug: string;
   name: string;
-  group: 'Managed IT' | 'Security & Compliance' | 'Networks & Communication' | 'Support & Projects' | 'Automation & AI';
+  group: ServiceGroup;
   icon: string;
   tier: 1 | 2 | 3;
   title: string;
@@ -930,6 +932,299 @@ export const services: Service[] = [
       { q: 'Will there be downtime during a migration?', a: 'We plan cut-overs after hours and keep the old system available as a fallback, so most clients see little or no disruption to business hours.' },
     ],
     related: ['microsoft-365-email-migration', 'network-wifi-setup', 'hardware-upgrades'],
+  },
+  {
+    slug: 'website-design',
+    name: 'Website Design',
+    group: 'Digital Marketing',
+    icon: 'layout',
+    tier: 1,
+    title: 'Website Design in Vail Valley, CO | Vail Valley IT',
+    description: 'Fast, mobile-first website design for Vail Valley businesses — built for local search, AI answers and booking, by a local Eagle County team.',
+    h1: 'Website Design for Vail Valley Businesses',
+    primaryKeyword: 'website design Vail Valley',
+    answer: 'Vail Valley IT designs and builds websites for small businesses across the Vail Valley and Eagle County. Every site is fast on a phone, written to rank for the towns you actually serve, structured so Google and AI assistants can quote it, and connected to the way you take bookings, calls and leads. You own the site, the domain and the content.',
+    card: 'Fast, mobile-first websites built to rank locally, get quoted by AI and turn visitors into calls and bookings.',
+    sections: [
+      {
+        h2: 'What a small business website needs to do now',
+        html: `<p>A website used to be a brochure. Today it has three jobs: show up when someone nearby searches for what you do, give Google and AI assistants clear facts they can repeat, and make it effortless for a visitor to call, book or ask for a quote from their phone.</p>
+<p>Most of the sites we are asked to replace fail at least one of those. They load slowly on mountain cell coverage, list the wrong hours, bury the phone number, or say nothing about which towns they serve. Each of those costs real calls.</p>
+<p>We build every site around those three jobs: a page for each core service, clear answers to the questions customers actually ask, structured data (schema) that spells out your business details for search engines, and a call or booking button on every screen.</p>`,
+      },
+      {
+        h2: 'Built by the team that runs your technology',
+        html: `<p>Because we also manage IT, your website is not an island. Domains, DNS, business email, SSL certificates, contact forms and tracking are set up correctly the first time, and someone local is accountable when anything changes. No more chasing a freelancer who registered your domain under their own account.</p>
+<p>Sites are built on modern, static hosting that is fast, inexpensive to run and hard to hack, with no plugin updates to forget. This site is built exactly that way. When you need a change, you ask and it is done.</p>`,
+      },
+      {
+        h2: 'Designed for how people find Vail Valley businesses',
+        html: `<p>Your customers are a mix of locals, second-home owners and visitors who may be searching from Denver, Texas or a hotel room in Beaver Creek. We plan the site so each group finds what it needs: service-area pages for the towns you cover, seasonal hours and offers that are easy to update, and content that answers the questions visitors ask before they arrive.</p>
+<p>Every site launches with <a href="/seo-ai-search-optimization">local SEO and AI search</a> foundations in place and analytics that show which pages produce calls and bookings.</p>`,
+      },
+    ],
+    includes: [
+      'Custom design and mobile-first build',
+      'Copywriting for core service and town pages',
+      'Local SEO foundations and schema markup',
+      'Booking, form and click-to-call integration',
+      'Domain, DNS, SSL and business email setup',
+      'Fast, secure hosting with no plugins to patch',
+      'Google Analytics and Search Console setup',
+      'Accessibility basics: contrast, headings, alt text and keyboard navigation',
+      'Ongoing edits and updates on request',
+    ],
+    faqs: [
+      { q: 'How long does it take to build a small business website?', a: 'A typical small business site of five to fifteen pages takes about three to six weeks from kickoff to launch. The biggest variable is how quickly content, photos and feedback come back during the project.' },
+      { q: 'Do I own my website and domain?', a: 'Yes. The domain is registered in your name and the site content is yours. We manage it for you, but you are never locked in.' },
+      { q: 'Will my new website show up on Google?', a: 'A new site is built with the technical foundations Google needs: fast pages, clear titles, a page for each service and town, schema markup and a submitted sitemap. Rankings then depend on competition, reviews and ongoing content, which our SEO and AI search service covers.' },
+      { q: 'Can you redesign my existing website instead of starting over?', a: 'Yes. We review your current site first. If the content and structure are sound, a redesign may be enough. If the site is slow, hard to update or poorly structured, a rebuild usually costs less over time.' },
+    ],
+    related: ['seo-ai-search-optimization', 'google-ads-management', 'short-form-video-content'],
+  },
+  {
+    slug: 'short-form-video-content',
+    name: 'Short-Form Video Content',
+    group: 'Digital Marketing',
+    icon: 'video',
+    tier: 1,
+    title: 'Short-Form Video Content in Vail Valley, CO | Vail Valley IT',
+    description: 'Instagram Reels, TikTok and YouTube Shorts for Vail Valley businesses — planned, filmed on location in Eagle County, edited and posted for you.',
+    h1: 'Short-Form Video Content for Vail Valley Businesses',
+    primaryKeyword: 'short form video content Vail Valley',
+    answer: 'Vail Valley IT produces short-form video for local businesses across the Vail Valley: Instagram Reels, TikTok, YouTube Shorts and Facebook video. We plan the ideas, film on location in Eagle County, edit with captions and music, and deliver ready-to-post clips in batches, so you have a steady stream of video without a camera crew on payroll.',
+    card: 'Reels, TikToks and Shorts planned, filmed on location in the valley, edited and ready to post.',
+    sections: [
+      {
+        h2: 'Why short-form video matters for local businesses',
+        html: `<p>Short vertical video is now one of the main ways people discover local businesses on Instagram, TikTok, YouTube and Facebook. It is also where visitors plan trips: what to eat in Vail Village, which shop to stop at in Edwards, who to call when the condo heater fails.</p>
+<p>Video that shows the real people, place and work behind a business builds trust faster than any photo or ad. It gives your social accounts something worth following, and it gives your ads and website content that does not look like a stock template.</p>`,
+      },
+      {
+        h2: 'How a batch shoot works',
+        html: `<p>The most efficient way to produce consistent video is to plan ahead and film in batches. We agree on a month or season of ideas with you, script the hooks, then film several clips in a single visit to your business. That one visit becomes weeks of content.</p>
+<p>Clips are edited for each platform with on-screen captions, since most short video is watched with the sound off, along with music, branding and a clear call to action. You review and approve every clip before it is posted.</p>`,
+      },
+      {
+        h2: 'What we film',
+        html: `<ul>
+<li>Behind-the-scenes and day-in-the-life clips of your team at work</li>
+<li>Product, menu, property and project showcases</li>
+<li>Quick tips and answers to the questions customers ask most</li>
+<li>Customer stories and walk-throughs, with permission</li>
+<li>Seasonal openings, events and offers</li>
+<li>Recruiting videos for seasonal hiring</li>
+</ul>
+<p>Video pairs naturally with <a href="/social-media-management">social media management</a> and gives <a href="/meta-ads-management">Meta ads</a> far stronger creative than still images.</p>`,
+      },
+    ],
+    includes: [
+      'Content planning and hook-first scripting',
+      'On-location filming in Eagle County',
+      'Vertical editing with captions, music and branding',
+      'Versions sized for Reels, TikTok, Shorts and Facebook',
+      'Monthly or seasonal batch shoot days',
+      'Approval before anything is posted',
+      'Raw footage and final files you keep',
+      'Optional posting through social media management',
+    ],
+    faqs: [
+      { q: 'How many videos do we get from one shoot?', a: 'It depends on the plan and the business, but a well-planned half-day shoot commonly produces several finished short videos. We agree on the number of finished clips in the quote before filming.' },
+      { q: 'Do my employees have to be on camera?', a: 'No. Many effective videos show hands, products, places and finished work with voiceover or on-screen text. When staff are willing to appear, the results are usually stronger, and we coach them through it.' },
+      { q: 'Which platform should a local business post short videos on?', a: 'Instagram Reels and Facebook reach the widest local audience for most Vail Valley businesses. TikTok and YouTube Shorts add reach with younger and visitor audiences. Because the same vertical clip works on all of them, we usually format each video for several platforms.' },
+      { q: 'Can we use the videos in ads?', a: 'Yes. You own the finished videos and can use them in ads, on your website and anywhere else. Short videos usually make stronger ad creative than still photos.' },
+    ],
+    related: ['social-media-management', 'meta-ads-management', 'website-design'],
+  },
+  {
+    slug: 'social-media-management',
+    name: 'Social Media Management',
+    group: 'Digital Marketing',
+    icon: 'share',
+    tier: 1,
+    title: 'Social Media Management in Vail Valley, CO | Vail Valley IT',
+    description: 'Social media management for Vail Valley businesses — content calendars, posting, community replies and reporting on Instagram, Facebook, TikTok and LinkedIn.',
+    h1: 'Social Media Management for Vail Valley Businesses',
+    primaryKeyword: 'social media management Vail Valley',
+    answer: 'Vail Valley IT manages social media for small businesses across the Vail Valley and Eagle County. We build a content calendar around your seasons, create and schedule posts on Instagram, Facebook, TikTok, LinkedIn and Google Business Profile, reply to comments and messages, and report each month on what is growing your audience and bringing in customers.',
+    card: 'Content calendars, posting, comment and message replies, and monthly reporting, run around your seasons.',
+    sections: [
+      {
+        h2: 'What social media management includes',
+        html: `<p>Most owners know they should post more. The problem is time: coming up with ideas, taking photos, writing captions, posting at the right time and keeping up with comments and messages. Social media management takes all of that off your plate.</p>
+<p>We start with your goals, whether that is bookings, walk-ins, calls, hiring or brand awareness, and build a monthly calendar that supports them. You approve the plan, we create and schedule the posts, and we watch the accounts so questions from customers do not sit unanswered.</p>`,
+      },
+      {
+        h2: 'Planned around the Vail Valley calendar',
+        html: `<p>Business in the valley moves with the seasons. Opening day, the holidays, spring break, mud season, summer events and fall all bring different customers and different messages. Your content calendar follows that rhythm, so you are promoting the right thing at the right time instead of reacting at the last minute.</p>
+<p>We also plan for the slow weeks. Mud season is a good time to build your local following, recognize staff and tell the story of your business, so the audience is there when visitors return.</p>`,
+      },
+      {
+        h2: 'Content that looks like your business',
+        html: `<p>Generic stock photos and recycled quotes do not build trust. We use your real people, place and work wherever possible, combining photos you send, images we take on visits and <a href="/short-form-video-content">short-form video</a> filmed on location.</p>
+<p>When a post performs well, it can be boosted or turned into a <a href="/meta-ads-management">Meta ad</a> aimed at people in the valley or planning a trip here.</p>`,
+      },
+    ],
+    includes: [
+      'Monthly content calendar built around your seasons',
+      'Post design, captions and hashtags',
+      'Scheduling on Instagram, Facebook, TikTok and LinkedIn',
+      'Google Business Profile posts',
+      'Comment and direct message monitoring and replies',
+      'Review response drafting',
+      'Account setup, cleanup and branding',
+      'Monthly performance report',
+    ],
+    faqs: [
+      { q: 'How often should a small business post on social media?', a: 'Consistency matters more than volume. For most local businesses, a few quality posts a week on one or two main platforms, plus timely replies to comments and messages, outperforms daily posting that cannot be sustained.' },
+      { q: 'Which social media platforms should a local business be on?', a: 'Facebook and Instagram reach the broadest local and visitor audience for most Vail Valley businesses. LinkedIn suits professional services and B2B. TikTok fits businesses with visual products or a younger audience. Google Business Profile posts are worth doing for every local business.' },
+      { q: 'Do I approve posts before they go live?', a: 'Yes. You approve the monthly calendar and can review posts before they are scheduled. Time-sensitive replies follow guidelines you set.' },
+      { q: 'Will social media management bring in customers?', a: 'Organic social media builds awareness and trust over time, and it supports reviews, referrals and ads. For faster, measurable lead flow, we usually pair it with Meta or Google ads.' },
+    ],
+    related: ['short-form-video-content', 'meta-ads-management', 'seo-ai-search-optimization'],
+  },
+  {
+    slug: 'seo-ai-search-optimization',
+    name: 'SEO & AI Search (GEO)',
+    group: 'Digital Marketing',
+    icon: 'search',
+    tier: 1,
+    title: 'Local SEO & AI Search Optimization (GEO) in Vail Valley, CO | Vail Valley IT',
+    description: 'Local SEO and AI search optimization for Vail Valley businesses — rank in Google Maps and get recommended by ChatGPT, Gemini, Perplexity and AI Overviews.',
+    h1: 'Local SEO & AI Search Optimization in the Vail Valley',
+    primaryKeyword: 'local SEO Vail Valley',
+    answer: 'Vail Valley IT provides local SEO and generative engine optimization (GEO) for businesses in the Vail Valley. We optimize your Google Business Profile, website and listings so you rank in Google Maps and local results for the towns you serve, and we structure your content so AI assistants like ChatGPT, Gemini, Perplexity and Google AI Overviews can find, trust and recommend your business.',
+    card: 'Rank in Google Maps and local results, and get recommended when customers ask ChatGPT and other AI assistants.',
+    sections: [
+      {
+        h2: 'What is GEO, and how is it different from SEO?',
+        html: `<p>Search engine optimization (SEO) is the work of ranking in Google’s results and Maps. Generative engine optimization (GEO) is the newer work of being named in the answers AI assistants write, such as ChatGPT, Gemini, Perplexity, Microsoft Copilot and Google’s AI Overviews.</p>
+<p>The two overlap heavily. AI assistants lean on the same signals Google does: a clear, consistent business profile, a website that states facts plainly, reviews, and mentions on other trusted sites. GEO adds a focus on writing content that answers questions directly, marking it up with structured data, and making sure your business facts are identical everywhere they appear.</p>`,
+      },
+      {
+        h2: 'Local SEO for a resort-town market',
+        html: `<p>Vail Valley search is unusual. A large share of searches come from visitors and second-home owners, many of them searching before they arrive or from a phone in the village. Searches are also very town-specific: someone in Edwards may not drive to Vail for a service, and someone in Gypsum searches differently from someone in Beaver Creek.</p>
+<p>We build your local presence around that: a fully optimized Google Business Profile, a page for each town you actually serve, consistent name, address and phone details across directories, and a steady plan for earning and responding to reviews.</p>`,
+      },
+      {
+        h2: 'We built this site the same way',
+        html: `<p>The site you are reading was built for local SEO and AI search from the start: one page per service and per town, plain-language answers at the top of every page, structured data describing the business and its services, and a machine-readable summary for AI crawlers. We apply the same methods to your website, or <a href="/website-design">build you a new one</a> if your current site cannot support them.</p>`,
+      },
+    ],
+    includes: [
+      'Google Business Profile optimization and posting',
+      'Local keyword and competitor research by town',
+      'On-page SEO for service and town pages',
+      'Schema markup (structured data) for your business and services',
+      'AI search readiness: answer-first content, llms.txt and entity consistency',
+      'Directory and citation cleanup for consistent name, address and phone',
+      'Review generation and response plan',
+      'Technical SEO: speed, indexing, sitemaps and Search Console',
+      'Monthly ranking, traffic and lead reporting',
+    ],
+    faqs: [
+      { q: 'How long does local SEO take to work?', a: 'Improvements to a Google Business Profile and on-page fixes can show results within weeks. Competitive rankings usually build over three to six months or longer, depending on the market, your reviews and how much content you have.' },
+      { q: 'How do I get my business recommended by ChatGPT and other AI tools?', a: 'AI assistants recommend businesses they can clearly identify and trust. That means consistent business details everywhere, a website that answers common questions directly, structured data, strong reviews and mentions on other reputable sites. GEO work focuses on each of those signals.' },
+      { q: 'What is the most important local SEO factor?', a: 'For most local businesses, a complete and active Google Business Profile with steady, genuine reviews has the biggest impact on Maps rankings, followed by a website with a clear page for each service and town you serve.' },
+      { q: 'Do you guarantee first-page rankings?', a: 'No honest provider can guarantee rankings, because Google and AI tools control their own results. We commit to the work, report on it transparently every month and focus on the rankings and leads that matter to your business.' },
+    ],
+    related: ['website-design', 'google-ads-management', 'social-media-management'],
+  },
+  {
+    slug: 'google-ads-management',
+    name: 'Google Ads Management',
+    group: 'Digital Marketing',
+    icon: 'target',
+    tier: 1,
+    title: 'Google Ads Management in Vail Valley, CO | Vail Valley IT',
+    description: 'Google Ads management for Vail Valley businesses — search, Maps and Local Services ads targeted to Eagle County and visitors planning a trip, with call tracking.',
+    h1: 'Google Ads Management for Vail Valley Businesses',
+    primaryKeyword: 'Google Ads management Vail Valley',
+    answer: 'Vail Valley IT manages Google Ads for local businesses across the Vail Valley and Eagle County. We build search, Maps and Local Services campaigns targeted to the towns you serve and to visitors planning a trip, track every call, form and booking, and adjust spending every week so your budget goes to the searches that produce customers.',
+    card: 'Search, Maps and Local Services ads aimed at the valley and incoming visitors, with every call and lead tracked.',
+    sections: [
+      {
+        h2: 'Why Google Ads works for local service businesses',
+        html: `<p>Google Ads put your business at the top of the page at the moment someone searches for what you do. Unlike most advertising, you reach people who already have the need: “plumber in Avon,” “dinner reservations Vail,” “property manager Edwards.” You pay when someone clicks or, with Local Services Ads, when a lead contacts you.</p>
+<p>The catch is waste. Poorly run accounts spend heavily on irrelevant searches, people far outside your service area and clicks that never turn into calls. Most of the value of management is in stopping that waste.</p>`,
+      },
+      {
+        h2: 'Targeting the valley and the people coming to it',
+        html: `<p>Vail Valley businesses often have two audiences: locals and visitors. We build campaigns for each. Local campaigns target the specific towns you serve, so a Gypsum business is not paying for clicks from Vail Pass. Visitor campaigns reach people searching from the Front Range and further afield who are planning a stay, timed to your seasons.</p>
+<p>Budgets follow the calendar too. Spending rises ahead of your busy season and drops in the shoulder seasons, instead of running flat all year.</p>`,
+      },
+      {
+        h2: 'Tracking that shows what you are actually getting',
+        html: `<p>Clicks are not customers. Every account we manage tracks the actions that matter: phone calls from ads, form submissions, bookings and directions requests. Because we also handle <a href="/website-design">websites</a> and IT, conversion tracking is set up correctly on your site and forms, not guessed at.</p>
+<p>Each month you get a plain-language report: what you spent, how many leads it produced, what each lead cost and what we are changing next.</p>`,
+      },
+    ],
+    includes: [
+      'Account audit, setup or rebuild',
+      'Search and Google Maps campaigns',
+      'Local Services Ads setup and verification where eligible',
+      'Town-level and visitor-market geo-targeting',
+      'Keyword research and negative keyword management',
+      'Ad copy and landing page recommendations',
+      'Call, form and booking conversion tracking',
+      'Seasonal budget planning',
+      'Weekly optimization and monthly reporting',
+    ],
+    faqs: [
+      { q: 'How much should a small business spend on Google Ads?', a: 'It depends on your industry, competition and service area. Local service keywords in the Vail Valley vary widely in cost. We recommend a starting budget after reviewing keyword costs for your business, then adjust based on the cost per lead.' },
+      { q: 'What are Google Local Services Ads?', a: 'Local Services Ads appear at the very top of some searches with a “Google Screened” or “Google Guaranteed” badge. You pay per lead rather than per click. They are available for certain service categories and require background and license checks.' },
+      { q: 'Is the ad budget included in management fees?', a: 'No. Your ad spend is paid directly to Google from your own account, so you always see exactly what was spent. Management is a separate flat fee.' },
+      { q: 'Who owns the Google Ads account?', a: 'You do. The account is set up under your business, with us given management access. If you ever leave, the account, history and data stay with you.' },
+    ],
+    related: ['seo-ai-search-optimization', 'meta-ads-management', 'website-design'],
+  },
+  {
+    slug: 'meta-ads-management',
+    name: 'Meta Ads Management',
+    group: 'Digital Marketing',
+    icon: 'megaphone',
+    tier: 1,
+    title: 'Meta Ads Management (Facebook & Instagram) in Vail Valley, CO | Vail Valley IT',
+    description: 'Facebook and Instagram ads for Vail Valley businesses — local and visitor targeting, video creative, lead forms and retargeting, managed by a local team.',
+    h1: 'Facebook & Instagram Ads for Vail Valley Businesses',
+    primaryKeyword: 'Facebook ads Vail Valley',
+    answer: 'Vail Valley IT manages Meta ads, meaning Facebook and Instagram advertising, for businesses across the Vail Valley. We target locals by town and visitors by where they live and travel, create scroll-stopping video and image ads, set up lead forms and retargeting, and track results back to calls, bookings and sales so you know what your ad spend is returning.',
+    card: 'Facebook and Instagram campaigns with local and visitor targeting, video creative and results you can track.',
+    sections: [
+      {
+        h2: 'When Meta ads make sense',
+        html: `<p>Google Ads reach people who are already searching. Meta ads reach people before they search, while they scroll Facebook and Instagram. That makes them ideal for creating demand: promoting a new menu, an event, a seasonal offer, a listing or an opening, and for staying in front of people who have already visited your website.</p>
+<p>They also work well for hiring. Many valley businesses use Instagram and Facebook ads to recruit seasonal staff ahead of winter and summer.</p>`,
+      },
+      {
+        h2: 'Reaching locals and visitors',
+        html: `<p>We target locals by the towns and radius you serve, and visitors by where they live, their interests and travel behavior, so your ads reach people planning a trip to the mountains, not just people already here. Retargeting brings back people who visited your website or engaged with your posts.</p>
+<p>Some ad types have rules. Housing, employment, credit and financial services ads fall under Meta’s Special Ad Categories, which limit targeting by age, gender and ZIP code. If you are in real estate, property management, lending or hiring, we set up campaigns that comply from the start.</p>`,
+      },
+      {
+        h2: 'Creative that earns attention',
+        html: `<p>On Meta, the ad itself does most of the targeting work. Strong, authentic creative, especially <a href="/short-form-video-content">short vertical video</a> filmed in the valley, consistently outperforms polished stock imagery. We produce and test multiple versions and shift budget to what works.</p>
+<p>Every campaign is connected to tracking on your <a href="/website-design">website</a> and booking tools, so results are measured in leads and sales, not just likes.</p>`,
+      },
+    ],
+    includes: [
+      'Meta Business account and Pixel setup or cleanup',
+      'Campaign strategy and audience planning',
+      'Local radius and visitor-market targeting',
+      'Image and short-form video ad creative',
+      'Lead form and landing page setup',
+      'Website and engagement retargeting',
+      'Special Ad Category compliance for housing, employment and credit',
+      'Conversion tracking with the Meta Pixel and Conversions API',
+      'Ongoing testing, optimization and monthly reporting',
+    ],
+    faqs: [
+      { q: 'Are Facebook ads worth it for a small local business?', a: 'Yes, when the offer is clear and the creative is strong. Meta ads are an affordable way to reach a defined local or visitor audience, promote events and offers, recruit staff and retarget website visitors. Results depend on tracking and on testing creative.' },
+      { q: 'Should I advertise on Facebook or Instagram?', a: 'Usually both. Meta ads run across Facebook and Instagram from one campaign, and the system shifts budget toward whichever placement performs better for your goal.' },
+      { q: 'Can I target tourists planning a trip to Vail?', a: 'Yes. Meta allows targeting by where people live, their interests and travel-related behavior, so campaigns can reach people in your key visitor markets before and during their trip, subject to Meta’s targeting rules.' },
+      { q: 'Is ad spend included in the management fee?', a: 'No. Ad spend is billed by Meta directly to your own ad account, so you always see exactly what was spent. Management is a separate flat fee.' },
+    ],
+    related: ['short-form-video-content', 'social-media-management', 'google-ads-management'],
   },
 ];
 

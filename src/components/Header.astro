@@ -1,14 +1,13 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-import { services } from '../data/services';
+import { services, serviceGroups as groups } from '../data/services';
 import { locations } from '../data/locations';
 import { industries } from '../data/industries';
 import { frameworks } from '../data/compliance';
 import { bookHref, telHref } from '../data/site';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const groups = ['Managed IT', 'Security & Compliance', 'Networks & Communication', 'Support & Projects', 'Automation & AI'] as const;
-const cols = [[groups[0], groups[4]], [groups[1], groups[2]], [groups[3]]];
+const cols = [[groups[0], groups[4], groups[5]], [groups[1]], [groups[2], groups[3]]];
 const links = [
   { href: '/about', label: 'About' },
   { href: '/service-areas', label: 'Service Areas' },
@@ -36,7 +35,8 @@ const links = [
               ))}
             </div>
           ))}
-          <a class="all" href="/services">All IT services</a>
+          <a class="all" href="/services">All services</a>
+          <a class="all" href="/digital-marketing" style="grid-column:auto;border:0;padding-top:0">Digital marketing</a>
           <a class="all" href="/security-check" style="grid-column:auto;border:0;padding-top:0">Free security check</a>
         </div>
       </div>
@@ -84,6 +84,7 @@ const links = [
       <div class="mnav-panel">
         <a href="/">Home</a>
         <a href="/services">IT Services</a>
+        <a href="/digital-marketing">Digital Marketing</a>
         <a href="/service-areas">Service Areas</a>
         <a href="/industries">Industries</a>
         <a href="/compliance">Compliance</a>

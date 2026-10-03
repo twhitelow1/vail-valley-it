@@ -1,17 +1,17 @@
 # Vail Valley IT — vailvalleyit.com
 
-Local IT services site for **Vail Valley IT**, a DubLow Digital brand (owner: Todd Whitelow).
+Local IT and digital marketing site for **Vail Valley IT**, a DubLow Digital brand (owner: Todd Whitelow).
 Astro 7 static site (Node ≥ 22), deployed on Vercel. Built for local SEO and AI answer engines (GEO).
 
 ## Commands
 - `npm run dev` — dev server on http://localhost:4321
-- `npm run build` — static build to `dist/` (54 pages). Run this before every push; it is the only check.
+- `npm run build` — static build to `dist/` (61 pages). Run this before every push; it is the only check.
 - `npm run build && python3 tools/preview_bundle.py dist preview.html` — single-file clickable preview
 
 ## Architecture
 Pages are data-driven. Edit content in `src/data/`, not in page templates:
 - `site.ts` — single source of truth for NAP, hours, GHL links, tracking IDs, reviews. NAP must match the Google Business Profile character-for-character.
-- `services.ts` + `serviceExtras.ts` → service pages, rendered by `src/pages/[slug].astro`
+- `services.ts` + `serviceExtras.ts` → service pages, rendered by `src/pages/[slug].astro`. `serviceGroups` drives nav and `/services`; the `Digital Marketing` group gets marketing CTAs (free marketing review) instead of the cybersecurity assessment, and has its own hub at `/digital-marketing`
 - `locations.ts` → town pages (`/it-support-<town>-co`), also via `[slug].astro`
 - `industries.ts` → `src/pages/industries/[slug].astro`
 - `compliance.ts` → `src/pages/compliance/[slug].astro`

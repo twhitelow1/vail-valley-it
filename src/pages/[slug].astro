@@ -31,8 +31,9 @@ const allFaqs = [...item.faqs, ...(ex?.faqs ?? [])];
 const slugify = (t: string) => t.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const featuredReview = ex?.review ? reviews.find((r) => r.author === ex.review) : undefined;
 let crumbs, schema;
+const mkt = kind === 'service' && (item as Service).group === 'Digital Marketing';
 if (kind === 'service') {
-  crumbs = [{ name: 'Home', path: '/' }, { name: 'IT Services', path: '/services' }, { name: item.name, path }];
+  crumbs = [{ name: 'Home', path: '/' }, mkt ? { name: 'Digital Marketing', path: '/digital-marketing' } : { name: 'IT Services', path: '/services' }, { name: item.name, path }];
   schema = [webPage(path, item.title, item.description), serviceSchema(item), breadcrumbs(crumbs), faqPage(allFaqs, path)];
 } else {
   crumbs = [{ name: 'Home', path: '/' }, { name: 'Service Areas', path: '/service-areas' }, { name: `IT Support ${item.town}`, path }];
@@ -58,7 +59,7 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
           </>
         ) : (
           <>
-            <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Get a free cybersecurity assessment</a>
+            <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />{mkt ? 'Get a free marketing review' : 'Get a free cybersecurity assessment'}</a>
             <a class="btn btn-outline" href={telHref}><Icon name="phone" />{site.phone}</a>
           </>
         )}
@@ -92,7 +93,9 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
           <>
             <h2 id="signs">Signs it’s time for {svc.name}</h2>
             <ul class="signs">{ex.signs.map((x) => <li><Icon name="check" />{x}</li>)}</ul>
-            <p>If two or more of these sound familiar, <a href="/security-check">take the free security check</a> or <a href={bookHref}>book a free cybersecurity assessment</a>.</p>
+            {mkt
+              ? <p>If two or more of these sound familiar, <a href={bookHref}>book a free marketing review</a> or call <a href={telHref}>{site.phone}</a>.</p>
+              : <p>If two or more of these sound familiar, <a href="/security-check">take the free security check</a> or <a href={bookHref}>book a free cybersecurity assessment</a>.</p>}
 
             {ex.process && (
               <>
@@ -126,11 +129,11 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
               </figure>
             )}
 
-            <div class="mini-check">
+            {!mkt && <div class="mini-check">
               <Icon name="shield" />
               <div><b>How exposed is your business?</b><span>Ten questions, two minutes, an instant risk score.</span></div>
               <a class="btn btn-primary" href="/security-check">Take the free check</a>
-            </div>
+            </div>}
           </>
         )}
 
@@ -150,7 +153,10 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
             </div>
 
             <h3 style="margin-top:2rem">All IT services available in {loc.town}</h3>
-            <ul class="towns">{services.map((x) => <li><a href={`/${x.slug}`}>{x.name}</a></li>)}</ul>
+            <ul class="towns">{services.filter((x) => x.group !== 'Digital Marketing').map((x) => <li><a href={`/${x.slug}`}>{x.name}</a></li>)}</ul>
+
+            <h3 style="margin-top:1.6rem">Digital marketing in {loc.town}</h3>
+            <ul class="towns">{services.filter((x) => x.group === 'Digital Marketing').map((x) => <li><a href={`/${x.slug}`}>{x.name}</a></li>)}</ul>
 
             <h3 style="margin-top:1.6rem">Industries we specialize in</h3>
             <ul class="towns">{industries.map((i) => <li><a href={`/industries/${i.slug}`}>{i.name} IT</a></li>)}</ul>
@@ -178,9 +184,19 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
 
       <aside class="aside" aria-label="Related">
         <div class="box dark">
-          <h3>Free cybersecurity assessment</h3>
-          <p style="font-size:.95rem">We review your devices, accounts, backups and security, then send a written plan with a flat price.</p>
-          <a class="btn btn-light" href={bookHref}><Icon name="calendar" />Book my assessment</a>
+          {mkt ? (
+            <>
+              <h3>Free local marketing review</h3>
+              <p style="font-size:.95rem">We review your website, Google Business Profile, search visibility, social and ads, then send a written plan with a flat price.</p>
+              <a class="btn btn-light" href={bookHref}><Icon name="calendar" />Book my review</a>
+            </>
+          ) : (
+            <>
+              <h3>Free cybersecurity assessment</h3>
+              <p style="font-size:.95rem">We review your devices, accounts, backups and security, then send a written plan with a flat price.</p>
+              <a class="btn btn-light" href={bookHref}><Icon name="calendar" />Book my assessment</a>
+            </>
+          )}
           <a class="btn btn-ghost-light" href={telHref}><Icon name="phone" />Call {site.phone}</a>
         </div>
         {svc && (
@@ -208,7 +224,7 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
   {svc && (
     <section class="section tint" aria-labelledby="rel-h">
       <div class="wrap">
-        <h2 id="rel-h">Related IT services</h2>
+        <h2 id="rel-h">{mkt ? 'Related marketing services' : 'Related IT services'}</h2>
         <div class="grid grid-3">
           {svc.related.map((r) => { const x = serviceBySlug[r]; return (
             <article class="card"><Icon name={x.icon} class="icon-lg" /><div><h3><a href={`/${x.slug}`}>{x.name}</a></h3><p>{x.card}</p><span class="more">Learn more<Icon name="chevron" /></span></div></article>
@@ -218,5 +234,7 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
     </section>
   )}
 
-  <CtaBand title={loc ? `Get local IT support in ${loc.town}` : `Talk to us about ${svc!.name.toLowerCase()}`} />
+  {mkt
+    ? <CtaBand title={`Talk to us about ${svc!.name.toLowerCase()}`} text="Get a free local marketing review. We look at your website, Google Business Profile, search rankings, social and ads, then give you a written plan and a flat price." button="Get a free marketing review" />
+    : <CtaBand title={loc ? `Get local IT support in ${loc.town}` : `Talk to us about ${svc!.name.toLowerCase()}`} />}
 </Base>

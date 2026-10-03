@@ -3,24 +3,23 @@ import Base from '../../layouts/Base.astro';
 import Icon from '../../components/Icon.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { services } from '../../data/services';
+import { services, serviceGroups as groups } from '../../data/services';
 import { breadcrumbs, webPage } from '../../lib/schema';
-const title = 'IT Services for Vail Valley Businesses | Vail Valley IT';
-const description = 'Managed IT, cybersecurity, compliance, Microsoft 365, networks, VoIP, backup and AI automation for businesses across Vail, Avon, Edwards and Eagle County.';
-const crumbs = [{ name: 'Home', path: '/' }, { name: 'IT Services', path: '/services' }];
-const groups = ['Managed IT', 'Security & Compliance', 'Networks & Communication', 'Support & Projects', 'Automation & AI'] as const;
+const title = 'IT & Digital Marketing Services for Vail Valley Businesses | Vail Valley IT';
+const description = 'Managed IT, cybersecurity, compliance, Microsoft 365, networks, VoIP, backup, AI automation and digital marketing for businesses across Vail, Avon, Edwards and Eagle County.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }];
 const list = { '@type': 'ItemList', itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://vailvalleyit.com/${s.slug}`, name: s.name })) };
 ---
 <Base title={title} description={description} path="/services" schema={[webPage('/services', title, description, 'CollectionPage'), breadcrumbs(crumbs), list]}>
   <header class="page-head"><div class="wrap">
     <Breadcrumbs items={crumbs} />
-    <h1>IT services for Vail Valley businesses</h1>
-    <p class="answer">Vail Valley IT provides {services.length} business IT services across Eagle County, grouped into managed IT, security and compliance, networks and communication, support and projects, and automation and AI. Most clients combine several under one flat-fee managed plan. Not sure where to start? Take the <a href="/security-check">free security check</a>, or browse by <a href="/industries">industry</a> or <a href="/service-areas">town</a>.</p>
+    <h1>IT and digital marketing services for Vail Valley businesses</h1>
+    <p class="answer">Vail Valley IT provides {services.length} business technology and marketing services across Eagle County, grouped into managed IT, security and compliance, networks and communication, support and projects, automation and AI, and <a href="/digital-marketing">digital marketing</a>. Most clients combine several under one flat-fee managed plan. Not sure where to start? Take the <a href="/security-check">free security check</a>, or browse by <a href="/industries">industry</a> or <a href="/service-areas">town</a>.</p>
   </div></header>
   {groups.map((g, gi) => (
     <section class={`section ${gi % 2 ? 'tint' : ''}`} aria-labelledby={`g${gi}`}>
       <div class="wrap">
-        <h2 id={`g${gi}`}>{g}</h2>
+        <h2 id={`g${gi}`}>{g === 'Digital Marketing' ? <a href="/digital-marketing">{g}</a> : g}</h2>
         <div class="grid grid-3">
           {services.filter((s) => s.group === g).map((s) => (
             <article class="card"><Icon name={s.icon} class="icon-lg" /><div><h3><a href={`/${s.slug}`}>{s.name}</a></h3><p>{s.card}</p><span class="more">Learn more<Icon name="chevron" /></span></div></article>

@@ -19,6 +19,7 @@ const title = 'Vail Valley IT | Local IT Support & Managed Services in Vail, CO'
 const description = 'Vail Valley IT delivers managed IT, cybersecurity & tech support to businesses across Eagle County — Vail, Avon, Edwards, Eagle & Beaver Creek. Call today.';
 
 const cards = featuredServices.map((s) => serviceBySlug[s]);
+const marketing = services.filter((s) => s.group === 'Digital Marketing');
 const pillars = [
   { icon: 'shield', h: 'Cybersecurity-first approach', p: 'Security is built into everything we do, not sold as an add-on. Every engagement starts with a risk assessment.' },
   { icon: 'users', h: 'Strategic technology partner', p: 'We learn your business goals and keep a technology roadmap and budget reviewed with you every quarter.' },
@@ -28,13 +29,13 @@ const pillars = [
 ];
 const faqs = [
   { q: 'Who provides IT support in the Vail Valley?', a: 'Vail Valley IT is a locally based IT support and managed services provider in Edwards, Colorado. It serves businesses in Vail, Avon, Beaver Creek, Edwards, Eagle-Vail, Minturn, Eagle and Gypsum, and is the local IT brand of DubLow Digital.' },
-  { q: 'What does Vail Valley IT do?', a: 'Managed IT services, cybersecurity and compliance (including HIPAA and FTC Safeguards Rule support), Microsoft 365, business Wi-Fi and networks, VoIP phones, data backup and recovery, and automation and AI enablement for small and mid-sized businesses.' },
+  { q: 'What does Vail Valley IT do?', a: 'Managed IT services, cybersecurity and compliance (including HIPAA and FTC Safeguards Rule support), Microsoft 365, business Wi-Fi and networks, VoIP phones, data backup and recovery, automation and AI enablement, and local digital marketing (website design, short-form video, social media management, SEO and AI search, Google Ads and Meta ads) for small and mid-sized businesses.' },
   { q: 'How much does IT support cost for a small business in the Vail Valley?', a: 'Fully managed IT for small businesses commonly runs about $100 to $250 per user per month across the industry, depending on security and compliance needs. Vail Valley IT quotes a flat monthly price after a free cybersecurity assessment. Hourly and project-based support is also available.' },
   { q: 'Do you offer on-site IT support, or only remote?', a: 'Both. Most issues are fixed remotely in minutes. On-site support is available throughout Eagle County from our Edwards base, which is about 10 minutes from Avon and about 20 minutes from Vail and Eagle.' },
   { q: 'Do you help with HIPAA, GLBA and cyber insurance requirements?', a: 'Yes. Vail Valley IT runs security risk assessments, penetration tests and vulnerability scans, and security awareness training, and implements the technical safeguards HIPAA, GLBA and the FTC Safeguards Rule, SEC Regulation S-P, PCI DSS and cyber insurers require, with documentation to prove it.' },
   { q: 'Can I get IT help without a contract?', a: 'Yes. Vail Valley IT offers emergency and on-demand IT support for businesses that are not on a managed plan, billed per incident, plus fixed-price IT projects such as migrations and network upgrades.' },
   { q: 'Will I be talking to an AI instead of a person?', a: 'No. Automation handles a few routine requests, such as password and MFA resets for verified users, in about ten minutes. Everything else goes straight to a real technician, who gets the details faster because the automation already gathered them.' },
-  { q: 'How is Vail Valley IT related to DubLow Digital?', a: 'Vail Valley IT is the local managed technology services brand of DubLow Digital, focused only on IT, cybersecurity and automation for Eagle County businesses. DubLow Digital is the parent company.' },
+  { q: 'How is Vail Valley IT related to DubLow Digital?', a: 'Vail Valley IT is the local brand of DubLow Digital, focused only on Eagle County businesses: IT, cybersecurity, automation and digital marketing from one local team. DubLow Digital is the parent company.' },
 ];
 const steps = [
   { h: 'Free cybersecurity assessment', p: 'We inventory your devices, accounts, licenses and backups, and run a security risk assessment.', when: 'About an hour, on site or remote' },
@@ -117,8 +118,31 @@ const nodes = [
           </article>
         ))}
       </div>
-      <p class="svc-more">Also: {services.filter((s) => !featuredServices.includes(s.slug)).map((s, i, a) => <><a href={`/${s.slug}`}>{s.name}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</p>
-      <p style="text-align:center;margin-top:1.4rem"><a class="btn btn-outline" href="/services">See all {services.length} IT services</a></p>
+      <p class="svc-more">Also: {services.filter((s) => !featuredServices.includes(s.slug) && s.group !== 'Digital Marketing').map((s, i, a) => <><a href={`/${s.slug}`}>{s.name}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</p>
+      <p style="text-align:center;margin-top:1.4rem"><a class="btn btn-outline" href="/services">See all {services.length - marketing.length} IT services</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="mkt-h" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Digital marketing</span>
+        <h2 id="mkt-h">Get found by locals and visitors</h2>
+        <p>Websites, video, social, search and ads for Vail Valley businesses, from the same local team that runs your technology.</p>
+      </div>
+      <div class="grid grid-3">
+        {marketing.map((s) => (
+          <article class="card">
+            <Icon name={s.icon} class="icon-lg" />
+            <div>
+              <h3><a href={`/${s.slug}`}>{s.name}</a></h3>
+              <p>{s.card}</p>
+              <span class="more">Learn more<Icon name="chevron" /></span>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p style="text-align:center;margin-top:1.4rem"><a class="btn btn-outline" href="/digital-marketing">Explore digital marketing</a></p>
     </div>
   </section>
 

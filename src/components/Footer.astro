@@ -7,6 +7,7 @@ import { locations } from '../data/locations';
 import { industries } from '../data/industries';
 import { frameworks } from '../data/compliance';
 const year = new Date().getFullYear();
+const marketing = services.filter((s) => s.group === 'Digital Marketing');
 const top = ['managed-it-services', 'compliance-cybersecurity', 'it-data-protection', 'microsoft-365-email-migration', 'business-network-wifi-support', 'cybersecurity-risk-assessment', 'penetration-testing-vulnerability-scanning', 'security-awareness-training', 'automation-ai-enablement', 'emergency-it-support', 'it-projects'];
 ---
 <footer class="site-footer">
@@ -26,6 +27,10 @@ const top = ['managed-it-services', 'compliance-cybersecurity', 'it-data-protect
     <div>
       <h2>IT services</h2>
       <ul>{top.map((s) => <li><a href={`/${s}`}>{services.find((x) => x.slug === s)!.name}</a></li>)}<li><a href="/services">All services</a></li></ul>
+    </div>
+    <div>
+      <h2>Digital marketing</h2>
+      <ul>{marketing.map((s) => <li><a href={`/${s.slug}`}>{s.name}</a></li>)}<li><a href="/digital-marketing">All marketing</a></li></ul>
     </div>
     <div>
       <h2>Service areas</h2>

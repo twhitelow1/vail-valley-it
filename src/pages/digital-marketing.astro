@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Faq from '../components/Faq.astro';
+import { services } from '../data/services';
+import { locations } from '../data/locations';
+import { breadcrumbs, faqPage, webPage } from '../lib/schema';
+const path = '/digital-marketing';
+const title = 'Digital Marketing for Vail Valley Businesses | Vail Valley IT';
+const description = 'Local digital marketing for Vail Valley businesses — website design, short-form video, social media, SEO and AI search, Google Ads and Meta ads from an Eagle County team.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Digital Marketing', path }];
+const marketing = services.filter((s) => s.group === 'Digital Marketing');
+const faqs = [
+  { q: 'Who does digital marketing for small businesses in the Vail Valley?', a: 'Vail Valley IT provides local digital marketing for small businesses across Eagle County, including website design, short-form video content, social media management, local SEO and AI search optimization, Google Ads and Meta ads. It is the local brand of DubLow Digital, based in Edwards, Colorado.' },
+  { q: 'Which digital marketing service should a local business start with?', a: 'Most businesses should start with the foundations: a fast website and a complete Google Business Profile, followed by local SEO. Ads add leads quickly once the website can convert visitors, and social media and short-form video build awareness and trust over time.' },
+  { q: 'Why use the same company for IT and marketing?', a: 'Websites, domains, email, forms, tracking and ad accounts all sit on top of your technology. When one local team handles both, domains and logins stay in your name, tracking is set up correctly and there is one accountable partner when something breaks.' },
+  { q: 'Do you work with businesses that target visitors as well as locals?', a: 'Yes. Most Vail Valley businesses serve both. Campaigns, content and search pages are planned for locals by town and for visitors in their home markets, timed to the ski and summer seasons.' },
+];
+const list = { '@type': 'ItemList', itemListElement: marketing.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://vailvalleyit.com/${s.slug}`, name: s.name })) };
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description, 'CollectionPage'), breadcrumbs(crumbs), list, faqPage(faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Digital marketing for Vail Valley businesses</h1>
+    <p class="answer">Vail Valley IT provides local digital marketing for businesses across the Vail Valley and Eagle County: website design, short-form video content, social media management, local SEO and AI search optimization, Google Ads and Meta ads. Everything is planned around the towns you serve, the visitors you want to reach and the valley’s seasons, by the same local team that can run your technology.</p>
+  </div></header>
+
+  <section class="section" aria-labelledby="mkt-svc-h">
+    <div class="wrap">
+      <h2 id="mkt-svc-h">Marketing services</h2>
+      <div class="grid grid-3">
+        {marketing.map((s) => (
+          <article class="card"><Icon name={s.icon} class="icon-lg" /><div><h3><a href={`/${s.slug}`}>{s.name}</a></h3><p>{s.card}</p><span class="more">Learn more<Icon name="chevron" /></span></div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="why-h">
+    <div class="wrap article">
+      <article class="prose">
+        <h2 id="why-h">Marketing built for a resort-town economy</h2>
+        <p>Marketing a business in the Vail Valley is different from marketing one in Denver. Your customers are a mix of year-round locals, second-home owners and visitors who may be searching from another state before they ever arrive. Demand rises and falls with opening day, the holidays, spring break, mud season and summer. And search is town by town: a customer in Edwards searches differently from one in Vail or Gypsum.</p>
+        <p>We plan every channel around that: town-level pages and Google Business Profile work for local search, ads aimed at both the valley and your visitor markets, and content calendars that follow the seasons.</p>
+        <h2>One local team for technology and marketing</h2>
+        <p>Your website, domain, email, forms, tracking and ad accounts all depend on your technology. Because Vail Valley IT also <a href="/managed-it-services">manages IT</a>, those pieces are set up correctly and kept in your name, and there is one accountable partner when something needs to change. No more chasing a freelancer for a login.</p>
+        <h2>How we start</h2>
+        <ol>
+          <li><strong>Free local marketing review.</strong> We look at your website, Google Business Profile, search rankings, reviews, social accounts and any ads you run.</li>
+          <li><strong>Written plan and flat quote.</strong> You get the highest-impact fixes and a clear monthly or project price.</li>
+          <li><strong>Foundations first.</strong> Website, profile and tracking are fixed so every later dollar is measurable.</li>
+          <li><strong>Grow and report.</strong> Content, search and ads run on a schedule, with plain-language monthly reporting.</li>
+        </ol>
+      </article>
+      <aside class="aside" aria-label="Where we work">
+        <div class="box">
+          <h3>Where we work</h3>
+          <ul class="linklist">{locations.map((l) => <li><a href={`/${l.slug}`}>{l.town}<Icon name="chevron" /></a></li>)}</ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="section"><div class="wrap"><Faq faqs={faqs} /></div></div>
+
+  <CtaBand title="Get found by more customers in the valley" text="Get a free local marketing review. We look at your website, Google Business Profile, search rankings, social and ads, then give you a written plan and a flat price." button="Get a free marketing review" />
+</Base>
