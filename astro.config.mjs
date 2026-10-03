@@ -15,7 +15,7 @@ export default defineConfig({
       serialize(item) {
         const u = item.url.replace(/\/$/, '');
         if (u === 'https://vailvalleyit.com') return { ...item, priority: 1.0, changefreq: 'weekly' };
-        if (/\/(it-support-|managed-it-services|compliance|cybersecurity-risk-assessment|penetration-testing|security-awareness|automation-ai-enablement)/.test(u)) return { ...item, priority: 0.9 };
+        if (/\/(it-support-|managed-it-services|compliance|cybersecurity-risk-assessment|penetration-testing|security-awareness|automation-ai-enablement|digital-marketing|website-design|short-form-video|social-media-management|seo-ai-search|google-ads|meta-ads)/.test(u)) return { ...item, priority: 0.9 };
         return item;
       },
     }),

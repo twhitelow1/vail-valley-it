@@ -5,9 +5,10 @@
 // ─────────────────────────────────────────────────────────────
 export const site = {
   name: 'Vail Valley IT',
-  legalName: 'DubLow Consulting LLC', // TODO confirm which entity contracts IT clients
+  legalName: 'DubLow Consulting LLC', // Vail Valley IT is a DBA of this entity
   parentBrand: 'DubLow Digital',
   parentUrl: 'https://dublowdigital.com',
+  parentHq: 'Edwards, Colorado', // DubLow Digital headquarters; nationwide IT firm for small businesses
   tagline: 'Business Technology Partners',
   url: 'https://vailvalleyit.com',
   phone: '(970) 446-9440',
@@ -20,6 +21,8 @@ export const site = {
   // GoHighLevel. Leave blank and every CTA falls back to /contact + phone.
   bookingUrl: '', // TODO GHL calendar URL
   formEmbedUrl: '', // TODO GHL form embed src
+  careersFormUrl: '', // TODO GHL application form embed src (add a file-upload field for resumes)
+  careersEmail: '', // optional: where resumes go if no form is set, e.g. careers@vailvalleyit.com
   // Tracking (14). Loaded only on the production build, only when an ID is set.
   tracking: {
     ga4Id: '', // TODO 'G-XXXXXXX'

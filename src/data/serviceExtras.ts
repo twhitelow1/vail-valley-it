@@ -15,7 +15,7 @@ export type Extra = {
 
 export const extras: Record<string, Extra> = {
   'managed-it-services': {
-    facts: [['Pricing', 'Flat monthly, per user'], ['Monitoring', '24/7'], ['Routine requests', '~10 minutes'], ['Coverage', 'All of Eagle County']],
+    facts: [['Plans from', '$297/month'], ['Monitoring', '24/7'], ['Routine requests', '~10 minutes'], ['Coverage', 'All of Eagle County']],
     signs: [
       'The same computer problems keep coming back every few weeks.',
       'Nobody can say for certain whether last night’s backup worked.',
@@ -26,7 +26,7 @@ export const extras: Record<string, Extra> = {
     ],
     fit: ['Offices with roughly 5 to 50 users', 'Healthcare, financial, insurance and professional firms with sensitive data', 'Owners who want one accountable partner instead of several vendors', 'Businesses with seasonal staffing swings'],
     pricing: [
-      ['Number of users and devices', 'Most plans are priced per user, covering their laptop, phone and accounts.'],
+      ['Number of users and devices', 'Plans start at $297/month and scale with the users, laptops, phones and accounts covered.'],
       ['Servers and locations', 'On-premise servers, multiple offices or job sites add monitoring and maintenance.'],
       ['Compliance requirements', 'HIPAA or FTC Safeguards documentation and controls add to the security stack.'],
       ['Current state', 'A one-time onboarding fee may apply if systems need cleanup before they can be managed.'],
@@ -443,7 +443,7 @@ export const extras: Record<string, Extra> = {
     review: 'Tony Martinez',
   },
   'emergency-it-support': {
-    facts: [['Contract', 'None required'], ['Call', '(970) 446-9440'], ['Billing', 'Per incident'], ['Coverage', 'Eagle County + remote']],
+    facts: [['Contract', 'None required'], ['Call', '(970) 446-9440'], ['Rate', '$200 min, then $175/hr'], ['Coverage', 'Eagle County + remote']],
     signs: [
       'The internet, Wi-Fi or phones are down and customers are waiting.',
       'You are locked out of email or Microsoft 365.',
@@ -459,9 +459,9 @@ export const extras: Record<string, Extra> = {
     ],
     fit: ['Businesses without an IT provider', 'Offices whose IT person is unavailable', 'Second-opinion help when your current provider is not responding', 'Anyone facing an outage or security incident right now'],
     pricing: [
-      ['Time required', 'Billed per incident, or from prepaid block hours at a better rate.'],
+      ['Time required', 'A $200 minimum, then $175 for each hour after that.'],
       ['Remote vs. on site', 'Remote work avoids travel time; on-site visits include travel within Eagle County.'],
-      ['After-hours urgency', 'Evenings, weekends and holidays may carry an emergency rate.'],
+      ['Evenings and weekends', 'After-hours and weekend emergencies are billed at the same $175/hour emergency rate. Scheduled project work is quoted separately and may differ.'],
       ['Parts and equipment', 'Replacement hardware is quoted and approved before purchase.'],
     ],
     local: { h2: 'Emergency coverage across Eagle County', html: `<p>From village businesses in <a href="/it-support-vail-co">Vail</a> and <a href="/it-support-beaver-creek-co">Beaver Creek</a> to contractors in <a href="/it-support-gypsum-co">Gypsum</a>, remote triage starts as soon as you reach us. <a href="/it-support-avon-co">Avon</a>, <a href="/it-support-edwards-co">Edwards</a> and <a href="/it-support-eagle-vail-co">Eagle-Vail</a> are closest to our base for on-site work.</p>` },
@@ -526,5 +526,172 @@ export const extras: Record<string, Extra> = {
       { q: 'What should we automate first?', a: 'Start with the task that repeats most often and has a clear cost, such as lead follow-up, appointment reminders or moving data between two systems. Quick wins build confidence for bigger projects.' },
     ],
     review: 'Anthony Atencio',
+  },
+  'website-design': {
+    facts: [['Typical timeline', '3–6 weeks'], ['Built for', 'Phones first'], ['Ownership', 'Your domain, your content'], ['Includes', 'Local SEO foundations']],
+    signs: [
+      'Your website is slow or awkward to use on a phone.',
+      'Hours, services or prices on the site are out of date.',
+      'Nobody is sure who controls the domain or hosting login.',
+      'The site does not mention the towns you actually serve.',
+      'Visitors cannot book, call or request a quote in one tap.',
+      'You are embarrassed to send people to your website.',
+    ],
+    process: [
+      { h: 'Discovery', p: 'We review your current site, competitors and goals, and agree on pages and features.' },
+      { h: 'Design & content', p: 'Layout, copy and photos come together for your review and approval.' },
+      { h: 'Build & connect', p: 'The site is built, tested on phones and connected to forms, booking and tracking.' },
+      { h: 'Launch & improve', p: 'We launch, submit to Google and keep the site updated as your business changes.' },
+    ],
+    fit: ['Local businesses with an outdated or slow website', 'New businesses opening in the valley', 'Service businesses that depend on calls and bookings', 'Owners tired of managing plugins and hosting'],
+    pricing: [
+      ['Number of pages', 'Each service and town page adds design and writing time.'],
+      ['Content', 'Copywriting and photography from us cost more than supplied content.'],
+      ['Integrations', 'Booking, ecommerce, CRM and payment connections add build time.'],
+      ['Ongoing care', 'Monthly updates, hosting and SEO support are quoted separately.'],
+    ],
+    local: { h2: 'Websites for businesses across the Vail Valley', html: `<p>We build sites for restaurants, shops, contractors, property managers and professional firms from <a href="/it-support-vail-co">Vail</a> to <a href="/it-support-gypsum-co">Gypsum</a>. Meetings happen in person from our Edwards base, and every site is written around the specific towns you serve, so locals and visitors both find you.</p>` },
+    faqs: [
+      { q: 'Can you update my website after launch?', a: 'Yes. Most clients have us handle updates on request, so changes to hours, menus, staff or offers are made quickly without logging into anything.' },
+    ],
+    review: 'Andrew Metzler',
+  },
+  'short-form-video-content': {
+    facts: [['Formats', 'Reels, TikTok, Shorts'], ['Filmed', 'On location in the valley'], ['Delivered', 'In monthly batches'], ['Approval', 'Every clip, before posting']],
+    signs: [
+      'Your social accounts are mostly still photos or nothing at all.',
+      'Competitors’ Reels and TikToks are getting the attention yours are not.',
+      'You know video matters but nobody on staff has time to make it.',
+      'Your ads use stock images that look like everyone else’s.',
+      'Seasonal hiring is hard and job posts are not getting responses.',
+    ],
+    process: [
+      { h: 'Plan', p: 'We agree on goals and a list of video ideas and hooks for the month or season.' },
+      { h: 'Film', p: 'One on-location shoot at your business captures several videos at once.' },
+      { h: 'Edit', p: 'Clips are cut vertical with captions, music and branding for each platform.' },
+      { h: 'Approve & post', p: 'You approve each clip, then post it yourself or let us schedule it.' },
+    ],
+    fit: ['Restaurants, retail, lodging and experience businesses', 'Contractors and trades with visual before-and-after work', 'Real estate and property management', 'Businesses recruiting seasonal staff'],
+    pricing: [
+      ['Number of finished videos', 'Monthly volume is the main driver of cost.'],
+      ['Shoot days', 'More locations or longer shoots add production time.'],
+      ['Editing complexity', 'Motion graphics, voiceover and multi-scene edits take longer.'],
+      ['Posting', 'Scheduling and community management can be added through social media management.'],
+    ],
+    local: { h2: 'Filmed in the valley, for the valley', html: `<p>Your best backdrop is already here. We film on location at your business anywhere in Eagle County, from slopeside shops in <a href="/it-support-beaver-creek-co">Beaver Creek</a> and <a href="/it-support-vail-co">Vail</a> to job sites in <a href="/it-support-eagle-co">Eagle</a>, and schedule shoots around your busy hours and the seasons.</p>` },
+    faqs: [
+      { q: 'Do you need professional equipment to film short-form video?', a: 'Modern phones and compact gear produce excellent short-form video. What matters most is planning, lighting, sound and editing, and short-form content that feels authentic usually performs better than heavily produced video.' },
+    ],
+  },
+  'social-media-management': {
+    facts: [['Platforms', 'Instagram, Facebook, TikTok, LinkedIn'], ['Planning', 'Monthly content calendar'], ['Included', 'Lead Alchemist automation'], ['Reporting', 'Monthly']],
+    signs: [
+      'Your last post was weeks or months ago.',
+      'Leads from social media and your website are not followed up quickly.',
+      'You post only when someone remembers, with no plan behind it.',
+      'Your profiles have old hours, logos or links.',
+      'You cannot tell whether social media is bringing in any business.',
+    ],
+    process: [
+      { h: 'Audit & goals', p: 'We review your accounts and competitors and agree on what social should achieve.' },
+      { h: 'Calendar', p: 'A monthly plan built around your seasons, offers and events goes to you for approval.' },
+      { h: 'Create & post', p: 'Posts are designed, written and scheduled across your platforms.' },
+      { h: 'Report & refine', p: 'Monthly reporting shows what is working, and the next calendar builds on it.' },
+    ],
+    fit: ['Restaurants, retail, lodging and experience businesses', 'Service businesses that rely on reputation and referrals', 'Owners who want a consistent presence without doing it themselves', 'Businesses preparing for a busy season or opening'],
+    pricing: [
+      ['Number of platforms', 'Each additional platform adds content formatting and monitoring.'],
+      ['Posting frequency', 'More posts per week means more content to create.'],
+      ['Content creation', 'Original photography and video cost more than supplied images.'],
+      ['Paid boosts', 'Boosted posts and ad spend are billed separately from management.'],
+    ],
+    local: { h2: 'Social media for valley businesses', html: `<p>We manage social media for businesses throughout Eagle County, from <a href="/it-support-avon-co">Avon</a> and <a href="/it-support-edwards-co">Edwards</a> to <a href="/it-support-minturn-co">Minturn</a> and <a href="/it-support-eagle-co">Eagle</a>. Being local means we know the events, seasons and community moments worth posting about, and we can drop by to capture fresh photos and video.</p>` },
+    faqs: [
+      { q: 'Can you manage our Google Business Profile too?', a: 'Yes. Google Business Profile posts and photo updates can be included, and they directly support your local search visibility.' },
+    ],
+    review: 'Erin Gross',
+  },
+  'seo-ai-search-optimization': {
+    facts: [['Plans from', '$999/month'], ['Covers', 'Google, Maps & AI answers'], ['AI engines', 'ChatGPT, Gemini, Perplexity'], ['Focus', 'Town-level local search']],
+    signs: [
+      'Competitors show up in Google Maps and you do not.',
+      'Asking ChatGPT for your type of business in your town does not mention you.',
+      'Your Google Business Profile is incomplete or rarely updated.',
+      'Your name, address or phone differ across listings.',
+      'Your website gets little traffic beyond people searching your name.',
+      'You have fewer Google reviews than your competitors.',
+    ],
+    process: [
+      { h: 'Audit', p: 'We review your rankings, Google Business Profile, listings, website and AI visibility.' },
+      { h: 'Fix foundations', p: 'Profile, listings, schema and technical issues are corrected first.' },
+      { h: 'Build content', p: 'Service and town pages and answer-first content target what customers ask.' },
+      { h: 'Grow & report', p: 'Reviews, posts and content continue monthly, with transparent reporting.' },
+    ],
+    fit: ['Local service businesses that depend on being found', 'Businesses serving several towns in Eagle County', 'Companies being outranked by regional or national firms', 'Businesses that want to show up in AI assistant answers'],
+    pricing: [
+      ['Competition', 'Crowded categories need more content and ongoing work.'],
+      ['Number of towns and services', 'Each town and service you want to rank for adds pages and optimization.'],
+      ['Website condition', 'Sites with technical problems may need fixes or a rebuild first.'],
+      ['Content volume', 'More monthly articles and pages mean faster growth and higher cost.'],
+    ],
+    local: { h2: 'Local search across Eagle County', html: `<p>Rankings in the valley are won town by town. A business that ranks well in <a href="/it-support-edwards-co">Edwards</a> may be invisible in <a href="/it-support-vail-co">Vail</a> or <a href="/it-support-gypsum-co">Gypsum</a>. We map which towns matter to your business and build a presence in each, while making sure visitors searching from outside the valley still find you.</p>` },
+    faqs: [
+      { q: 'What is llms.txt?', a: 'llms.txt is a plain-text file on your website that summarizes your business and key pages for AI crawlers, similar to how a sitemap helps search engines. It is one of several signals that help AI tools understand and cite your site.' },
+    ],
+    review: 'Anthony Atencio',
+  },
+  'google-ads-management': {
+    facts: [['Management from', '$899/month'], ['Campaigns', 'Search, Maps, Local Services'], ['Targeting', 'By town + visitor markets'], ['Ad account', 'Owned by you']],
+    signs: [
+      'You are spending on Google Ads but cannot say how many customers it brings.',
+      'Your ads show up for searches that have nothing to do with your business.',
+      'Competitors appear above you every time you search your own service.',
+      'Nobody has looked at your ad account in months.',
+      'Your busy season is coming and you need more calls fast.',
+    ],
+    process: [
+      { h: 'Audit', p: 'We review your existing account or research keyword costs for your market.' },
+      { h: 'Build', p: 'Campaigns, targeting, ads and conversion tracking are set up properly.' },
+      { h: 'Launch', p: 'Campaigns go live with a budget matched to your season and goals.' },
+      { h: 'Optimize', p: 'Weekly adjustments cut waste, and monthly reports show cost per lead.' },
+    ],
+    fit: ['Trades, home services and contractors', 'Professional services and medical practices', 'Restaurants, lodging and experiences targeting visitors', 'Businesses that need leads quickly'],
+    pricing: [
+      ['Ad budget', 'Paid directly to Google from your account, separate from management.'],
+      ['Number of campaigns', 'Separate local, visitor and service campaigns add management time.'],
+      ['Account condition', 'Messy existing accounts may need a one-time rebuild.'],
+      ['Landing pages', 'New or improved landing pages are quoted separately if needed.'],
+    ],
+    local: { h2: 'Google Ads for the Vail Valley market', html: `<p>We know where valley customers come from. Campaigns are targeted to the towns you serve, from <a href="/it-support-vail-co">Vail</a> and <a href="/it-support-avon-co">Avon</a> to <a href="/it-support-eagle-co">Eagle</a> and <a href="/it-support-gypsum-co">Gypsum</a>, and to the visitor markets that bring your guests, with budgets that rise and fall with the seasons.</p>` },
+    faqs: [
+      { q: 'How quickly do Google Ads produce results?', a: 'Ads can start producing calls within days of launch. The first few weeks are spent refining keywords, bids and targeting, and results usually improve steadily over the first two to three months.' },
+    ],
+  },
+  'meta-ads-management': {
+    facts: [['Management from', '$1,499/month'], ['Platforms', 'Facebook & Instagram'], ['Targeting', 'Locals + visitors'], ['Ad account', 'Owned by you']],
+    signs: [
+      'You boost posts now and then without a clear goal or result.',
+      'You have an event, offer or opening to promote and little time to do it.',
+      'Website visitors leave and you have no way to bring them back.',
+      'You need to fill seasonal positions before winter or summer.',
+      'You want to reach visitors before they arrive in the valley.',
+    ],
+    process: [
+      { h: 'Strategy', p: 'We define the goal, audience, offer and budget for each campaign.' },
+      { h: 'Set up tracking', p: 'Pixel, Conversions API and lead forms are configured so results are measurable.' },
+      { h: 'Create & launch', p: 'Video and image ads are produced, approved and launched.' },
+      { h: 'Test & optimize', p: 'We test creative and audiences and shift spend to what works.' },
+    ],
+    fit: ['Restaurants, retail, lodging and experience businesses', 'Real estate and property management, with Special Ad Category compliance', 'Businesses promoting events, offers or openings', 'Employers recruiting seasonal staff'],
+    pricing: [
+      ['Ad budget', 'Paid directly to Meta from your account, separate from management.'],
+      ['Creative production', 'Video shoots and multiple ad variations add production time.'],
+      ['Number of campaigns', 'Separate local, visitor, retargeting and hiring campaigns add management.'],
+      ['Tracking setup', 'Pixel and Conversions API setup may be a one-time cost.'],
+    ],
+    local: { h2: 'Meta ads for the valley and its visitors', html: `<p>We run Facebook and Instagram campaigns for businesses throughout Eagle County, targeting locals in towns like <a href="/it-support-edwards-co">Edwards</a>, <a href="/it-support-eagle-vail-co">Eagle-Vail</a> and <a href="/it-support-avon-co">Avon</a>, and reaching visitors in their home markets before they arrive in <a href="/it-support-vail-co">Vail</a> or <a href="/it-support-beaver-creek-co">Beaver Creek</a>.</p>` },
+    faqs: [
+      { q: 'What is the Meta Conversions API?', a: 'The Conversions API sends conversion events, such as leads and purchases, from your website or systems to Meta directly. It makes tracking more reliable than the browser Pixel alone, especially with ad blockers and privacy settings.' },
+    ],
   },
 };

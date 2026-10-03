@@ -1,14 +1,13 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-import { services } from '../data/services';
+import { services, serviceGroups as groups } from '../data/services';
 import { locations } from '../data/locations';
 import { industries } from '../data/industries';
 import { frameworks } from '../data/compliance';
-import { bookHref, telHref } from '../data/site';
+import { site, bookHref, telHref } from '../data/site';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
-const groups = ['Managed IT', 'Security & Compliance', 'Networks & Communication', 'Support & Projects', 'Automation & AI'] as const;
-const cols = [[groups[0], groups[4]], [groups[1], groups[2]], [groups[3]]];
+const cols = [[groups[0], groups[4], groups[5]], [groups[1]], [groups[2], groups[3]]];
 const links = [
   { href: '/about', label: 'About' },
   { href: '/service-areas', label: 'Service Areas' },
@@ -17,9 +16,16 @@ const links = [
 ];
 ---
 <a class="skip" href="#main">Skip to content</a>
+<div class="topbar">
+  <div class="wrap">
+    <a class="topbar-parent" href={site.parentUrl} rel="noopener">A <img src="/dublow-digital-logo.webp" alt={site.parentBrand} width="381" height="160" /> brand</a>
+    <span>IT · Cybersecurity · Digital Marketing · Eagle County, CO</span>
+  </div>
+</div>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Vail Valley IT home"><Logo /></a>
+    <a class="brand" href="/" aria-label="Vail Valley IT home"><Logo parent={false} /></a>
+    <a class="brand-parent" href={site.parentUrl} rel="noopener" aria-label={`A ${site.parentBrand} brand`}><img src="/dublow-digital-logo.webp" alt={site.parentBrand} width="381" height="160" /></a>
     <nav class="nav" aria-label="Main">
       <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
       <a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
@@ -36,7 +42,8 @@ const links = [
               ))}
             </div>
           ))}
-          <a class="all" href="/services">All IT services</a>
+          <a class="all" href="/services">All services</a>
+          <a class="all" href="/digital-marketing" style="grid-column:auto;border:0;padding-top:0">Digital marketing</a>
           <a class="all" href="/security-check" style="grid-column:auto;border:0;padding-top:0">Free security check</a>
         </div>
       </div>
@@ -84,6 +91,7 @@ const links = [
       <div class="mnav-panel">
         <a href="/">Home</a>
         <a href="/services">IT Services</a>
+        <a href="/digital-marketing">Digital Marketing</a>
         <a href="/service-areas">Service Areas</a>
         <a href="/industries">Industries</a>
         <a href="/compliance">Compliance</a>
@@ -91,6 +99,7 @@ const links = [
         <a href="/workshops-webinars">Workshops</a>
         <a href="/about">About</a>
         <a href="/reviews-testimonials">Reviews</a>
+        <a href="/careers">Careers</a>
         <a href="/contact">Contact</a>
         <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Get a free cybersecurity assessment</a>
         <a class="btn btn-outline" href={telHref}><Icon name="phone" />Call (970) 446-9440</a>

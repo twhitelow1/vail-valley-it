@@ -1,10 +1,10 @@
 ---
 import Icon from './Icon.astro';
 import { site, bookHref, telHref } from '../data/site';
-interface Props { title?: string; text?: string }
-const { title = 'Ready for IT that just works?', text = 'Get a free cybersecurity assessment. We review your devices, accounts, backups and security, then give you a written plan and a flat price.' } = Astro.props;
+interface Props { title?: string; text?: string; button?: string }
+const { title = 'Ready for IT that just works?', text = 'Get a free cybersecurity assessment. We review your devices, accounts, backups and security, then give you a written plan and a flat price.', button = 'Get a free cybersecurity assessment' } = Astro.props;
 ---
-<section class="section" aria-label="Free cybersecurity assessment">
+<section class="section" aria-label={button}>
   <div class="wrap">
     <div class="cta">
       <Icon name="calendar" class="cta-icon" />
@@ -13,7 +13,7 @@ const { title = 'Ready for IT that just works?', text = 'Get a free cybersecurit
         <p>{text}</p>
       </div>
       <div class="btn-row">
-        <a class="btn btn-light" href={bookHref}><Icon name="calendar" />Get a free cybersecurity assessment</a>
+        <a class="btn btn-light" href={bookHref}><Icon name="calendar" />{button}</a>
         <a class="btn btn-ghost-light" href={telHref}><Icon name="phone" />Call {site.phone}</a>
       </div>
     </div>

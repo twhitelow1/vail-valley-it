@@ -27,9 +27,10 @@ export function organization() {
     '@type': 'ProfessionalService',
     '@id': ORG_ID,
     name: site.name,
+    legalName: site.legalName,
     alternateName: ['Vail Valley IT Services', 'VailValleyIT'],
     slogan: 'Local IT support, cybersecurity and automation for Vail Valley businesses',
-    description: 'Vail Valley IT is the local managed IT services brand of DubLow Digital, based in Edwards, Colorado. It provides managed IT, cybersecurity, compliance, networking, Microsoft 365 and AI automation services to businesses across Eagle County.',
+    description: 'Vail Valley IT is the local Eagle County branch of DubLow Digital, a nationwide small-business IT firm headquartered in Edwards, Colorado. It provides managed IT, cybersecurity, compliance, networking, Microsoft 365 and AI automation services to businesses across Eagle County, plus technology-led digital marketing (websites, local SEO and AI search, video, social media and ads).',
     url: `${U}/`,
     logo: `${U}/logo.png`,
     image: `${U}/og-default.png`,
@@ -47,13 +48,13 @@ export function organization() {
     areaServed: areaServed(),
     openingHoursSpecification: site.hours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
     founder: { '@id': FOUNDER_ID },
-    parentOrganization: { '@type': 'Organization', name: site.parentBrand, url: site.parentUrl },
+    parentOrganization: { '@type': 'Organization', name: site.parentBrand, url: site.parentUrl, description: 'Nationwide IT firm for small businesses, headquartered in Edwards, Colorado.', address: { '@type': 'PostalAddress', addressLocality: 'Edwards', addressRegion: 'CO', addressCountry: 'US' } },
     sameAs: site.sameAs,
     hasMap: site.gbp.mapsUrl,
-    knowsAbout: ['Managed IT services', 'Cybersecurity', 'HIPAA compliance', 'FTC Safeguards Rule', 'Microsoft 365', 'Business Wi-Fi networks', 'VoIP phone systems', 'Data backup and disaster recovery', 'Business process automation', 'AI enablement for small business'],
+    knowsAbout: ['Managed IT services', 'Cybersecurity', 'HIPAA compliance', 'FTC Safeguards Rule', 'Microsoft 365', 'Business Wi-Fi networks', 'VoIP phone systems', 'Data backup and disaster recovery', 'Business process automation', 'AI enablement for small business', 'Website design', 'Local SEO', 'Generative engine optimization', 'Google Ads', 'Meta ads', 'Social media management'],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'IT services',
+      name: 'IT and digital marketing services',
       itemListElement: services.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${U}/${s.slug}` } })),
     },
   };
@@ -69,6 +70,8 @@ export function founder() {
     '@id': FOUNDER_ID,
     name: site.founder.name,
     jobTitle: 'Founder',
+    image: `${U}/todd-whitelow.jpg`,
+    url: `${U}/about#todd-whitelow`,
     worksFor: { '@id': ORG_ID },
     homeLocation: { '@type': 'Place', name: 'Vail Valley, Colorado' },
     knowsAbout: ['Managed IT services', 'Cybersecurity', 'Automation', 'Microsoft 365'],
@@ -116,6 +119,13 @@ export function serviceSchema(s: Service) {
     provider: { '@id': ORG_ID },
     areaServed: areaServed(),
     audience: { '@type': 'BusinessAudience', audienceType: 'Small and mid-sized businesses' },
+    ...(s.price ? {
+      offers: {
+        '@type': 'Offer',
+        description: `${s.price.text}. ${s.price.note}`,
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: s.price.amount, priceCurrency: 'USD', unitText: s.price.unit === 'month' ? 'MONTH' : 'HOUR', ...(s.price.unit === 'month' ? { referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' } } : {}) },
+      },
+    } : {}),
   };
 }
 

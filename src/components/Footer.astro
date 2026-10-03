@@ -7,6 +7,7 @@ import { locations } from '../data/locations';
 import { industries } from '../data/industries';
 import { frameworks } from '../data/compliance';
 const year = new Date().getFullYear();
+const marketing = services.filter((s) => s.group === 'Digital Marketing');
 const top = ['managed-it-services', 'compliance-cybersecurity', 'it-data-protection', 'microsoft-365-email-migration', 'business-network-wifi-support', 'cybersecurity-risk-assessment', 'penetration-testing-vulnerability-scanning', 'security-awareness-training', 'automation-ai-enablement', 'emergency-it-support', 'it-projects'];
 ---
 <footer class="site-footer">
@@ -22,10 +23,21 @@ const top = ['managed-it-services', 'compliance-cybersecurity', 'it-data-protect
         {site.email && <><br /><a href={`mailto:${site.email}`}>{site.email}</a></>}
       </address>
       <p style="margin-top:1rem">Serving businesses across Eagle County, Colorado.</p>
+      <a class="cobrand" href={site.parentUrl} rel="noopener">
+        <span>A brand of</span>
+        <picture>
+          <source srcset="/dublow-digital-logo-white.webp" type="image/webp" />
+          <img src="/dublow-digital-logo-white.png" alt={site.parentBrand} width="381" height="160" loading="lazy" />
+        </picture>
+      </a>
     </div>
     <div>
       <h2>IT services</h2>
       <ul>{top.map((s) => <li><a href={`/${s}`}>{services.find((x) => x.slug === s)!.name}</a></li>)}<li><a href="/services">All services</a></li></ul>
+    </div>
+    <div>
+      <h2>Digital marketing</h2>
+      <ul>{marketing.map((s) => <li><a href={`/${s.slug}`}>{s.name}</a></li>)}<li><a href="/digital-marketing">All marketing</a></li></ul>
     </div>
     <div>
       <h2>Service areas</h2>
@@ -47,13 +59,14 @@ const top = ['managed-it-services', 'compliance-cybersecurity', 'it-data-protect
         <li><a href="/case-studies">Case studies</a></li>
         <li><a href="/security-check">Free security check</a></li>
         <li><a href="/workshops-webinars">Workshops & webinars</a></li>
+        <li><a href="/careers">Careers</a></li>
         <li><a href="/contact">Contact</a></li>
         <li><a href={bookHref}>Free cybersecurity assessment</a></li>
       </ul>
     </div>
   </div>
   <div class="wrap foot-bottom">
-    <span>© {year} {site.name}, a brand of {site.parentBrand}. All rights reserved.</span>
+    <span>© {year} {site.legalName}, DBA {site.name}. All rights reserved.</span>
     <span><a href="/privacy-policy">Privacy policy</a> &nbsp; <a href={site.parentUrl}>DubLow Digital</a></span>
   </div>
 </footer>

@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import { site, telHref } from '../data/site';
+import { breadcrumbs, webPage, faqPage } from '../lib/schema';
+// No JobPosting schema on purpose: Google only allows it for real, open positions.
+const path = '/careers';
+const title = 'Careers in the Vail Valley | Vail Valley IT';
+const description = 'Work in IT, cybersecurity or digital marketing in the Vail Valley. Vail Valley IT welcomes resumes from local talent anytime, even when no position is posted.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Careers', path }];
+const areas = [
+  { icon: 'headset', h: 'Help desk & field technicians', p: 'Hands-on support for local businesses, on site across Eagle County and remotely.' },
+  { icon: 'network', h: 'Networks & systems', p: 'Microsoft 365, Wi-Fi, firewalls, servers, cloud and phone systems.' },
+  { icon: 'shield', h: 'Cybersecurity & compliance', p: 'Security tooling, assessments, monitoring and compliance documentation.' },
+  { icon: 'bot', h: 'Automation & AI', p: 'Building workflows and AI tools that save small businesses time.' },
+  { icon: 'megaphone', h: 'Digital marketing', p: 'Web design, video, social media, SEO and paid ads for local brands.' },
+  { icon: 'users', h: 'Client success & operations', p: 'Onboarding, scheduling, account management and keeping clients happy.' },
+];
+const faqs = [
+  { q: 'Is Vail Valley IT hiring right now?', a: 'We are not always advertising open positions, but we are always interested in meeting talented people in the Vail Valley. Send your resume anytime and we will reach out when there is a fit.' },
+  { q: 'Do I need IT certifications to apply?', a: 'No. Certifications help for technical roles, but we value curiosity, reliability and how you treat people just as much. Tell us what you have done and what you want to learn.' },
+  { q: 'Are positions local or remote?', a: 'Vail Valley IT roles are based in Eagle County and often include on-site work with local businesses. Some roles with our parent company, DubLow Digital, may be remote or hybrid.' },
+  { q: 'What happens after I send my resume?', a: 'A real person reads every submission. We keep resumes on file and contact candidates directly when a role opens that matches their skills and interests.' },
+];
+const formUrl = site.careersFormUrl;
+const email = site.careersEmail || site.email;
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description), breadcrumbs(crumbs), faqPage(faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Careers at Vail Valley IT</h1>
+    <p class="answer">Vail Valley IT is always looking to meet talented people in the Vail Valley, even when we are not advertising a position. If you are into IT, cybersecurity, automation or digital marketing and want to build a career where you live, send us your resume. We read every one and reach out when there is a fit.</p>
+    <div class="btn-row" style="margin-top:1.5rem">
+      <a class="btn btn-primary" href="#apply"><Icon name="calendar" />Send your resume</a>
+      <a class="btn btn-outline" href={telHref}><Icon name="phone" />{site.phone}</a>
+    </div>
+  </div></header>
+
+  <section class="section" aria-labelledby="areas-h">
+    <div class="wrap">
+      <h2 id="areas-h">Where we grow our team</h2>
+      <p style="max-width:62ch">We are growing in the valley, and most hires start with a conversation rather than a job ad. These are the areas we hire for most often:</p>
+      <div class="grid grid-3" style="margin-top:1.5rem">
+        {areas.map((a) => (
+          <article class="card"><Icon name={a.icon} class="icon-lg" /><div><h3>{a.h}</h3><p>{a.p}</p></div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="why-h">
+    <div class="wrap article">
+      <article class="prose">
+        <h2 id="why-h">Why work with us</h2>
+        <ul class="included">
+          <li><Icon name="check" />Live and work in the Vail Valley, supporting businesses you actually know</li>
+          <li><Icon name="check" />Backed by {site.parentBrand}, a nationwide small-business IT firm headquartered in {site.parentHq}</li>
+          <li><Icon name="check" />Modern tools: automation, AI and a security-first stack</li>
+          <li><Icon name="check" />Variety: IT, security and marketing work under one roof</li>
+          <li><Icon name="check" />Room to learn, earn certifications and grow with a growing team</li>
+        </ul>
+
+        <h2 id="apply" style="scroll-margin-top:100px">Send us your resume</h2>
+        {formUrl ? (
+          <iframe src={formUrl} title="Vail Valley IT job application" style="width:100%;min-height:900px;border:0" loading="lazy"></iframe>
+        ) : email ? (
+          <>
+            <p>Email your resume and a few lines about yourself: what you are good at, what you want to learn and which part of the valley you live in.</p>
+            <p><a class="btn btn-primary" href={`mailto:${email}?subject=${encodeURIComponent('Resume — Vail Valley IT')}`}><Icon name="calendar" />Email {email}</a></p>
+          </>
+        ) : (
+          <>
+            <p>Our online application is on its way. In the meantime, call <a href={telHref}>{site.phone}</a> and let us know you are interested. We will tell you where to send your resume.</p>
+          </>
+        )}
+        <p style="font-size:.9rem;color:var(--muted)">Vail Valley IT is an equal opportunity employer. Applications are kept confidential and used only for hiring.</p>
+
+        <div style="margin-top:2.5rem"><Faq faqs={faqs} /></div>
+      </article>
+      <aside class="aside" aria-label="About us">
+        <div class="box">
+          <h3>Get to know us</h3>
+          <ul class="linklist">
+            <li><a href="/about">About Vail Valley IT<Icon name="chevron" /></a></li>
+            <li><a href="/services">What we do<Icon name="chevron" /></a></li>
+            <li><a href="/reviews-testimonials">What clients say<Icon name="chevron" /></a></li>
+            <li><a href="/workshops-webinars">Workshops & webinars<Icon name="chevron" /></a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
