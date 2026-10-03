@@ -38,14 +38,26 @@ export const services: Service[] = [
     description: 'Proactive managed IT services for Vail Valley businesses — 24/7 monitoring, help desk, and strategic IT planning from a local Eagle County team.',
     h1: 'Managed IT Services in the Vail Valley',
     primaryKeyword: 'managed IT services Vail Valley',
-    answer: 'Vail Valley IT provides managed IT services to small and mid-sized businesses across the Vail Valley and Eagle County for a flat monthly fee, with plans starting at $297 a month. That covers 24/7 device and network monitoring, security patching, a help desk your staff can reach by phone or email, Microsoft 365 administration, backup checks, and a technology roadmap reviewed with you every quarter.',
-    card: 'Flat-fee monitoring, maintenance, help desk and planning so your systems run and your team stays productive.',
+    answer: 'Vail Valley IT provides managed IT services to small and mid-sized businesses across the Vail Valley and Eagle County for a flat monthly fee, with plans starting at $297 a month. That covers 24/7 device and network monitoring, security patching, a 24/7 help desk and security operations, zero trust endpoint security, Microsoft 365 administration, cloud backups, and a technology roadmap reviewed with you every quarter.',
+    card: 'Flat-fee monitoring, layered security, 24/7 help desk and planning so your systems run and your team stays productive.',
     sections: [
       {
         h2: 'What a managed IT services company actually does',
         html: `<p>A managed service provider (MSP) takes ownership of your technology the way an in-house IT department would, without the salary. Instead of calling someone after a laptop dies or email stops syncing, you have a team watching your systems around the clock and fixing problems before your staff notices them.</p>
 <p>For a typical Eagle County office of five to fifty people, that means every computer, server, firewall, Wi-Fi access point and Microsoft 365 account is enrolled in monitoring. Patches roll out on a schedule. Backups are tested, not assumed. New hires get a ready-to-go laptop and accounts on day one, and departing employees lose access the same afternoon.</p>
 <p>It is the opposite of break-fix. Break-fix IT is paid by the hour when something fails, which means your provider earns more when your systems are unstable. Managed IT is paid by the month, so we only do well when your technology stays quiet.</p>`,
+      },
+      {
+        h2: 'Where our approach is different: a security baseline for every client',
+        html: `<p>We believe every client needs a baseline of their security risks covered, no matter how small the team or which plan they choose. So instead of selling security as add-ons, we build it into every tier.</p>
+<ul>
+<li><strong>Zero trust endpoint security.</strong> Advanced endpoint protection uses zero trust principles, so security is layered at the perimeter of each device, not just the office network. Nothing runs or connects just because it is already inside.</li>
+<li><strong>Protection that travels with your people.</strong> Much of today’s workforce works remotely, from home, a coffee shop or a hotel. Our security practices go with the device, regardless of the network it connects to.</li>
+<li><strong>Secure Access Service Edge (SASE) on every device.</strong> Traffic is encrypted wherever your team works, and backups run to the cloud, including backups of your cloud environments such as Microsoft 365.</li>
+<li><strong>A cybersecurity warranty.</strong> Our stack is strong enough that we back it with a warranty, with coverage starting at $100,000 when our security stack and policies are in place. It complements any cyber insurance you already carry.</li>
+<li><strong>24/7 help desk and security operations on every tier.</strong> Round-the-clock support and security monitoring are included at every level, so you do not pay extra for what we believe every client needs as AI-driven threats grow stronger.</li>
+</ul>
+<p>Warranty coverage is subject to the terms of your service agreement.</p>`,
       },
       {
         h2: 'Built for how businesses run in a mountain resort economy',
@@ -72,10 +84,12 @@ export const services: Service[] = [
     includes: [
       '24/7 monitoring and alerting for computers, servers and network gear',
       'Scheduled Windows, macOS and third-party patching',
-      'Help desk by phone and email for every employee',
+      'Today’s best stance against ransomware: a layered security stack including zero trust endpoint security',
+      '24/7 help desk and security operations on every tier',
+      'Secure Access Service Edge (SASE) encrypting traffic on every device',
+      'Cybersecurity warranty with coverage starting at $100,000',
       'Microsoft 365 / Google Workspace administration',
-      'Endpoint detection and response (EDR) on every device',
-      'Backup monitoring with regular restore tests',
+      'Cloud backups of devices and your cloud environments, with regular restore tests',
       'Automated user onboarding and offboarding',
       'Vendor management for internet, phones, printers and line-of-business software',
       'Quarterly technology roadmap and budget planning',
@@ -85,10 +99,14 @@ export const services: Service[] = [
       { q: 'What is the difference between managed IT and break-fix support?', a: 'Break-fix support bills by the hour after something breaks. Managed IT is a flat monthly fee for monitoring, maintenance, security and help desk, which shifts the incentive toward preventing problems rather than billing for them.' },
       { q: 'Do you offer managed IT for businesses with fewer than 10 employees?', a: 'Yes. Most of our clients are offices with roughly 5 to 50 people, and many have about ten users and devices. Small teams often benefit most because nobody on staff has time to be the part-time IT person.' },
       { q: 'Can you work alongside our existing IT person?', a: 'Yes. We often run co-managed IT, where we provide monitoring, security tooling and after-hours coverage while your internal person handles day-to-day requests and local knowledge.' },
+      { q: 'What is zero trust endpoint security?', a: 'Zero trust endpoint security treats every device, user and application as untrusted until verified. Protection is layered on each device itself rather than relying only on the office network, so laptops stay protected at home, in a hotel or on public Wi-Fi.' },
+      { q: 'What is SASE?', a: 'Secure Access Service Edge (SASE) combines network security and secure connectivity in the cloud. Vail Valley IT uses it on every managed device so traffic is encrypted and protected no matter which network an employee connects to.' },
+      { q: 'Does Vail Valley IT offer a cybersecurity warranty?', a: 'Yes. Managed IT clients running our security stack and policies are covered by a cybersecurity warranty starting at $100,000 in coverage, which complements any cyber insurance the business already has. Coverage is subject to the terms of the service agreement.' },
+      { q: 'Is 24/7 help desk support included?', a: 'Yes. A 24/7 help desk and security operations are included on every managed IT tier at no extra charge.' },
       { q: 'Who provides managed IT services in the Vail Valley?', a: 'Vail Valley IT is a locally based managed IT provider in Edwards, Colorado, serving Vail, Avon, Beaver Creek, Edwards, Eagle-Vail, Minturn, Eagle and Gypsum. It is the local IT brand of DubLow Digital.' },
     ],
     related: ['compliance-cybersecurity', 'it-data-protection', 'it-consulting-support'],
-    price: { amount: 297, unit: 'month', text: 'Plans start at $297/month', note: 'Includes a secure business email and productivity suite, endpoint protection and a secure AI platform. Your final flat price depends on users, devices and compliance needs.' },
+    price: { amount: 297, unit: 'month', text: 'Plans start at $297/month', note: 'Includes a secure business email and productivity suite, zero trust endpoint protection, a secure AI platform and 24/7 help desk and security operations. Your final flat price depends on users, devices and compliance needs.' },
   },
   {
     slug: 'it-consulting-support',
@@ -883,7 +901,7 @@ export const services: Service[] = [
       { q: 'What should I do while I wait?', a: 'If you suspect a hack or ransomware, disconnect the affected computer from the network and do not pay any ransom. For outages, note any error messages and lights on your modem or firewall. Do not repeatedly restart a server that is failing.' },
     ],
     related: ['remote-tech-support', 'virus-malware-removal', 'managed-it-services'],
-    price: { amount: 200, unit: 'hour', text: '$200 minimum, then $175/hour', note: 'No contract required. Every visit ends with a written summary of what was wrong and what was done.' },
+    price: { amount: 200, unit: 'hour', text: '$200 minimum, then $175/hour', note: 'No contract required. Evenings and weekends are the same $175/hour emergency rate. Every visit ends with a written summary of what was wrong and what was done.' },
   },
   {
     slug: 'it-projects',

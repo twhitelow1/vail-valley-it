@@ -461,7 +461,7 @@ export const extras: Record<string, Extra> = {
     pricing: [
       ['Time required', 'A $200 minimum, then $175 for each hour after that.'],
       ['Remote vs. on site', 'Remote work avoids travel time; on-site visits include travel within Eagle County.'],
-      ['After-hours urgency', 'Evening, weekend and holiday help is available by arrangement.'],
+      ['Evenings and weekends', 'After-hours and weekend emergencies are billed at the same $175/hour emergency rate. Scheduled project work is quoted separately and may differ.'],
       ['Parts and equipment', 'Replacement hardware is quoted and approved before purchase.'],
     ],
     local: { h2: 'Emergency coverage across Eagle County', html: `<p>From village businesses in <a href="/it-support-vail-co">Vail</a> and <a href="/it-support-beaver-creek-co">Beaver Creek</a> to contractors in <a href="/it-support-gypsum-co">Gypsum</a>, remote triage starts as soon as you reach us. <a href="/it-support-avon-co">Avon</a>, <a href="/it-support-edwards-co">Edwards</a> and <a href="/it-support-eagle-vail-co">Eagle-Vail</a> are closest to our base for on-site work.</p>` },
