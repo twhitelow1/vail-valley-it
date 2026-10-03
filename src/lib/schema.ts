@@ -69,6 +69,8 @@ export function founder() {
     '@id': FOUNDER_ID,
     name: site.founder.name,
     jobTitle: 'Founder',
+    image: `${U}/todd-whitelow.jpg`,
+    url: `${U}/about#todd-whitelow`,
     worksFor: { '@id': ORG_ID },
     homeLocation: { '@type': 'Place', name: 'Vail Valley, Colorado' },
     knowsAbout: ['Managed IT services', 'Cybersecurity', 'Automation', 'Microsoft 365'],

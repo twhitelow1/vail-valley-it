@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import founderPhoto from '../assets/todd-whitelow-founder.jpg';
 import Icon from '../components/Icon.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -32,6 +34,10 @@ const faqs = [
       <h2>Cyber-first and automation-driven</h2>
       <p>Security is where every engagement starts. Before we recommend hardware or software, we assess the risk to your data. And because we run our own operation on automation, routine requests like new users and password or MFA resets for verified staff are resolved in about ten minutes instead of hours, while every other request reaches the right human technician faster. We help clients adopt the same approach so their teams spend less time on repetitive work.</p>
       <h2 id="todd-whitelow">Meet the founder</h2>
+      <figure class="founder-photo">
+        <Image src={founderPhoto} alt={`${site.founder.name}, founder of ${site.parentBrand} and Vail Valley IT`} widths={[480, 800, 1200]} sizes="(max-width: 980px) 100vw, 680px" loading="lazy" />
+        <figcaption>{site.founder.name}, founder of {site.parentBrand} and Vail Valley IT</figcaption>
+      </figure>
       <p><strong>{site.founder.name}</strong> founded DubLow Digital and leads Vail Valley IT. He lives in the Vail Valley, works hands-on with clients across Eagle County, and leads a team of technicians and specialists backed by a dedicated help desk and network operations partner. His focus is simple: IT that protects the business, gets out of the way, and pays for itself.</p>
       <p>See the work in <a href="/case-studies">case studies</a> and <a href="/reviews-testimonials">client reviews</a>, or catch Todd at a free <a href="/workshops-webinars">workshop or webinar</a>.</p>
       <h2>How we work</h2>

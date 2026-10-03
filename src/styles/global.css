@@ -249,6 +249,9 @@ tr:last-child td { border-bottom: 0; }
 .foot a:hover, .foot-bottom a:hover { color: #fff; text-decoration: underline; }
 .foot-bottom a { color: #bdb8e6; text-decoration: none; margin-left: 1rem; }
 .foot .brand svg { width: 200px; color: #fff; }
+.founder-photo { margin: 0 0 1.4rem; }
+.founder-photo img { width: 100%; height: auto; border-radius: var(--radius); display: block; }
+.founder-photo figcaption { font-size: .85rem; color: var(--muted); margin-top: .5rem; }
 .nap { font-style: normal; margin-top: 1rem; line-height: 1.7; }
 .foot .cobrand { display: inline-flex; flex-direction: column; gap: .4rem; margin-top: 1.4rem; opacity: .9; }
 .foot .cobrand:hover { opacity: 1; text-decoration: none; }
