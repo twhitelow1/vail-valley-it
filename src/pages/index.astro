@@ -55,7 +55,8 @@ const compare = [
 const platforms = [
   ['Microsoft 365', 'Email, Teams, SharePoint'], ['Microsoft Defender', 'Endpoint & email security'], ['Google Workspace', 'Email & files'],
   ['Ubiquiti UniFi', 'Networks & Wi-Fi'], ['Cisco Meraki', 'Networks & Wi-Fi'], ['Windows & macOS', 'Device management'],
-  ['IT Glue', 'Documentation'], ['Rewst', 'Automation'], ['Hosted VoIP', 'Cloud phone systems'],
+  ['Hosted VoIP', 'Cloud phone systems'], ['Automations & Secure AI Platforms', 'Workflows & AI, safely'],
+  ['Managed Security Services', 'Monitoring & response'], ['Manage Your Tech Vendors', 'One point of contact'],
 ];
 const nextEvent = events.filter((e) => new Date(e.end).getTime() > Date.now()).sort((a, b) => a.start.localeCompare(b.start))[0];
 const schema = [webPage('/', title, description), faqPage(faqs, '/')];
