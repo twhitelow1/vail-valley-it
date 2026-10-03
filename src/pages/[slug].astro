@@ -67,7 +67,6 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
       {ex && (
         <dl class="facts">{ex.facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
       )}
-      <p class="meta">Reviewed by <a href="/about">{site.founder.name}</a>, founder of Vail Valley IT · Updated {reviewed}</p>
     </div>
   </header>
 
@@ -111,6 +110,13 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
             <ul class="fit">{ex.fit.map((f) => <li>{f}</li>)}</ul>
 
             <h2 id="pricing">What affects the price</h2>
+            {svc.price && (
+              <div class="price-callout">
+                <span class="price-label">Starting price</span>
+                <strong>{svc.price.text}</strong>
+                <p>{svc.price.note}</p>
+              </div>
+            )}
             <p>Every quote is flat and in writing. These are the factors that move the number:</p>
             <div class="tablewrap"><table>
               <thead><tr><th scope="col">Factor</th><th scope="col">Why it matters</th></tr></thead>
@@ -173,6 +179,7 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
         )}
 
         <div style="margin-top:2.5rem"><Faq faqs={allFaqs} /></div>
+        <p class="meta byline">Reviewed by <a href="/about">{site.founder.name}</a>, founder · Updated {reviewed}</p>
 
         {loc && (
           <>

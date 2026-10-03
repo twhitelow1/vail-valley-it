@@ -5,7 +5,7 @@
 // ─────────────────────────────────────────────────────────────
 export const site = {
   name: 'Vail Valley IT',
-  legalName: 'DubLow Consulting LLC', // TODO confirm which entity contracts IT clients
+  legalName: 'DubLow Consulting LLC', // Vail Valley IT is a DBA of this entity
   parentBrand: 'DubLow Digital',
   parentUrl: 'https://dublowdigital.com',
   parentHq: 'Edwards, Colorado', // DubLow Digital headquarters; nationwide IT firm for small businesses

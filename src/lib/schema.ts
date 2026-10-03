@@ -27,6 +27,7 @@ export function organization() {
     '@type': 'ProfessionalService',
     '@id': ORG_ID,
     name: site.name,
+    legalName: site.legalName,
     alternateName: ['Vail Valley IT Services', 'VailValleyIT'],
     slogan: 'Local IT support, cybersecurity and automation for Vail Valley businesses',
     description: 'Vail Valley IT is the local Eagle County branch of DubLow Digital, a nationwide small-business IT firm headquartered in Edwards, Colorado. It provides managed IT, cybersecurity, compliance, networking, Microsoft 365 and AI automation services to businesses across Eagle County, plus technology-led digital marketing (websites, local SEO and AI search, video, social media and ads).',
@@ -118,6 +119,13 @@ export function serviceSchema(s: Service) {
     provider: { '@id': ORG_ID },
     areaServed: areaServed(),
     audience: { '@type': 'BusinessAudience', audienceType: 'Small and mid-sized businesses' },
+    ...(s.price ? {
+      offers: {
+        '@type': 'Offer',
+        description: `${s.price.text}. ${s.price.note}`,
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: s.price.amount, priceCurrency: 'USD', unitText: s.price.unit === 'month' ? 'MONTH' : 'HOUR', ...(s.price.unit === 'month' ? { referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' } } : {}) },
+      },
+    } : {}),
   };
 }
 

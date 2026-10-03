@@ -23,6 +23,8 @@ export type Service = {
   includes: string[];
   faqs: Faq[];
   related: string[];
+  // Published starting price. Rendered on the page and as an Offer in the Service schema.
+  price?: { amount: number; unit: 'month' | 'hour'; text: string; note: string };
 };
 
 export const services: Service[] = [
@@ -36,7 +38,7 @@ export const services: Service[] = [
     description: 'Proactive managed IT services for Vail Valley businesses — 24/7 monitoring, help desk, and strategic IT planning from a local Eagle County team.',
     h1: 'Managed IT Services in the Vail Valley',
     primaryKeyword: 'managed IT services Vail Valley',
-    answer: 'Vail Valley IT provides managed IT services to small and mid-sized businesses across the Vail Valley and Eagle County for a flat monthly fee. That covers 24/7 device and network monitoring, security patching, a help desk your staff can reach by phone or email, Microsoft 365 administration, backup checks, and a technology roadmap reviewed with you every quarter.',
+    answer: 'Vail Valley IT provides managed IT services to small and mid-sized businesses across the Vail Valley and Eagle County for a flat monthly fee, with plans starting at $297 a month. That covers 24/7 device and network monitoring, security patching, a help desk your staff can reach by phone or email, Microsoft 365 administration, backup checks, and a technology roadmap reviewed with you every quarter.',
     card: 'Flat-fee monitoring, maintenance, help desk and planning so your systems run and your team stays productive.',
     sections: [
       {
@@ -79,13 +81,14 @@ export const services: Service[] = [
       'Quarterly technology roadmap and budget planning',
     ],
     faqs: [
-      { q: 'How much do managed IT services cost for a small business in Vail?', a: 'Across the industry, fully managed IT for small businesses commonly runs about $100 to $250 per user per month, depending on the security tools, compliance requirements and how many servers or locations are involved. Vail Valley IT quotes a flat monthly price after a free cybersecurity assessment, so you know the number before you sign anything.' },
+      { q: 'How much do managed IT services cost for a small business in Vail?', a: 'Vail Valley IT managed IT plans start at $297 a month, including a secure business email and productivity suite, endpoint protection and a secure AI platform. The final price depends on the number of users and devices, servers, locations and compliance requirements, and is quoted as a flat monthly fee after a free cybersecurity assessment.' },
       { q: 'What is the difference between managed IT and break-fix support?', a: 'Break-fix support bills by the hour after something breaks. Managed IT is a flat monthly fee for monitoring, maintenance, security and help desk, which shifts the incentive toward preventing problems rather than billing for them.' },
       { q: 'Do you offer managed IT for businesses with fewer than 10 employees?', a: 'Yes. Most of our clients are offices with roughly 5 to 50 people, and many have about ten users and devices. Small teams often benefit most because nobody on staff has time to be the part-time IT person.' },
       { q: 'Can you work alongside our existing IT person?', a: 'Yes. We often run co-managed IT, where we provide monitoring, security tooling and after-hours coverage while your internal person handles day-to-day requests and local knowledge.' },
       { q: 'Who provides managed IT services in the Vail Valley?', a: 'Vail Valley IT is a locally based managed IT provider in Edwards, Colorado, serving Vail, Avon, Beaver Creek, Edwards, Eagle-Vail, Minturn, Eagle and Gypsum. It is the local IT brand of DubLow Digital.' },
     ],
     related: ['compliance-cybersecurity', 'it-data-protection', 'it-consulting-support'],
+    price: { amount: 297, unit: 'month', text: 'Plans start at $297/month', note: 'Includes a secure business email and productivity suite, endpoint protection and a secure AI platform. Your final flat price depends on users, devices and compliance needs.' },
   },
   {
     slug: 'it-consulting-support',
@@ -177,7 +180,7 @@ export const services: Service[] = [
   {
     slug: 'microsoft-365-email-migration',
     name: 'Microsoft 365 Email Migration',
-    group: 'Managed IT',
+    group: 'Support & Projects',
     icon: 'cloud',
     tier: 1,
     title: 'Microsoft 365 Email Migration Services | Vail Valley IT',
@@ -838,12 +841,12 @@ export const services: Service[] = [
     h1: 'Emergency & On-Demand IT Support in the Vail Valley',
     primaryKeyword: 'emergency IT support Vail',
     answer: 'Vail Valley IT provides emergency and on-demand IT support for Vail Valley businesses that are not on a managed plan. No contract is required: call (970) 446-9440 when the internet, email, a server or a critical computer is down, someone is locked out, or you think you have been hacked. We fix it remotely when we can and on site across Eagle County when we can’t.',
-    card: 'No contract needed. Urgent help for outages, lockouts and hacked accounts, billed per incident.',
+    card: 'No contract needed. Urgent help for outages, lockouts and hacked accounts: $200 minimum, then $175 per hour.',
     sections: [
       {
         h2: 'IT help when you don’t have an IT provider',
         html: `<p>Most small businesses in the valley do not have an IT company on call until the day they need one. The internet drops an hour before a busy weekend, the office manager is locked out of Microsoft 365, the server that runs scheduling will not boot, or a staff member clicks a link and the screen fills with warnings. That is exactly what on-demand support is for.</p>
-<p>You do not need a contract, a monthly plan or an existing relationship. Call, describe what is happening, and a technician starts working on it. Work is billed per incident or from prepaid block hours, and you get a written summary of what was wrong and what was done.</p>`,
+<p>You do not need a contract, a monthly plan or an existing relationship. Call, describe what is happening, and a technician starts working on it. Pricing is simple: a $200 minimum, then $175 for each hour after that, and you get a written summary of what was wrong and what was done.</p>`,
       },
       {
         h2: 'What counts as an IT emergency',
@@ -873,12 +876,14 @@ export const services: Service[] = [
       'Written summary and recommendations after every incident',
     ],
     faqs: [
-      { q: 'Do I need a contract to get emergency IT support?', a: 'No. Vail Valley IT provides on-demand support to businesses that are not on a managed plan. Work is billed per incident or from prepaid block hours.' },
+      { q: 'Do I need a contract to get emergency IT support?', a: 'No. Vail Valley IT provides on-demand support to businesses that are not on a managed plan, with no contract required.' },
+      { q: 'How much does emergency IT support cost?', a: 'On-demand and emergency IT support from Vail Valley IT is a $200 minimum, then $175 for each hour after that. You receive a written summary of the work when the issue is resolved.' },
       { q: 'Who do I call for emergency IT support in Vail?', a: 'Call Vail Valley IT at (970) 446-9440. We are based in Edwards and support businesses across Vail, Avon, Beaver Creek, Edwards, Eagle-Vail, Minturn, Eagle and Gypsum.' },
       { q: 'How fast can you respond to an IT emergency?', a: 'Remote diagnosis can usually begin as soon as we reach you. On-site timing depends on location and conditions; Avon and Edwards are closest to our base, and Vail and Eagle are about 20 minutes away. Managed clients receive priority.' },
       { q: 'What should I do while I wait?', a: 'If you suspect a hack or ransomware, disconnect the affected computer from the network and do not pay any ransom. For outages, note any error messages and lights on your modem or firewall. Do not repeatedly restart a server that is failing.' },
     ],
     related: ['remote-tech-support', 'virus-malware-removal', 'managed-it-services'],
+    price: { amount: 200, unit: 'hour', text: '$200 minimum, then $175/hour', note: 'No contract required. Every visit ends with a written summary of what was wrong and what was done.' },
   },
   {
     slug: 'it-projects',
@@ -964,6 +969,7 @@ export const services: Service[] = [
       },
     ],
     includes: [
+      'Lead Alchemist lead automation and AI software (included with every marketing package)',
       'Custom design and mobile-first build',
       'Copywriting for core service and town pages',
       'Local SEO foundations and schema markup',
@@ -1019,6 +1025,7 @@ export const services: Service[] = [
       },
     ],
     includes: [
+      'Lead Alchemist lead automation and AI software (included with every marketing package)',
       'Content planning and hook-first scripting',
       'On-location filming in Eagle County',
       'Vertical editing with captions, music and branding',
@@ -1043,16 +1050,16 @@ export const services: Service[] = [
     icon: 'share',
     tier: 1,
     title: 'Social Media Management in Vail Valley, CO | Vail Valley IT',
-    description: 'Social media management for Vail Valley businesses — content calendars, posting, community replies and reporting on Instagram, Facebook, TikTok and LinkedIn.',
+    description: 'Social media management for Vail Valley businesses — content calendars, design, scheduling and reporting on Instagram, Facebook, TikTok and LinkedIn, plus Lead Alchemist lead automation.',
     h1: 'Social Media Management for Vail Valley Businesses',
     primaryKeyword: 'social media management Vail Valley',
-    answer: 'Vail Valley IT manages social media for small businesses across the Vail Valley and Eagle County. We build a content calendar around your seasons, create and schedule posts on Instagram, Facebook, TikTok, LinkedIn and Google Business Profile, reply to comments and messages, and report each month on what is growing your audience and bringing in customers.',
-    card: 'Content calendars, posting, comment and message replies, and monthly reporting, run around your seasons.',
+    answer: 'Vail Valley IT manages social media for small businesses across the Vail Valley and Eagle County. We build a content calendar around your seasons, create and schedule posts on Instagram, Facebook, TikTok, LinkedIn and Google Business Profile, and report each month on what is growing your audience and bringing in customers. Like every marketing package, it includes Lead Alchemist, our lead automation and AI software.',
+    card: 'Content calendars, design, scheduling and monthly reporting run around your seasons, plus Lead Alchemist lead automation.',
     sections: [
       {
         h2: 'What social media management includes',
-        html: `<p>Most owners know they should post more. The problem is time: coming up with ideas, taking photos, writing captions, posting at the right time and keeping up with comments and messages. Social media management takes all of that off your plate.</p>
-<p>We start with your goals, whether that is bookings, walk-ins, calls, hiring or brand awareness, and build a monthly calendar that supports them. You approve the plan, we create and schedule the posts, and we watch the accounts so questions from customers do not sit unanswered.</p>`,
+        html: `<p>Most owners know they should post more. The problem is time: coming up with ideas, taking photos, writing captions and posting at the right time. Social media management takes the content work off your plate.</p>
+<p>We start with your goals, whether that is bookings, walk-ins, calls, hiring or brand awareness, and build a monthly calendar that supports them. You approve the plan, and we create and schedule the posts. Your team stays the voice in comments and direct messages, and Lead Alchemist, our lead automation and AI software, helps make sure new leads are captured and followed up.</p>`,
       },
       {
         h2: 'Planned around the Vail Valley calendar',
@@ -1066,26 +1073,26 @@ export const services: Service[] = [
       },
     ],
     includes: [
+      'Lead Alchemist lead automation and AI software (included with every marketing package)',
       'Monthly content calendar built around your seasons',
       'Post design, captions and hashtags',
       'Scheduling on Instagram, Facebook, TikTok and LinkedIn',
       'Google Business Profile posts',
-      'Comment and direct message monitoring and replies',
-      'Review response drafting',
       'Account setup, cleanup and branding',
       'Monthly performance report',
     ],
     faqs: [
       { q: 'How often should a small business post on social media?', a: 'Consistency matters more than volume. For most local businesses, a few quality posts a week on one or two main platforms, plus timely replies to comments and messages, outperforms daily posting that cannot be sustained.' },
       { q: 'Which social media platforms should a local business be on?', a: 'Facebook and Instagram reach the broadest local and visitor audience for most Vail Valley businesses. LinkedIn suits professional services and B2B. TikTok fits businesses with visual products or a younger audience. Google Business Profile posts are worth doing for every local business.' },
-      { q: 'Do I approve posts before they go live?', a: 'Yes. You approve the monthly calendar and can review posts before they are scheduled. Time-sensitive replies follow guidelines you set.' },
+      { q: 'Do I approve posts before they go live?', a: 'Yes. You approve the monthly calendar and can review posts before they are scheduled.' },
+      { q: 'Do you answer comments and direct messages?', a: 'No. Social media management covers planning, content creation, scheduling and reporting. Your team answers comments and messages, so customers hear from the people they will actually work with. Lead Alchemist, included with every marketing package, helps capture and follow up with new leads.' },
       { q: 'Will social media management bring in customers?', a: 'Organic social media builds awareness and trust over time, and it supports reviews, referrals and ads. For faster, measurable lead flow, we usually pair it with Meta or Google ads.' },
     ],
     related: ['short-form-video-content', 'meta-ads-management', 'seo-ai-search-optimization'],
   },
   {
     slug: 'seo-ai-search-optimization',
-    name: 'SEO & AI Search (GEO)',
+    name: 'SEO & AI Search (AEO)',
     group: 'Digital Marketing',
     icon: 'search',
     tier: 1,
@@ -1093,7 +1100,7 @@ export const services: Service[] = [
     description: 'Local SEO and AI search optimization for Vail Valley businesses — rank in Google Maps and get recommended by ChatGPT, Gemini, Perplexity and AI Overviews.',
     h1: 'Local SEO & AI Search Optimization in the Vail Valley',
     primaryKeyword: 'local SEO Vail Valley',
-    answer: 'Vail Valley IT provides local SEO and generative engine optimization (GEO) for businesses in the Vail Valley. We optimize your Google Business Profile, website and listings so you rank in Google Maps and local results for the towns you serve, and we structure your content so AI assistants like ChatGPT, Gemini, Perplexity and Google AI Overviews can find, trust and recommend your business.',
+    answer: 'Vail Valley IT provides local SEO and answer engine optimization (AEO, also called GEO) for businesses in the Vail Valley, with plans starting at $999 a month. We optimize your Google Business Profile, website and listings so you rank in Google Maps and local results for the towns you serve, and we structure your content so AI assistants like ChatGPT, Gemini, Perplexity and Google AI Overviews can find, trust and recommend your business.',
     card: 'Rank in Google Maps and local results, and get recommended when customers ask ChatGPT and other AI assistants.',
     sections: [
       {
@@ -1112,6 +1119,7 @@ export const services: Service[] = [
       },
     ],
     includes: [
+      'Lead Alchemist lead automation and AI software (included with every marketing package)',
       'Google Business Profile optimization and posting',
       'Local keyword and competitor research by town',
       'On-page SEO for service and town pages',
@@ -1126,9 +1134,11 @@ export const services: Service[] = [
       { q: 'How long does local SEO take to work?', a: 'Improvements to a Google Business Profile and on-page fixes can show results within weeks. Competitive rankings usually build over three to six months or longer, depending on the market, your reviews and how much content you have.' },
       { q: 'How do I get my business recommended by ChatGPT and other AI tools?', a: 'AI assistants recommend businesses they can clearly identify and trust. That means consistent business details everywhere, a website that answers common questions directly, structured data, strong reviews and mentions on other reputable sites. GEO work focuses on each of those signals.' },
       { q: 'What is the most important local SEO factor?', a: 'For most local businesses, a complete and active Google Business Profile with steady, genuine reviews has the biggest impact on Maps rankings, followed by a website with a clear page for each service and town you serve.' },
+      { q: 'How much does SEO and AEO cost?', a: 'Vail Valley IT AEO plans start at $999 a month, covering local SEO, Google Business Profile and AI search optimization. Every plan includes Lead Alchemist, our lead automation and AI software. Larger markets, more towns and more content move the price up.' },
       { q: 'Do you guarantee first-page rankings?', a: 'No honest provider can guarantee rankings, because Google and AI tools control their own results. We commit to the work, report on it transparently every month and focus on the rankings and leads that matter to your business.' },
     ],
     related: ['website-design', 'google-ads-management', 'social-media-management'],
+    price: { amount: 999, unit: 'month', text: 'AEO plans start at $999/month', note: 'Includes Lead Alchemist, our lead automation and AI software.' },
   },
   {
     slug: 'google-ads-management',
@@ -1140,7 +1150,7 @@ export const services: Service[] = [
     description: 'Google Ads management for Vail Valley businesses — search, Maps and Local Services ads targeted to Eagle County and visitors planning a trip, with call tracking.',
     h1: 'Google Ads Management for Vail Valley Businesses',
     primaryKeyword: 'Google Ads management Vail Valley',
-    answer: 'Vail Valley IT manages Google Ads for local businesses across the Vail Valley and Eagle County. We build search, Maps and Local Services campaigns targeted to the towns you serve and to visitors planning a trip, track every call, form and booking, and adjust spending every week so your budget goes to the searches that produce customers.',
+    answer: 'Vail Valley IT manages Google Ads for local businesses across the Vail Valley and Eagle County. We build search, Maps and Local Services campaigns targeted to the towns you serve and to visitors planning a trip, track every call, form and booking, and adjust spending every week so your budget goes to the searches that produce customers. Management starts at $899 a month.',
     card: 'Search, Maps and Local Services ads aimed at the valley and incoming visitors, with every call and lead tracked.',
     sections: [
       {
@@ -1160,6 +1170,7 @@ export const services: Service[] = [
       },
     ],
     includes: [
+      'Lead Alchemist lead automation and AI software (included with every marketing package)',
       'Account audit, setup or rebuild',
       'Search and Google Maps campaigns',
       'Local Services Ads setup and verification where eligible',
@@ -1173,10 +1184,12 @@ export const services: Service[] = [
     faqs: [
       { q: 'How much should a small business spend on Google Ads?', a: 'It depends on your industry, competition and service area. Local service keywords in the Vail Valley vary widely in cost. We recommend a starting budget after reviewing keyword costs for your business, then adjust based on the cost per lead.' },
       { q: 'What are Google Local Services Ads?', a: 'Local Services Ads appear at the very top of some searches with a “Google Screened” or “Google Guaranteed” badge. You pay per lead rather than per click. They are available for certain service categories and require background and license checks.' },
+      { q: 'How much does Google Ads management cost?', a: 'Google Ads management from Vail Valley IT starts at $899 a month, and includes Lead Alchemist, our lead automation and AI software. Your ad budget is separate and paid directly to Google.' },
       { q: 'Is the ad budget included in management fees?', a: 'No. Your ad spend is paid directly to Google from your own account, so you always see exactly what was spent. Management is a separate flat fee.' },
       { q: 'Who owns the Google Ads account?', a: 'You do. The account is set up under your business, with us given management access. If you ever leave, the account, history and data stay with you.' },
     ],
     related: ['seo-ai-search-optimization', 'meta-ads-management', 'website-design'],
+    price: { amount: 899, unit: 'month', text: 'Management starts at $899/month', note: 'Ad spend is separate and paid directly to Google from your own account. Includes Lead Alchemist, our lead automation and AI software.' },
   },
   {
     slug: 'meta-ads-management',
@@ -1188,7 +1201,7 @@ export const services: Service[] = [
     description: 'Facebook and Instagram ads for Vail Valley businesses — local and visitor targeting, video creative, lead forms and retargeting, managed by a local team.',
     h1: 'Facebook & Instagram Ads for Vail Valley Businesses',
     primaryKeyword: 'Facebook ads Vail Valley',
-    answer: 'Vail Valley IT manages Meta ads, meaning Facebook and Instagram advertising, for businesses across the Vail Valley. We target locals by town and visitors by where they live and travel, create scroll-stopping video and image ads, set up lead forms and retargeting, and track results back to calls, bookings and sales so you know what your ad spend is returning.',
+    answer: 'Vail Valley IT manages Meta ads, meaning Facebook and Instagram advertising, for businesses across the Vail Valley. We target locals by town and visitors by where they live and travel, create scroll-stopping video and image ads, set up lead forms and retargeting, and track results back to calls, bookings and sales so you know what your ad spend is returning. Management starts at $1,499 a month.',
     card: 'Facebook and Instagram campaigns with local and visitor targeting, video creative and results you can track.',
     sections: [
       {
@@ -1208,6 +1221,7 @@ export const services: Service[] = [
       },
     ],
     includes: [
+      'Lead Alchemist lead automation and AI software (included with every marketing package)',
       'Meta Business account and Pixel setup or cleanup',
       'Campaign strategy and audience planning',
       'Local radius and visitor-market targeting',
@@ -1222,9 +1236,11 @@ export const services: Service[] = [
       { q: 'Are Facebook ads worth it for a small local business?', a: 'Yes, when the offer is clear and the creative is strong. Meta ads are an affordable way to reach a defined local or visitor audience, promote events and offers, recruit staff and retarget website visitors. Results depend on tracking and on testing creative.' },
       { q: 'Should I advertise on Facebook or Instagram?', a: 'Usually both. Meta ads run across Facebook and Instagram from one campaign, and the system shifts budget toward whichever placement performs better for your goal.' },
       { q: 'Can I target tourists planning a trip to Vail?', a: 'Yes. Meta allows targeting by where people live, their interests and travel-related behavior, so campaigns can reach people in your key visitor markets before and during their trip, subject to Meta’s targeting rules.' },
+      { q: 'How much does Meta ads management cost?', a: 'Facebook and Instagram ads management from Vail Valley IT starts at $1,499 a month, and includes Lead Alchemist, our lead automation and AI software. Your ad budget is separate and paid directly to Meta.' },
       { q: 'Is ad spend included in the management fee?', a: 'No. Ad spend is billed by Meta directly to your own ad account, so you always see exactly what was spent. Management is a separate flat fee.' },
     ],
     related: ['short-form-video-content', 'social-media-management', 'google-ads-management'],
+    price: { amount: 1499, unit: 'month', text: 'Management starts at $1,499/month', note: 'Ad spend is separate and paid directly to Meta from your own account. Includes Lead Alchemist, our lead automation and AI software.' },
   },
 ];
 

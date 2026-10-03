@@ -267,6 +267,11 @@ tr:last-child td { border-bottom: 0; }
 .founder-links a:hover { color: #fff; text-decoration: underline; }
 .founder-links a::after { content: ' →'; }
 @media (max-width: 640px) { .founder { grid-template-columns: 1fr; gap: 1.2rem; padding: 1.4rem; } .founder-photo { width: 160px; } }
+.price-callout { margin: 0 0 1.2rem; padding: 1.1rem 1.3rem; border-radius: 14px; background: linear-gradient(135deg, var(--band-deep), var(--indigo)); color: #d9d6f5; }
+.price-callout .price-label { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #8fc1ff; }
+.price-callout strong { display: block; color: #fff; font-size: 1.35rem; margin: .15rem 0 .3rem; }
+.price-callout p { margin: 0; font-size: .92rem; }
+.byline { margin-top: 2rem; font-size: .8rem; }
 .nap { font-style: normal; margin-top: 1rem; line-height: 1.7; }
 .foot .cobrand { display: inline-flex; flex-direction: column; gap: .4rem; margin-top: 1.4rem; opacity: .9; }
 .foot .cobrand:hover { opacity: 1; text-decoration: none; }

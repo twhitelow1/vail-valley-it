@@ -15,7 +15,7 @@ export type Extra = {
 
 export const extras: Record<string, Extra> = {
   'managed-it-services': {
-    facts: [['Pricing', 'Flat monthly, per user'], ['Monitoring', '24/7'], ['Routine requests', '~10 minutes'], ['Coverage', 'All of Eagle County']],
+    facts: [['Plans from', '$297/month'], ['Monitoring', '24/7'], ['Routine requests', '~10 minutes'], ['Coverage', 'All of Eagle County']],
     signs: [
       'The same computer problems keep coming back every few weeks.',
       'Nobody can say for certain whether last night’s backup worked.',
@@ -26,7 +26,7 @@ export const extras: Record<string, Extra> = {
     ],
     fit: ['Offices with roughly 5 to 50 users', 'Healthcare, financial, insurance and professional firms with sensitive data', 'Owners who want one accountable partner instead of several vendors', 'Businesses with seasonal staffing swings'],
     pricing: [
-      ['Number of users and devices', 'Most plans are priced per user, covering their laptop, phone and accounts.'],
+      ['Number of users and devices', 'Plans start at $297/month and scale with the users, laptops, phones and accounts covered.'],
       ['Servers and locations', 'On-premise servers, multiple offices or job sites add monitoring and maintenance.'],
       ['Compliance requirements', 'HIPAA or FTC Safeguards documentation and controls add to the security stack.'],
       ['Current state', 'A one-time onboarding fee may apply if systems need cleanup before they can be managed.'],
@@ -443,7 +443,7 @@ export const extras: Record<string, Extra> = {
     review: 'Tony Martinez',
   },
   'emergency-it-support': {
-    facts: [['Contract', 'None required'], ['Call', '(970) 446-9440'], ['Billing', 'Per incident'], ['Coverage', 'Eagle County + remote']],
+    facts: [['Contract', 'None required'], ['Call', '(970) 446-9440'], ['Rate', '$200 min, then $175/hr'], ['Coverage', 'Eagle County + remote']],
     signs: [
       'The internet, Wi-Fi or phones are down and customers are waiting.',
       'You are locked out of email or Microsoft 365.',
@@ -459,9 +459,9 @@ export const extras: Record<string, Extra> = {
     ],
     fit: ['Businesses without an IT provider', 'Offices whose IT person is unavailable', 'Second-opinion help when your current provider is not responding', 'Anyone facing an outage or security incident right now'],
     pricing: [
-      ['Time required', 'Billed per incident, or from prepaid block hours at a better rate.'],
+      ['Time required', 'A $200 minimum, then $175 for each hour after that.'],
       ['Remote vs. on site', 'Remote work avoids travel time; on-site visits include travel within Eagle County.'],
-      ['After-hours urgency', 'Evenings, weekends and holidays may carry an emergency rate.'],
+      ['After-hours urgency', 'Evening, weekend and holiday help is available by arrangement.'],
       ['Parts and equipment', 'Replacement hardware is quoted and approved before purchase.'],
     ],
     local: { h2: 'Emergency coverage across Eagle County', html: `<p>From village businesses in <a href="/it-support-vail-co">Vail</a> and <a href="/it-support-beaver-creek-co">Beaver Creek</a> to contractors in <a href="/it-support-gypsum-co">Gypsum</a>, remote triage starts as soon as you reach us. <a href="/it-support-avon-co">Avon</a>, <a href="/it-support-edwards-co">Edwards</a> and <a href="/it-support-eagle-vail-co">Eagle-Vail</a> are closest to our base for on-site work.</p>` },
@@ -584,10 +584,10 @@ export const extras: Record<string, Extra> = {
     ],
   },
   'social-media-management': {
-    facts: [['Platforms', 'Instagram, Facebook, TikTok, LinkedIn'], ['Planning', 'Monthly content calendar'], ['Replies', 'Comments & messages'], ['Reporting', 'Monthly']],
+    facts: [['Platforms', 'Instagram, Facebook, TikTok, LinkedIn'], ['Planning', 'Monthly content calendar'], ['Included', 'Lead Alchemist automation'], ['Reporting', 'Monthly']],
     signs: [
       'Your last post was weeks or months ago.',
-      'Customer comments and messages go unanswered.',
+      'Leads from social media and your website are not followed up quickly.',
       'You post only when someone remembers, with no plan behind it.',
       'Your profiles have old hours, logos or links.',
       'You cannot tell whether social media is bringing in any business.',
@@ -596,23 +596,23 @@ export const extras: Record<string, Extra> = {
       { h: 'Audit & goals', p: 'We review your accounts and competitors and agree on what social should achieve.' },
       { h: 'Calendar', p: 'A monthly plan built around your seasons, offers and events goes to you for approval.' },
       { h: 'Create & post', p: 'Posts are designed, written and scheduled across your platforms.' },
-      { h: 'Engage & report', p: 'We reply to comments and messages and report monthly on results.' },
+      { h: 'Report & refine', p: 'Monthly reporting shows what is working, and the next calendar builds on it.' },
     ],
     fit: ['Restaurants, retail, lodging and experience businesses', 'Service businesses that rely on reputation and referrals', 'Owners who want a consistent presence without doing it themselves', 'Businesses preparing for a busy season or opening'],
     pricing: [
       ['Number of platforms', 'Each additional platform adds content formatting and monitoring.'],
       ['Posting frequency', 'More posts per week means more content to create.'],
       ['Content creation', 'Original photography and video cost more than supplied images.'],
-      ['Community management', 'Heavier comment and message volume adds monitoring time.'],
+      ['Paid boosts', 'Boosted posts and ad spend are billed separately from management.'],
     ],
     local: { h2: 'Social media for valley businesses', html: `<p>We manage social media for businesses throughout Eagle County, from <a href="/it-support-avon-co">Avon</a> and <a href="/it-support-edwards-co">Edwards</a> to <a href="/it-support-minturn-co">Minturn</a> and <a href="/it-support-eagle-co">Eagle</a>. Being local means we know the events, seasons and community moments worth posting about, and we can drop by to capture fresh photos and video.</p>` },
     faqs: [
-      { q: 'Can you manage our Google Business Profile too?', a: 'Yes. Google Business Profile posts, photo updates and review responses can be included, and they directly support your local search visibility.' },
+      { q: 'Can you manage our Google Business Profile too?', a: 'Yes. Google Business Profile posts and photo updates can be included, and they directly support your local search visibility.' },
     ],
     review: 'Erin Gross',
   },
   'seo-ai-search-optimization': {
-    facts: [['Covers', 'Google, Maps & AI answers'], ['AI engines', 'ChatGPT, Gemini, Perplexity'], ['Focus', 'Town-level local search'], ['Reporting', 'Monthly']],
+    facts: [['Plans from', '$999/month'], ['Covers', 'Google, Maps & AI answers'], ['AI engines', 'ChatGPT, Gemini, Perplexity'], ['Focus', 'Town-level local search']],
     signs: [
       'Competitors show up in Google Maps and you do not.',
       'Asking ChatGPT for your type of business in your town does not mention you.',
@@ -641,7 +641,7 @@ export const extras: Record<string, Extra> = {
     review: 'Anthony Atencio',
   },
   'google-ads-management': {
-    facts: [['Campaigns', 'Search, Maps, Local Services'], ['Targeting', 'By town + visitor markets'], ['Tracking', 'Calls, forms, bookings'], ['Ad account', 'Owned by you']],
+    facts: [['Management from', '$899/month'], ['Campaigns', 'Search, Maps, Local Services'], ['Targeting', 'By town + visitor markets'], ['Ad account', 'Owned by you']],
     signs: [
       'You are spending on Google Ads but cannot say how many customers it brings.',
       'Your ads show up for searches that have nothing to do with your business.',
@@ -668,7 +668,7 @@ export const extras: Record<string, Extra> = {
     ],
   },
   'meta-ads-management': {
-    facts: [['Platforms', 'Facebook & Instagram'], ['Targeting', 'Locals + visitors'], ['Creative', 'Video & image ads'], ['Ad account', 'Owned by you']],
+    facts: [['Management from', '$1,499/month'], ['Platforms', 'Facebook & Instagram'], ['Targeting', 'Locals + visitors'], ['Ad account', 'Owned by you']],
     signs: [
       'You boost posts now and then without a clear goal or result.',
       'You have an event, offer or opening to promote and little time to do it.',

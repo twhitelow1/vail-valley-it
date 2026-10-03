@@ -25,6 +25,10 @@ ${services.map((s) => `- [${s.name}](${U}/${s.slug}): ${s.card}`).join('\n')}
 ## Digital marketing
 - [Digital marketing overview](${U}/digital-marketing)
 
+## Pricing
+${services.filter((s) => s.price).map((s) => `- [${s.name}](${U}/${s.slug}): ${s.price!.text}. ${s.price!.note}`).join('\n')}
+- Every digital marketing package includes Lead Alchemist, ${site.parentBrand}'s lead automation and AI software.
+
 ## Service areas
 ${locations.map((l) => `- [IT support in ${l.town}, CO](${U}/${l.slug}): ZIP ${l.zips.join(', ')}; ${l.driveFromEdwards === 'local' ? 'home base' : `${l.driveFromEdwards} from Edwards`}.`).join('\n')}
 
