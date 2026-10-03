@@ -7,23 +7,28 @@ import Faq from '../components/Faq.astro';
 import { site } from '../data/site';
 import { breadcrumbs, webPage, founder, faqPage } from '../lib/schema';
 const title = 'About Vail Valley IT | Local Managed IT Services Team';
-const description = 'Vail Valley IT is the local managed technology services brand of DubLow Digital, built to serve Eagle County businesses from Edwards, Colorado.';
+const description = 'Vail Valley IT is the local branch of DubLow Digital, a nationwide small-business IT firm headquartered in Edwards, Colorado, built to serve our own Eagle County community.';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }];
 const faqs = [
   { q: 'Is Vail Valley IT a local company?', a: 'Yes. Vail Valley IT is based in Edwards, Colorado, and its founder lives in the Vail Valley. It serves businesses throughout Eagle County.' },
-  { q: 'Who owns Vail Valley IT?', a: 'Vail Valley IT is a brand of DubLow Digital, founded by Todd Whitelow. DubLow Digital is the parent company; Vail Valley IT is its local IT, cybersecurity and automation practice.' },
+  { q: 'Who owns Vail Valley IT?', a: 'Vail Valley IT is a brand of DubLow Digital, founded by Todd Whitelow. DubLow Digital is a nationwide IT firm for small businesses, headquartered in Edwards, Colorado. Vail Valley IT is its local branch for Eagle County.' },
+  { q: 'Where is DubLow Digital headquartered?', a: 'DubLow Digital is headquartered in Edwards, Colorado, in the Vail Valley. It provides IT services to small businesses nationwide, and created Vail Valley IT to focus on its home community.' },
+  { q: 'Is Vail Valley IT hiring?', a: 'We are always interested in hearing from talented people in the Vail Valley, even when no position is advertised. You can send a resume through the careers page.' },
 ];
 ---
 <Base title={title} description={description} path="/about" schema={[webPage('/about', title, description, 'AboutPage'), founder(), breadcrumbs(crumbs), faqPage(faqs, '/about')]}>
   <header class="page-head"><div class="wrap">
     <Breadcrumbs items={crumbs} />
     <h1>About Vail Valley IT</h1>
-    <p class="answer">Vail Valley IT is the local managed technology services brand of DubLow Digital, based in Edwards, Colorado. We exist for one reason: to give Eagle County businesses enterprise-grade IT, security and automation from people who live here and answer the phone.</p>
+    <p class="answer">Vail Valley IT is the local branch of DubLow Digital, a nationwide IT firm for small businesses headquartered right here in Edwards, Colorado. We created Vail Valley IT to focus on our own community: to give Eagle County businesses enterprise-grade IT, security, automation and marketing from longtime locals who live here and answer the phone.</p>
   </div></header>
   <section class="section"><div class="wrap article">
     <article class="prose">
-      <h2>Why we built a local IT brand</h2>
-      <p>For years, the best-known names in Vail Valley IT search results have been regional and national firms serving many markets at once. Meanwhile, local practices, agencies, lodges and contractors have been getting by with break-fix calls and good intentions. Vail Valley IT is focused only on that gap: managed IT, cybersecurity, compliance, automation and digital marketing for businesses between Vail Pass and Dotsero.</p>
+      <h2>Headquartered in the Vail Valley, serving small businesses nationwide</h2>
+      <p><a href={site.parentUrl}>{site.parentBrand}</a> is an IT firm for small businesses across the country, and it has always been headquartered in {site.parentHq}. The tools, security stack, help desk and processes we use for clients nationwide are the same ones behind every Vail Valley IT client.</p>
+      <h2>Why we created Vail Valley IT</h2>
+      <p>We are longtime locals. This is where we live, work and play, and the businesses that keep the valley running are our neighbors. Vail Valley IT is the branch we built to focus on that community and to grow here: managed IT, cybersecurity, compliance, automation and digital marketing for businesses between Vail Pass and Dotsero, delivered by people who are a short drive away instead of a ticket number in another state.</p>
+      <p>It also means local practices, agencies, lodges and contractors no longer have to choose between a national provider that does not know the valley and break-fix help that only shows up after something breaks.</p>
       <h2>Cyber-first and automation-driven</h2>
       <p>Security is where every engagement starts. Before we recommend hardware or software, we assess the risk to your data. And because we run our own operation on automation, routine requests like new users and password or MFA resets for verified staff are resolved in about ten minutes instead of hours, while every other request reaches the right human technician faster. We help clients adopt the same approach so their teams spend less time on repetitive work.</p>
       <h2 id="todd-whitelow">Meet the founder</h2>
@@ -44,9 +49,12 @@ const faqs = [
         <table><tbody>
           <tr><th scope="row">Brand</th><td>{site.name}</td></tr>
           <tr><th scope="row">Parent</th><td><a href={site.parentUrl}>{site.parentBrand}</a></td></tr>
+          <tr><th scope="row">Parent HQ</th><td>{site.parentHq}</td></tr>
+          <tr><th scope="row">Parent reach</th><td>Small businesses nationwide</td></tr>
           <tr><th scope="row">Based in</th><td>{site.address.locality}, {site.address.region}</td></tr>
           <tr><th scope="row">Serves</th><td>Eagle County, CO</td></tr>
           <tr><th scope="row">Phone</th><td>{site.phone}</td></tr>
+          <tr><th scope="row">Careers</th><td><a href="/careers">Send us your resume</a></td></tr>
           <tr><th scope="row">Reviews</th><td><a href="/reviews-testimonials">{site.gbp.rating.toFixed(1)} ★ ({site.gbp.reviewCount})</a></td></tr>
         </tbody></table>
       </div>

@@ -267,6 +267,7 @@ tr:last-child td { border-bottom: 0; }
 .alert-strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; padding-block: .6rem; }
 .alert-strip strong { color: #5a3200; }
 .alert-strip a { color: #8a4b00; font-weight: 700; }
+a[href^="tel:"] { white-space: nowrap; }
 .alert-strip .dot { width: 9px; height: 9px; border-radius: 50%; background: #d9480f; flex: none; box-shadow: 0 0 0 4px rgba(217,72,15,.18); }
 
 /* How it works (3) — a real sequence, so numbered */
