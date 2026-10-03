@@ -23,6 +23,13 @@ const top = ['managed-it-services', 'compliance-cybersecurity', 'it-data-protect
         {site.email && <><br /><a href={`mailto:${site.email}`}>{site.email}</a></>}
       </address>
       <p style="margin-top:1rem">Serving businesses across Eagle County, Colorado.</p>
+      <a class="cobrand" href={site.parentUrl} rel="noopener">
+        <span>A brand of</span>
+        <picture>
+          <source srcset="/dublow-digital-logo-white.webp" type="image/webp" />
+          <img src="/dublow-digital-logo-white.png" alt={site.parentBrand} width="381" height="160" loading="lazy" />
+        </picture>
+      </a>
     </div>
     <div>
       <h2>IT services</h2>

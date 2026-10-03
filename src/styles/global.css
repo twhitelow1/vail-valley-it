@@ -250,6 +250,10 @@ tr:last-child td { border-bottom: 0; }
 .foot-bottom a { color: #bdb8e6; text-decoration: none; margin-left: 1rem; }
 .foot .brand svg { width: 200px; color: #fff; }
 .nap { font-style: normal; margin-top: 1rem; line-height: 1.7; }
+.foot .cobrand { display: inline-flex; flex-direction: column; gap: .4rem; margin-top: 1.4rem; opacity: .9; }
+.foot .cobrand:hover { opacity: 1; text-decoration: none; }
+.cobrand span { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: #bdb8e6; }
+.cobrand img { width: 150px; height: auto; display: block; }
 .foot-bottom { border-top: 1px solid rgba(255,255,255,.12); padding-block: 1.2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: .85rem; }
 @media (max-width: 960px) { .foot { grid-template-columns: 1fr 1fr; } .foot > :first-child { grid-column: 1 / -1; } }
 
