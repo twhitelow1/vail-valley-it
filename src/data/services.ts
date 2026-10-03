@@ -56,7 +56,7 @@ export const services: Service[] = [
       {
         h2: 'Faster resolution through automation, with people where it matters',
         html: `<p>Routine, repeatable requests such as a new user, a password reset or an MFA reset are handled by automation once we have verified the person asking is authorized. That brings those requests down to roughly ten minutes instead of the one to two hours they often take in a human-only queue.</p>
-<p>Everything else goes to a real technician, faster, because the automation has already gathered the device details, user history and error logs. You never have to argue with a chatbot to reach a person. You just stop waiting.</p>`,
+<p>Everything else goes to a real technician, faster, because the automation has already gathered the device details, user history and error logs. You never have to argue with a chatbot to reach a person.</p>`,
       },
       {
         h2: 'How onboarding works',
