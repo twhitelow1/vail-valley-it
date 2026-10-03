@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+import { reviews, site } from '../data/site';
+interface Props { limit?: number }
+const { limit = reviews.length } = Astro.props;
+---
+<div class="reviews">
+  {reviews.slice(0, limit).map((r) => (
+    <figure class="review">
+      <span class="stars" aria-label="5 out of 5 stars">{[1,2,3,4,5].map(() => <Icon name="star" />)}</span>
+      <blockquote><p>{r.text}</p></blockquote>
+      <figcaption><b>{r.author}</b>, Google review</figcaption>
+    </figure>
+  ))}
+</div>
+<p class="meta">Reviews shown verbatim from our <a href={site.gbp.mapsUrl} rel="noopener">Google Business Profile</a> (listed as {site.parentBrand}). <a href="/reviews-testimonials">See all reviews</a> or <a href={site.gbp.reviewUrl} rel="noopener">leave one</a>.</p>

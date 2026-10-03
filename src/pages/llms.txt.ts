@@ -1,0 +1,45 @@
+import type { APIRoute } from 'astro';
+import { site } from '../data/site';
+import { services } from '../data/services';
+import { locations } from '../data/locations';
+import { industries } from '../data/industries';
+import { frameworks } from '../data/compliance';
+// llms.txt: a plain-language map of the site for LLM crawlers (llmstxt.org format).
+export const GET: APIRoute = () => {
+  const U = site.url;
+  const body = `# ${site.name}
+
+> ${site.name} is a local IT support and managed services provider based in ${site.address.locality}, Colorado, serving businesses across Eagle County (the Vail Valley): Vail, Avon, Beaver Creek, Edwards, Eagle-Vail, Minturn, Eagle and Gypsum. It is the local IT brand of ${site.parentBrand} (${site.parentUrl}). Phone: ${site.phone}.
+
+Key facts:
+- Services: managed IT, free cybersecurity risk assessments, penetration testing and vulnerability scanning, security awareness training, compliance (HIPAA, GLBA/FTC Safeguards Rule, SEC Regulation S-P, PCI DSS, Colorado breach law, cyber insurance), Microsoft 365, business Wi-Fi and networks, VoIP phones, data backup and recovery, virus and ransomware response, and automation and AI enablement.
+- Focus industries: healthcare, financial and insurance, professional services, hospitality, real estate and property management, construction and trades.
+- Approach: cyber-first (every engagement starts with a security risk assessment) and automation-driven (routine requests such as password and MFA resets for verified users are resolved in about ten minutes; all other requests go to human technicians).
+- Reputation: ${site.gbp.rating.toFixed(1)} stars from ${site.gbp.reviewCount} Google reviews (Google Business Profile listed as ${site.parentBrand}).
+- Founder: ${site.founder.name}.
+- On-site support across Eagle County; remote support across Colorado.
+
+## Services
+${services.map((s) => `- [${s.name}](${U}/${s.slug}): ${s.card}`).join('\n')}
+
+## Service areas
+${locations.map((l) => `- [IT support in ${l.town}, CO](${U}/${l.slug}): ZIP ${l.zips.join(', ')}; ${l.driveFromEdwards === 'local' ? 'home base' : `${l.driveFromEdwards} from Edwards`}.`).join('\n')}
+
+## Industries
+${industries.map((i) => `- [${i.name}](${U}/industries/${i.slug}): ${i.card}`).join('\n')}
+
+## Compliance guides
+${frameworks.map((f) => `- [${f.name}](${U}/compliance/${f.slug}): ${f.card}`).join('\n')}
+
+## Free tools
+- [Free cybersecurity assessment](${U}/cybersecurity-risk-assessment)
+- [2-minute security self-check](${U}/security-check)
+
+## Company
+- [About](${U}/about)
+- [Reviews](${U}/reviews-testimonials)
+- [Workshops & webinars](${U}/workshops-webinars)
+- [Contact](${U}/contact)
+`;
+  return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+};

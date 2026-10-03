@@ -1,0 +1,222 @@
+---
+// Root-level pages: /<service-slug> and /it-support-<town>-co
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Reviews from '../components/Reviews.astro';
+import { services, serviceBySlug, type Service } from '../data/services';
+import { locations, locationBySlug, type Location } from '../data/locations';
+import { industries } from '../data/industries';
+import { extras } from '../data/serviceExtras';
+import { reviews } from '../data/site';
+import { site, bookHref, telHref } from '../data/site';
+import { breadcrumbs, faqPage, webPage, serviceSchema, localServiceSchema } from '../lib/schema';
+
+export function getStaticPaths() {
+  return [
+    ...services.map((s) => ({ params: { slug: s.slug }, props: { kind: 'service' as const, item: s } })),
+    ...locations.map((l) => ({ params: { slug: l.slug }, props: { kind: 'location' as const, item: l } })),
+  ];
+}
+
+type P = { kind: 'service'; item: Service } | { kind: 'location'; item: Location };
+const { kind, item } = Astro.props as P;
+const path = `/${item.slug}`;
+const reviewed = new Date(site.lastReviewed + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+const ex = kind === 'service' ? extras[item.slug] : undefined;
+const allFaqs = [...item.faqs, ...(ex?.faqs ?? [])];
+const slugify = (t: string) => t.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const featuredReview = ex?.review ? reviews.find((r) => r.author === ex.review) : undefined;
+let crumbs, schema;
+if (kind === 'service') {
+  crumbs = [{ name: 'Home', path: '/' }, { name: 'IT Services', path: '/services' }, { name: item.name, path }];
+  schema = [webPage(path, item.title, item.description), serviceSchema(item), breadcrumbs(crumbs), faqPage(allFaqs, path)];
+} else {
+  crumbs = [{ name: 'Home', path: '/' }, { name: 'Service Areas', path: '/service-areas' }, { name: `IT Support ${item.town}`, path }];
+  schema = [webPage(path, item.title, item.description), localServiceSchema(item), breadcrumbs(crumbs), faqPage(item.faqs, path)];
+}
+const callFirst = ['emergency-it-support', 'virus-malware-removal'].includes(item.slug);
+const svc = kind === 'service' ? (item as Service) : null;
+const loc = kind === 'location' ? (item as Location) : null;
+const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slug)) : [];
+---
+<Base title={item.title} description={item.description} path={path} schema={schema}>
+  <header class="page-head">
+    <div class="wrap">
+      <Breadcrumbs items={crumbs} />
+      {svc && <span class="svc-badge"><Icon name={svc.icon} /></span>}
+      <h1>{item.h1}</h1>
+      <p class="answer">{item.answer}</p>
+      <div class="btn-row" style="margin-top:1.5rem">
+        {callFirst ? (
+          <>
+            <a class="btn btn-primary" href={telHref} data-track="call_emergency"><Icon name="phone" />Call now: {site.phone}</a>
+            {item.slug === "virus-malware-removal" ? <a class="btn btn-outline" href="/emergency-it-support">Emergency IT support</a> : <a class="btn btn-outline" href="/virus-malware-removal">Hacked? What to do now</a>}
+          </>
+        ) : (
+          <>
+            <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Get a free cybersecurity assessment</a>
+            <a class="btn btn-outline" href={telHref}><Icon name="phone" />{site.phone}</a>
+          </>
+        )}
+      </div>
+      {ex && (
+        <dl class="facts">{ex.facts.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+      )}
+      <p class="meta">Reviewed by <a href="/about">{site.founder.name}</a>, founder of Vail Valley IT · Updated {reviewed}</p>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="wrap article">
+      <article class="prose">
+        {svc && ex && (
+          <nav class="toc" aria-label="On this page">
+            <b>On this page</b>
+            <ol>
+              {item.sections.map((s) => <li><a href={`#${slugify(s.h2)}`}>{s.h2}</a></li>)}
+              <li><a href="#signs">Signs you need it</a></li>
+              {ex.process && <li><a href="#process">How it works</a></li>}
+              <li><a href="#included">What’s included</a></li>
+              <li><a href="#pricing">What affects the price</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ol>
+          </nav>
+        )}
+        {item.sections.map((s) => (<><h2 id={slugify(s.h2)}>{s.h2}</h2><Fragment set:html={s.html} /></>))}
+
+        {svc && ex && (
+          <>
+            <h2 id="signs">Signs it’s time for {svc.name}</h2>
+            <ul class="signs">{ex.signs.map((x) => <li><Icon name="check" />{x}</li>)}</ul>
+            <p>If two or more of these sound familiar, <a href="/security-check">take the free security check</a> or <a href={bookHref}>book a free cybersecurity assessment</a>.</p>
+
+            {ex.process && (
+              <>
+                <h2 id="process">How our {svc.name} process works</h2>
+                <ol class="steps steps-2">{ex.process.map((st) => <li><h3>{st.h}</h3><p>{st.p}</p></li>)}</ol>
+              </>
+            )}
+
+            <h2 id="included">What’s included</h2>
+            <ul class="included cols">{svc.includes.map((i) => <li><Icon name="check" />{i}</li>)}</ul>
+
+            <h2 id="fit">Who it’s for</h2>
+            <ul class="fit">{ex.fit.map((f) => <li>{f}</li>)}</ul>
+
+            <h2 id="pricing">What affects the price</h2>
+            <p>Every quote is flat and in writing. These are the factors that move the number:</p>
+            <div class="tablewrap"><table>
+              <thead><tr><th scope="col">Factor</th><th scope="col">Why it matters</th></tr></thead>
+              <tbody>{ex.pricing.map(([k, v]) => <tr><td><strong>{k}</strong></td><td>{v}</td></tr>)}</tbody>
+            </table></div>
+
+            <h2 id={slugify(ex.local.h2)}>{ex.local.h2}</h2>
+            <Fragment set:html={ex.local.html} />
+            <ul class="towns">{locations.map((l) => <li><a href={`/${l.slug}`}>{l.town}</a></li>)}</ul>
+
+            {featuredReview && (
+              <figure class="pull">
+                <span class="stars" aria-label="5 out of 5 stars">{[1,2,3,4,5].map(() => <Icon name="star" />)}</span>
+                <blockquote><p>“{featuredReview.text}”</p></blockquote>
+                <figcaption><b>{featuredReview.author}</b>, Google review</figcaption>
+              </figure>
+            )}
+
+            <div class="mini-check">
+              <Icon name="shield" />
+              <div><b>How exposed is your business?</b><span>Ten questions, two minutes, an instant risk score.</span></div>
+              <a class="btn btn-primary" href="/security-check">Take the free check</a>
+            </div>
+          </>
+        )}
+
+        {loc && (
+          <>
+            <h2>{loc.town} businesses we support</h2>
+            <div class="tablewrap"><table>
+              <thead><tr><th scope="col">Business type</th><th scope="col">What we typically handle</th></tr></thead>
+              <tbody>{loc.businesses.map((b) => <tr><td><strong>{b.name}</strong></td><td>{b.note}</td></tr>)}</tbody>
+            </table></div>
+
+            <h2>Popular IT services in {loc.town}</h2>
+            <div class="grid grid-2">
+              {loc.featured.map((s) => { const x = serviceBySlug[s]; return (
+                <article class="card"><Icon name={x.icon} class="icon-lg" /><div><h3><a href={`/${x.slug}`}>{x.name}</a></h3><p>{x.card}</p></div></article>
+              ); })}
+            </div>
+
+            <h3 style="margin-top:2rem">All IT services available in {loc.town}</h3>
+            <ul class="towns">{services.map((x) => <li><a href={`/${x.slug}`}>{x.name}</a></li>)}</ul>
+
+            <h3 style="margin-top:1.6rem">Industries we specialize in</h3>
+            <ul class="towns">{industries.map((i) => <li><a href={`/industries/${i.slug}`}>{i.name} IT</a></li>)}</ul>
+
+            <h2>Coverage details for {loc.town}, CO</h2>
+            <div class="tablewrap"><table><tbody>
+              <tr><th scope="row">Areas covered</th><td>{loc.neighborhoods.join(', ')}</td></tr>
+              <tr><th scope="row">ZIP codes</th><td>{loc.zips.join(', ')}</td></tr>
+              <tr><th scope="row">Access</th><td>{loc.exit}</td></tr>
+              <tr><th scope="row">On-site from Edwards</th><td>{loc.driveFromEdwards === 'local' ? 'Local — Edwards is our home base' : loc.driveFromEdwards}</td></tr>
+              <tr><th scope="row">Remote support</th><td>Available immediately during business hours</td></tr>
+            </tbody></table></div>
+          </>
+        )}
+
+        <div style="margin-top:2.5rem"><Faq faqs={allFaqs} /></div>
+
+        {loc && (
+          <>
+            <h2>What our clients say</h2>
+            <Reviews limit={2} />
+          </>
+        )}
+      </article>
+
+      <aside class="aside" aria-label="Related">
+        <div class="box dark">
+          <h3>Free cybersecurity assessment</h3>
+          <p style="font-size:.95rem">We review your devices, accounts, backups and security, then send a written plan with a flat price.</p>
+          <a class="btn btn-light" href={bookHref}><Icon name="calendar" />Book my assessment</a>
+          <a class="btn btn-ghost-light" href={telHref}><Icon name="phone" />Call {site.phone}</a>
+        </div>
+        {svc && (
+          <div class="box">
+            <h3>Related services</h3>
+            <ul class="linklist">{svc.related.map((r) => <li><a href={`/${r}`}>{serviceBySlug[r].name}<Icon name="chevron" /></a></li>)}</ul>
+          </div>
+        )}
+        {industryLinks.length > 0 && (
+          <div class="box">
+            <h3>Industries</h3>
+            <ul class="linklist">{industryLinks.map((i) => <li><a href={`/industries/${i.slug}`}>{i.name} IT<Icon name="chevron" /></a></li>)}</ul>
+          </div>
+        )}
+        <div class="box">
+          <h3>{loc ? 'Nearby service areas' : 'Where we work'}</h3>
+          <ul class="linklist">
+            {(loc ? loc.nearby.map((n) => locationBySlug[n]) : locations).map((l) => <li><a href={`/${l.slug}`}>IT support {l.town}<Icon name="chevron" /></a></li>)}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {svc && (
+    <section class="section tint" aria-labelledby="rel-h">
+      <div class="wrap">
+        <h2 id="rel-h">Related IT services</h2>
+        <div class="grid grid-3">
+          {svc.related.map((r) => { const x = serviceBySlug[r]; return (
+            <article class="card"><Icon name={x.icon} class="icon-lg" /><div><h3><a href={`/${x.slug}`}>{x.name}</a></h3><p>{x.card}</p><span class="more">Learn more<Icon name="chevron" /></span></div></article>
+          ); })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand title={loc ? `Get local IT support in ${loc.town}` : `Talk to us about ${svc!.name.toLowerCase()}`} />
+</Base>

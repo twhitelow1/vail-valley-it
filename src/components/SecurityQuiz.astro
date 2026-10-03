@@ -1,0 +1,140 @@
+---
+// 10-question cyber-risk self-check. Pure client-side; nothing is sent anywhere
+// unless site.quizWebhookUrl is set AND the visitor chooses to submit their details.
+import { site, bookHref, telHref } from '../data/site';
+const questions = [
+  { id: 'mfa', w: 15, q: 'Does every employee use multi-factor authentication (MFA) to sign in to email?', fix: 'Turn on MFA for every mailbox. It blocks the large majority of account-takeover attacks.', link: '/email-security-spam-protection', linkText: 'Email security' },
+  { id: 'restore', w: 12, q: 'Has anyone actually restored files from your backup in the last 90 days?', fix: 'Schedule restore tests. An untested backup is a guess, not a plan.', link: '/it-data-protection', linkText: 'Data protection' },
+  { id: 'immutable', w: 8, q: 'Is at least one backup copy stored offsite where ransomware can’t delete it?', fix: 'Add an immutable, offsite backup copy so a compromised login cannot erase your recovery point.', link: '/it-data-protection', linkText: 'Data protection' },
+  { id: 'patch', w: 10, q: 'Are all computers on a supported operating system and receiving security updates automatically?', fix: 'Replace or upgrade unsupported machines (including any still on Windows 10) and centralize patching.', link: '/hardware-upgrades', linkText: 'Hardware upgrades' },
+  { id: 'edr', w: 10, q: 'Is someone actively monitoring security alerts on your computers (EDR or managed antivirus)?', fix: 'Deploy endpoint detection and response with someone watching the alerts 24/7.', link: '/compliance-cybersecurity', linkText: 'Cybersecurity' },
+  { id: 'training', w: 8, q: 'Has your team had phishing or security awareness training in the last 12 months?', fix: 'Run short, regular training with simulated phishing so staff recognize the real thing.', link: '/email-security-spam-protection', linkText: 'Email security' },
+  { id: 'dmarc', w: 7, q: 'Is your email domain protected with SPF, DKIM and DMARC?', fix: 'Publish SPF, DKIM and DMARC records so criminals can’t easily send mail as your domain.', link: '/email-security-spam-protection', linkText: 'Email security' },
+  { id: 'offboard', w: 8, q: 'When someone leaves, is all of their access removed the same day?', fix: 'Use an offboarding checklist (or automation) that removes every account the day someone leaves.', link: '/managed-it-services', linkText: 'Managed IT' },
+  { id: 'ir', w: 6, q: 'If you were hacked tomorrow, do you have a written plan and know exactly who to call?', fix: 'Write a one-page incident response plan with contacts, first steps and your insurer’s requirements.', link: '/virus-malware-removal', linkText: 'Incident response' },
+  { id: 'wifi', w: 6, q: 'Is guest Wi-Fi separated from your business and payment networks?', fix: 'Segment guest, staff and payment traffic onto separate networks with firewall rules between them.', link: '/business-network-wifi-support', linkText: 'Network support' },
+];
+const cfg = { webhook: site.quizWebhookUrl, book: bookHref, tel: telHref, phone: site.phone };
+---
+<div class="quiz" id="security-check" data-cfg={JSON.stringify(cfg)} data-q={JSON.stringify(questions)}>
+  <div class="quiz-progress" aria-hidden="true"><span></span></div>
+  <form class="quiz-form" novalidate>
+    <fieldset class="quiz-reg">
+      <legend>Does your business store patient, financial or card-payment data?</legend>
+      <div class="quiz-opts">
+        <label><input type="radio" name="regulated" value="yes" required /> Yes</label>
+        <label><input type="radio" name="regulated" value="no" /> No</label>
+        <label><input type="radio" name="regulated" value="unsure" /> Not sure</label>
+      </div>
+    </fieldset>
+    {questions.map((q, i) => (
+      <fieldset>
+        <legend><span class="qn">{i + 1}/10</span>{q.q}</legend>
+        <div class="quiz-opts">
+          <label><input type="radio" name={q.id} value="yes" required /> Yes</label>
+          <label><input type="radio" name={q.id} value="no" /> No</label>
+          <label><input type="radio" name={q.id} value="unsure" /> Not sure</label>
+        </div>
+      </fieldset>
+    ))}
+    <p class="quiz-err" role="alert" hidden>Answer every question to see your score. “Not sure” is a fine answer.</p>
+    <button class="btn btn-primary" type="submit">See my risk score</button>
+    <p class="meta">Answers stay in your browser. Nothing is sent unless you choose to email yourself the results. <a href="/privacy-policy">Privacy policy</a>.</p>
+  </form>
+
+  <div class="quiz-result" hidden tabindex="-1">
+    <div class="quiz-score">
+      <div class="dial"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" class="track" /><circle cx="60" cy="60" r="52" class="bar" /></svg><b class="num">0</b></div>
+      <div>
+        <p class="eyebrow">Your security score</p>
+        <h3 class="level"></h3>
+        <p class="summary"></p>
+      </div>
+    </div>
+    <h4 class="gaps-h">Your top fixes, in priority order</h4>
+    <ol class="gaps"></ol>
+    <p class="reg-note" hidden><strong>Compliance note:</strong> because you handle regulated data, several of these gaps may also be HIPAA, FTC Safeguards Rule or PCI issues. See <a href="/compliance-cybersecurity">compliance & cybersecurity</a>.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href={bookHref} data-track="book_from_quiz">Review my results with a local tech (free)</a>
+      <a class="btn btn-outline" href={telHref} data-track="call_from_quiz">Call {site.phone}</a>
+      <button class="btn btn-outline quiz-reset" type="button">Retake</button>
+    </div>
+    {site.quizWebhookUrl && (
+      <form class="form quiz-lead">
+        <h4>Email me my results and fix list</h4>
+        <label>Name<input name="name" autocomplete="name" required /></label>
+        <label>Business email<input name="email" type="email" autocomplete="email" required /></label>
+        <label>Business name<input name="company" autocomplete="organization" /></label>
+        <button class="btn btn-primary" type="submit">Send my results</button>
+        <p class="lead-ok meta" hidden>Sent. Check your inbox — a local technician may follow up to answer questions.</p>
+      </form>
+    )}
+  </div>
+</div>
+
+<script is:inline>
+(() => {
+  const root = document.getElementById('security-check');
+  if (!root) return;
+  const Q = JSON.parse(root.dataset.q), cfg = JSON.parse(root.dataset.cfg);
+  const form = root.querySelector('.quiz-form'), res = root.querySelector('.quiz-result');
+  const bar = root.querySelector('.quiz-progress span'), err = root.querySelector('.quiz-err');
+  const total = Q.reduce((a, q) => a + q.w, 0);
+  const track = (n, p) => { try { window.gtag && gtag('event', n, p || {}); window.dataLayer && dataLayer.push({ event: n, ...(p || {}) }); } catch (e) {} };
+  let started = false, last = null;
+  form.addEventListener('change', () => {
+    if (!started) { started = true; track('security_check_start'); }
+    const done = new Set([...form.querySelectorAll('input:checked')].map((i) => i.name)).size;
+    bar.style.width = (done / (Q.length + 1)) * 100 + '%';
+  });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const missing = ['regulated', ...Q.map((q) => q.id)].filter((n) => !fd.get(n));
+    if (missing.length) { err.hidden = false; form.querySelector(`[name="${missing[0]}"]`).focus(); return; }
+    err.hidden = true;
+    let pts = 0; const gaps = [];
+    Q.forEach((q) => { const a = fd.get(q.id); if (a === 'yes') pts += q.w; else gaps.push({ ...q, unsure: a === 'unsure' }); });
+    gaps.sort((a, b) => b.w - a.w);
+    const score = Math.round((pts / total) * 100);
+    const reg = fd.get('regulated') !== 'no';
+    const lvl = score >= 85 ? ['Low risk', 'Strong foundation. A few refinements and regular testing will keep it that way.']
+      : score >= 60 ? ['Moderate risk', 'You have some protections in place, but the gaps below are the kind attackers look for first.']
+      : ['High risk', 'Your business is exposed to the most common attacks hitting small businesses. The fixes below are the place to start.'];
+    root.querySelector('.num').textContent = score;
+    root.querySelector('.bar').style.strokeDashoffset = String(327 - (327 * score) / 100);
+    root.querySelector('.dial').dataset.level = score >= 85 ? 'low' : score >= 60 ? 'mid' : 'high';
+    root.querySelector('.level').textContent = lvl[0];
+    root.querySelector('.summary').textContent = lvl[1] + (reg ? ' Because you handle regulated data, the stakes are higher.' : '');
+    const ol = root.querySelector('.gaps'); ol.innerHTML = '';
+    root.querySelector('.gaps-h').hidden = !gaps.length;
+    gaps.slice(0, 5).forEach((g) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong></strong> <span></span> <a></a>`;
+      li.querySelector('strong').textContent = g.unsure ? 'Worth checking:' : 'Fix:';
+      li.querySelector('span').textContent = g.fix;
+      const a = li.querySelector('a'); a.href = g.link; a.textContent = g.linkText;
+      ol.appendChild(li);
+    });
+    root.querySelector('.reg-note').hidden = !(reg && gaps.length);
+    last = { score, level: lvl[0], regulated: fd.get('regulated'), answers: Object.fromEntries(Q.map((q) => [q.id, fd.get(q.id)])), gaps: gaps.map((g) => g.id) };
+    form.hidden = true; res.hidden = false; res.focus();
+    root.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    track('security_check_complete', { score, risk_level: lvl[0] });
+  });
+  root.querySelector('.quiz-reset').addEventListener('click', () => {
+    form.reset(); bar.style.width = '0'; res.hidden = true; form.hidden = false; started = false;
+    form.querySelector('input').focus();
+  });
+  const lead = root.querySelector('.quiz-lead');
+  if (lead && cfg.webhook) lead.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(lead));
+    try {
+      await fetch(cfg.webhook, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...d, ...last, source: 'vailvalleyit.com security check', page: location.pathname }) });
+      lead.querySelector('.lead-ok').hidden = false; lead.querySelector('button').disabled = true;
+      track('generate_lead', { method: 'security_check' });
+    } catch (x) { lead.querySelector('.lead-ok').textContent = 'Could not send. Call ' + cfg.phone + ' and we’ll walk through your results.'; lead.querySelector('.lead-ok').hidden = false; }
+  });
+})();
+</script>

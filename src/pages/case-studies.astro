@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { projects } from '../data/projects';
+import { breadcrumbs, webPage } from '../lib/schema';
+const title = 'IT Case Studies | Vail Valley IT';
+const description = 'Recent managed IT, cybersecurity, network and automation projects for businesses in the Vail Valley and Eagle County.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Case Studies', path: '/case-studies' }];
+const list = projects.filter((p) => p.published);
+---
+<Base title={title} description={description} path="/case-studies" schema={[webPage('/case-studies', title, description, 'CollectionPage'), breadcrumbs(crumbs)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>IT case studies from Vail Valley businesses</h1>
+    <p class="answer">A sample of recent Vail Valley IT work. Planning something similar? See <a href="/it-projects">IT projects & migrations</a>. Client names are shared only with permission, so most projects are described by industry.</p>
+  </div></header>
+  <section class="section"><div class="wrap grid">
+    {list.map((p) => (
+      <article class="box" id={p.slug}>
+        <span class="eyebrow">{p.industry}{p.town ? `, ${p.town}` : ''}</span>
+        <h2 style="font-size:1.4rem">{p.client}</h2>
+        <div class="grid grid-2" style="gap:2rem">
+          <div><h3>The challenge</h3><p>{p.challenge}</p><h3>The result</h3><p>{p.result}</p></div>
+          <div><h3>What we did</h3><ul class="included">{p.work.map((w) => <li><Icon name="check" />{w}</li>)}</ul></div>
+        </div>
+        {p.quote && <blockquote style="margin:1rem 0 0;border-left:3px solid var(--violet);padding-left:1rem;color:var(--ink)">“{p.quote.text}” <span class="meta">— {p.quote.author}</span></blockquote>}
+      </article>
+    ))}
+  </div></section>
+  <CtaBand title="Have a project in mind?" text="Office move, server replacement, Microsoft 365 migration or a security cleanup. Tell us what you are planning." />
+</Base>

@@ -1,0 +1,329 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Ridge from '../components/Ridge.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Reviews from '../components/Reviews.astro';
+import hero from '../assets/hero-vail-valley-it-support.png';
+import { site, bookHref, telHref } from '../data/site';
+import { services, serviceBySlug, featuredServices } from '../data/services';
+import { locations } from '../data/locations';
+import { industries } from '../data/industries';
+import { frameworks } from '../data/compliance';
+import { events, workshopTopics } from '../data/events';
+import { faqPage, webPage } from '../lib/schema';
+
+const title = 'Vail Valley IT | Local IT Support & Managed Services in Vail, CO';
+const description = 'Vail Valley IT delivers managed IT, cybersecurity & tech support to businesses across Eagle County — Vail, Avon, Edwards, Eagle & Beaver Creek. Call today.';
+
+const cards = featuredServices.map((s) => serviceBySlug[s]);
+const pillars = [
+  { icon: 'shield', h: 'Cybersecurity-first approach', p: 'Security is built into everything we do, not sold as an add-on. Every engagement starts with a risk assessment.' },
+  { icon: 'users', h: 'Strategic technology partner', p: 'We learn your business goals and keep a technology roadmap and budget reviewed with you every quarter.' },
+  { icon: 'clock', h: 'Hours back every month', p: 'Automation handles the repetitive work, so your team spends time on customers instead of copy-and-paste.' },
+  { icon: 'headset', h: 'One team, everything covered', p: 'Computers, network, phones, Microsoft 365, security and vendors. One number to call instead of five.' },
+  { icon: 'gauge', h: 'Proactive, not reactive', p: 'Systems are monitored 24/7 so most problems are fixed before anyone on your team notices them.' },
+];
+const faqs = [
+  { q: 'Who provides IT support in the Vail Valley?', a: 'Vail Valley IT is a locally based IT support and managed services provider in Edwards, Colorado. It serves businesses in Vail, Avon, Beaver Creek, Edwards, Eagle-Vail, Minturn, Eagle and Gypsum, and is the local IT brand of DubLow Digital.' },
+  { q: 'What does Vail Valley IT do?', a: 'Managed IT services, cybersecurity and compliance (including HIPAA and FTC Safeguards Rule support), Microsoft 365, business Wi-Fi and networks, VoIP phones, data backup and recovery, and automation and AI enablement for small and mid-sized businesses.' },
+  { q: 'How much does IT support cost for a small business in the Vail Valley?', a: 'Fully managed IT for small businesses commonly runs about $100 to $250 per user per month across the industry, depending on security and compliance needs. Vail Valley IT quotes a flat monthly price after a free cybersecurity assessment. Hourly and project-based support is also available.' },
+  { q: 'Do you offer on-site IT support, or only remote?', a: 'Both. Most issues are fixed remotely in minutes. On-site support is available throughout Eagle County from our Edwards base, which is about 10 minutes from Avon and about 20 minutes from Vail and Eagle.' },
+  { q: 'Do you help with HIPAA, GLBA and cyber insurance requirements?', a: 'Yes. Vail Valley IT runs security risk assessments, penetration tests and vulnerability scans, and security awareness training, and implements the technical safeguards HIPAA, GLBA and the FTC Safeguards Rule, SEC Regulation S-P, PCI DSS and cyber insurers require, with documentation to prove it.' },
+  { q: 'Can I get IT help without a contract?', a: 'Yes. Vail Valley IT offers emergency and on-demand IT support for businesses that are not on a managed plan, billed per incident, plus fixed-price IT projects such as migrations and network upgrades.' },
+  { q: 'Will I be talking to an AI instead of a person?', a: 'No. Automation handles a few routine requests, such as password and MFA resets for verified users, in about ten minutes. Everything else goes straight to a real technician, who gets the details faster because the automation already gathered them.' },
+  { q: 'How is Vail Valley IT related to DubLow Digital?', a: 'Vail Valley IT is the local managed technology services brand of DubLow Digital, focused only on IT, cybersecurity and automation for Eagle County businesses. DubLow Digital is the parent company.' },
+];
+const steps = [
+  { h: 'Free cybersecurity assessment', p: 'We inventory your devices, accounts, licenses and backups, and run a security risk assessment.', when: 'About an hour, on site or remote' },
+  { h: 'Written plan & flat price', p: 'You see exactly what is at risk, what is wasted, and one monthly number. No obligation.', when: 'Within a few days' },
+  { h: 'Onboarding', p: 'Monitoring, security tools and documentation go in with no disruption to your day.', when: 'Typically 2–3 weeks' },
+  { h: 'Quarterly reviews', p: 'We review tickets, risks and the next 12 months of technology spending with you.', when: 'Every quarter' },
+];
+const compare = [
+  ['Where they’re based', 'Edwards, in the Vail Valley', 'Often Denver, the Front Range or out of state', 'Usually local'],
+  ['On-site help in Eagle County', 'About 10–30 minutes away', 'Scheduled trips, sometimes over a pass', 'When available'],
+  ['Pricing', 'Flat monthly fee, quoted in writing', 'Flat monthly fee, often with long contracts', 'Hourly, after something breaks'],
+  ['Security included', 'Yes — EDR, MFA, patching and backups in every plan', 'Varies; often sold as add-ons', 'Rarely'],
+  ['Routine requests (password, MFA, new user)', 'About 10 minutes for verified users', 'Ticket queue', 'Whenever they can get to it'],
+  ['HIPAA / FTC Safeguards support', 'Yes, with documentation', 'Varies', 'Rarely'],
+  ['Knows mountain-town business', 'Seasonal staffing, lodging, I-70 realities', 'Generic playbook', 'Sometimes'],
+  ['Incentive', 'Paid when things stay quiet', 'Paid when things stay quiet', 'Paid when things break'],
+];
+const platforms = [
+  ['Microsoft 365', 'Email, Teams, SharePoint'], ['Microsoft Defender', 'Endpoint & email security'], ['Google Workspace', 'Email & files'],
+  ['Ubiquiti UniFi', 'Networks & Wi-Fi'], ['Cisco Meraki', 'Networks & Wi-Fi'], ['Windows & macOS', 'Device management'],
+  ['IT Glue', 'Documentation'], ['Rewst', 'Automation'], ['Hosted VoIP', 'Cloud phone systems'],
+];
+const nextEvent = events.filter((e) => new Date(e.end).getTime() > Date.now()).sort((a, b) => a.start.localeCompare(b.start))[0];
+const schema = [webPage('/', title, description), faqPage(faqs, '/')];
+const nodes = [
+  { icon: 'bot', b: 'AI & automation', t: 'Save time and reduce manual work', style: 'left:50%;top:0;transform:translateX(-50%);text-align:center' },
+  { icon: 'route', b: 'Workflow automation', t: 'Streamline processes and follow-ups', style: 'left:0;top:34%' },
+  { icon: 'network', b: 'Smart integrations', t: 'Connect the tools you already use', style: 'right:0;top:34%;text-align:right' },
+  { icon: 'users', b: 'Better customer experience', t: 'Faster responses, happier customers', style: 'left:4%;bottom:0' },
+  { icon: 'gauge', b: 'Data & insights', t: 'Decisions from real numbers', style: 'right:4%;bottom:0;text-align:right' },
+];
+---
+<Base title={title} description={description} path="/" schema={schema}>
+  <div class="alert-strip" role="note">
+    <div class="wrap">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>Hacked, locked out or seeing a ransom note?</strong><span class="long"> Disconnect the computer from the network and call us now.</span></span>
+      <a href={telHref} data-track="call_emergency">{site.phone}</a>
+      <a class="long" href="/emergency-it-support">Emergency IT help</a>
+    </div>
+  </div>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">IT support in the Vail Valley</span>
+        <h1>Vail Valley IT support built for <span class="accent">security, productivity</span> &amp; growth</h1>
+        <p class="lede">We combine proactive managed IT, enterprise-grade cybersecurity and automation to help businesses across Eagle County — from Vail and Beaver Creek to Avon, Edwards and Eagle — work smarter, stay secure and grow with confidence.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Get a free cybersecurity assessment</a>
+          <a class="btn btn-outline" href={telHref}><Icon name="phone" />Talk to an expert</a>
+        </div>
+        <div class="hero-proof">
+          <span><span class="stars" aria-hidden="true">{[1,2,3,4,5].map(() => <Icon name="star" />)}</span><a href="/reviews-testimonials">{site.gbp.rating.toFixed(1)} from {site.gbp.reviewCount} Google reviews</a></span>
+          <span><Icon name="pin" />Based in Edwards, CO</span>
+          <span><Icon name="shield" />Cyber-first since day one</span>
+        </div>
+      </div>
+      <div class="hero-media">
+        <Image src={hero} alt="Vail Valley IT technician reviewing a business's system health dashboard with a client, mountains outside the office window" widths={[600, 900, 1184]} sizes="(max-width: 900px) 100vw, 560px" loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="services-h">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Comprehensive IT solutions</span>
+        <h2 id="services-h">Everything your business needs under one roof</h2>
+      </div>
+      <div class="grid grid-3">
+        {cards.map((s) => (
+          <article class="card">
+            <Icon name={s.icon} class="icon-lg" />
+            <div>
+              <h3><a href={`/${s.slug}`}>{s.name}</a></h3>
+              <p>{s.card}</p>
+              <span class="more">Learn more<Icon name="chevron" /></span>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="svc-more">Also: {services.filter((s) => !featuredServices.includes(s.slug)).map((s, i, a) => <><a href={`/${s.slug}`}>{s.name}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</p>
+      <p style="text-align:center;margin-top:1.4rem"><a class="btn btn-outline" href="/services">See all {services.length} IT services</a></p>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">How it works</span>
+        <h2 id="how-h">From first call to IT that runs itself</h2>
+        <p>Switching IT providers sounds painful. It isn’t, when it follows a plan.</p>
+      </div>
+      <ol class="steps">
+        {steps.map((st) => <li><h3>{st.h}</h3><p>{st.p}</p><span class="when">{st.when}</span></li>)}
+      </ol>
+      <p style="text-align:center;margin-top:2rem"><a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Start with a free cybersecurity assessment</a></p>
+    </div>
+  </section>
+
+  <Ridge />
+  <section class="band section" aria-labelledby="why-h">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Why businesses choose Vail Valley IT</span>
+        <h2 id="why-h">More than IT support. We’re your technology partner.</h2>
+      </div>
+      <div class="pillars">
+        {pillars.map((p) => (
+          <div class="pillar"><Icon name={p.icon} /><h3>{p.h}</h3><p>{p.p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Ridge flip />
+
+  <section class="section" aria-labelledby="check-h">
+    <div class="wrap">
+      <div class="check-band">
+        <div>
+          <span class="eyebrow">Free 2-minute security check</span>
+          <h2 id="check-h">How exposed is your business?</h2>
+          <p>Answer ten yes-or-no questions and get an instant risk score with your top fixes in priority order. Built around what cyber-insurers and regulators ask about most. Your answers never leave your browser.</p>
+          <div class="btn-row" style="margin-top:1.4rem">
+            <a class="btn btn-light" href="/security-check" data-track="security_check_cta"><Icon name="shield" />Take the free security check</a>
+          </div>
+        </div>
+        <ul class="check-list" aria-label="Sample questions">
+          <li><span class="q" aria-hidden="true">?</span>Does every employee use MFA on email?</li>
+          <li><span class="q" aria-hidden="true">?</span>Has anyone restored from your backup in the last 90 days?</li>
+          <li><span class="q" aria-hidden="true">?</span>Is guest Wi-Fi separated from your payment network?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="auto-h">
+    <div class="wrap auto">
+      <div>
+        <span class="eyebrow">Work smarter, not harder</span>
+        <h2 id="auto-h">Automation &amp; AI that drives real results</h2>
+        <p>We help Vail Valley businesses eliminate repetitive tasks, automate workflows and use AI safely to improve accuracy and customer experience.</p>
+        <ul class="checks">
+          <li><Icon name="check" />Automate lead follow-up and customer communication</li>
+          <li><Icon name="check" />Streamline scheduling, reminders and support</li>
+          <li><Icon name="check" />Connect your tools so data stops getting retyped</li>
+          <li><Icon name="check" />Roll out AI assistants with client data protected</li>
+        </ul>
+        <a class="btn btn-primary" href="/automation-ai-enablement">See how we automate businesses</a>
+      </div>
+      <div class="hub" role="img" aria-label="Diagram: your business at the center, connected to AI and automation, workflow automation, smart integrations, customer experience, and data and insights">
+        <svg class="hub-svg" viewBox="0 0 500 400" preserveAspectRatio="none" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 6">
+            <path d="M250 200 250 112" /><path d="M250 200 85 150" /><path d="M250 200 415 150" /><path d="M250 200 120 330" /><path d="M250 200 380 330" />
+          </g>
+        </svg>
+        <div class="hub-core">Your <br />business</div>
+        {nodes.map((n) => (
+          <div class="hub-node" style={n.style}><Icon name={n.icon} style={n.style.includes('text-align:right') ? 'margin-left:auto' : n.style.includes('center') ? 'margin-inline:auto' : ''} /><b>{n.b}</b>{n.t}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="cmp-h">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Compare your options</span>
+        <h2 id="cmp-h">Local managed IT vs. a national MSP vs. break‑fix</h2>
+        <p>There are three ways most Vail Valley businesses handle IT. Here is how they compare.</p>
+      </div>
+      <div class="tablewrap">
+        <table class="compare">
+          <thead><tr><th scope="col"><span class="sr-only">Factor</span></th><th scope="col">Vail Valley IT</th><th scope="col">National or regional MSP</th><th scope="col">Break-fix / hourly tech</th></tr></thead>
+          <tbody>{compare.map((r) => <tr><th scope="row">{r[0]}</th><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <p class="meta">General comparison of provider types, not specific companies.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ind-h">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Industries we serve</span>
+        <h2 id="ind-h">IT built for the businesses that run the valley</h2>
+        <p><a href="/industries">See all industries we serve</a></p>
+      </div>
+      <div class="ind-grid">
+        {industries.map((i) => (
+          <div class="ind"><Icon name={i.icon} /><a href={`/industries/${i.slug}`}>{i.name}</a></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="comp-h">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Compliance made practical</span>
+        <h2 id="comp-h">HIPAA, GLBA, PCI and cyber insurance, handled</h2>
+        <p>Regulated businesses need more than antivirus. We run the <a href="/cybersecurity-risk-assessment">risk assessment</a>, <a href="/penetration-testing-vulnerability-scanning">penetration tests and vulnerability scans</a> and <a href="/security-awareness-training">staff security training</a> these rules require, and keep the evidence on file.</p>
+      </div>
+      <div class="grid grid-3">
+        {frameworks.map((f) => (
+          <article class="card"><Icon name={f.icon} class="icon-lg" /><div><h3><a href={`/compliance/${f.slug}`}>{f.name}</a></h3><p>{f.card}</p></div></article>
+        ))}
+      </div>
+      <p style="margin-top:1.6rem"><a class="btn btn-primary" href="/cybersecurity-risk-assessment"><Icon name="gauge" />Get a free compliance gap assessment</a></p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="proof-h">
+    <div class="wrap">
+      <div class="section-head center"><span class="eyebrow">Real results for local businesses</span><h2 id="proof-h" class="sr-only">Results</h2><p><a href="/case-studies">See case studies</a></p></div>
+      <div class="proof">
+        <div><Icon name="star" /><div><b>5.0 stars</b><span>{site.gbp.reviewCount} Google reviews</span><p>Every review from a real local client. <a href="/reviews-testimonials">Read them</a>.</p></div></div>
+        <div><Icon name="clock" /><div><b>~10 minutes</b><span>Routine requests</span><p>New users and password or MFA resets for verified staff, versus 1–2 hours human-only.</p></div></div>
+        <div><Icon name="shield" /><div><b>24/7</b><span>Monitoring</span><p>Devices, network and security alerts watched around the clock.</p></div></div>
+        <div><Icon name="pin" /><div><b>Edwards-based</b><span>Local technicians</span><p>On site in Avon in about 10 minutes and Vail in about 20.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="plat-h" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="section-head center">
+        <span class="eyebrow">Platforms we manage</span>
+        <h2 id="plat-h" style="font-size:1.5rem">The tools behind your business, handled by one team</h2>
+      </div>
+      <ul class="platforms">{platforms.map((p) => <li>{p[0]}<small>{p[1]}</small></li>)}</ul>
+      {site.credentials.length > 0 && (
+        <div class="creds">{site.credentials.map((c) => c.logo ? <a href={c.url || '#'} rel="noopener"><img src={c.logo} alt={c.name} loading="lazy" /></a> : <span class="platforms"><span style="padding:.6rem 1.1rem;border:1px solid var(--line);border-radius:10px;font-weight:700;color:var(--ink)">{c.name}</span></span>)}</div>
+      )}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="areas-h">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Service areas</span>
+        <h2 id="areas-h">IT support across Eagle County</h2>
+        <p>We are a Vail Valley IT company focused only on Eagle County. Here is where we work and how quickly we can be on site from Edwards.</p>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th scope="col">Town</th><th scope="col">ZIP</th><th scope="col">I-70 access</th><th scope="col">On-site from Edwards</th></tr></thead>
+          <tbody>
+            {locations.map((l) => (
+              <tr><td><a href={`/${l.slug}`}><strong>IT support {l.town}</strong></a></td><td>{l.zips.join(', ')}</td><td>{l.exit}</td><td>{l.driveFromEdwards === 'local' ? 'Local (home base)' : l.driveFromEdwards}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="meta">Remote support is available across Colorado. Vail neighborhoods including Vail Village, Lionshead Village, West Vail and East Vail are covered on our <a href="/it-support-vail-co">Vail page</a>. <a href="/service-areas">View all service areas</a>.</p>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="rev-h">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Reviews</span><h2 id="rev-h">What local business owners say</h2></div>
+      <Reviews limit={3} />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="ws-h">
+    <div class="wrap">
+      <h2 id="ws-h" class="sr-only">Upcoming workshop</h2>
+      <div class="workshop">
+        {nextEvent ? (
+          <>
+            <div class="date"><b>{new Date(nextEvent.start).toLocaleString('en-US', { month: 'short', timeZone: 'America/Denver' })}</b><span>{new Date(nextEvent.start).toLocaleString('en-US', { day: 'numeric', timeZone: 'America/Denver' })}</span></div>
+            <div><span class="eyebrow" style="margin-bottom:.3rem">Next free {nextEvent.kind === 'webinar' ? 'webinar' : 'workshop'}</span><h3>{nextEvent.title}</h3><p>{nextEvent.venue || 'Online'} · {nextEvent.description}</p></div>
+            <a class="btn btn-primary" href={nextEvent.url || '/workshops-webinars'}>Register free</a>
+          </>
+        ) : (
+          <>
+            <div class="date" aria-hidden="true"><b>Free</b><span><Icon name="users" size={34} style="margin:.2rem auto" /></span></div>
+            <div><span class="eyebrow" style="margin-bottom:.3rem">Free workshops & webinars</span><h3>{workshopTopics[1].h}</h3><p>Practical sessions for Eagle County business owners: in-person <a href="/workshops-webinars/chamber-workshops">chamber workshops</a> and an <a href="/workshops-webinars/online-webinars">online webinar series</a>. We present to chambers and teams at no cost.</p></div>
+            <a class="btn btn-outline" href="/workshops-webinars">See topics & request a session</a>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow"><Faq faqs={faqs} /></div>
+  </section>
+
+  <CtaBand title="Ready to elevate your business with better IT?" text="Let’s build a secure, efficient and future-ready technology foundation for your business." />
+</Base>

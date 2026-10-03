@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { locations } from '../data/locations';
+---
+<Base title="Page not found | Vail Valley IT" description="This page could not be found." path="/404" noindex>
+  <section class="section"><div class="wrap narrow">
+    <h1>That page isn’t here</h1>
+    <p>The link may be old or mistyped. Try one of these instead:</p>
+    <ul><li><a href="/">Home</a></li><li><a href="/services">IT services</a></li><li><a href="/service-areas">Service areas</a></li><li><a href="/contact">Contact us</a></li></ul>
+    <ul class="towns">{locations.map((l) => <li><a href={`/${l.slug}`}>{l.town}</a></li>)}</ul>
+  </div></section>
+</Base>

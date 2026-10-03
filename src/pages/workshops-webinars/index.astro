@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EventList from '../../components/EventList.astro';
+import { workshopTopics } from '../../data/events';
+import { breadcrumbs, webPage } from '../../lib/schema';
+const title = 'IT Workshops & Webinars | Vail Valley IT';
+const description = 'Join Vail Valley IT for free IT & cybersecurity workshops with local chambers and online webinars for Eagle County business owners.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Workshops & Webinars', path: '/workshops-webinars' }];
+---
+<Base title={title} description={description} path="/workshops-webinars" schema={[webPage('/workshops-webinars', title, description, 'CollectionPage'), breadcrumbs(crumbs)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Free IT workshops &amp; webinars for Vail Valley businesses</h1>
+    <p class="answer">Vail Valley IT runs free, practical technology workshops for small business owners in Eagle County: in-person sessions with local chambers and business groups, and a recurring online webinar series. Topics include cybersecurity, phishing and wire fraud, practical AI and cyber insurance.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <div class="grid grid-2">
+      <article class="card"><Icon name="users" class="icon-lg" /><div><h3><a href="/workshops-webinars/chamber-workshops">Chamber of Commerce workshops</a></h3><p>In-person, 60–90 minute sessions for chamber members and local business groups.</p><span class="more">Details<Icon name="chevron" /></span></div></article>
+      <article class="card"><Icon name="video" class="icon-lg" /><div><h3><a href="/workshops-webinars/online-webinars">Online webinar series</a></h3><p>Recurring 45 minute webinars you can join from the office or the chairlift.</p><span class="more">Details<Icon name="chevron" /></span></div></article>
+    </div>
+    <h2 style="margin-top:3rem">Upcoming sessions</h2>
+    <EventList />
+    <h2 style="margin-top:3rem">Topics we cover</h2>
+    <div class="grid grid-3">{workshopTopics.map((t) => <div class="box"><h3>{t.h}</h3><p style="margin:0;font-size:.95rem">{t.p}</p></div>)}</div>
+  </div></section>
+  <CtaBand title="Want a workshop for your team or group?" text="We present to chambers, associations and staff meetings across Eagle County at no cost." />
+</Base>

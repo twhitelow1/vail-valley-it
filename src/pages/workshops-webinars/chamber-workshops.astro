@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EventList from '../../components/EventList.astro';
+import Faq from '../../components/Faq.astro';
+import { workshopTopics } from '../../data/events';
+import { breadcrumbs, webPage, faqPage } from '../../lib/schema';
+const title = 'Chamber of Commerce IT Workshops | Vail Valley IT';
+const description = 'Free in-person cybersecurity and technology workshops for Vail Valley chamber members and local business groups, presented by Vail Valley IT.';
+const path = '/workshops-webinars/chamber-workshops';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Workshops & Webinars', path: '/workshops-webinars' }, { name: 'Chamber workshops', path }];
+const faqs = [
+  { q: 'Are Vail Valley IT workshops free?', a: 'Yes. Workshops and webinars are free and educational. There is no sales pitch during the session.' },
+  { q: 'Who should attend?', a: 'Business owners, office managers and anyone responsible for technology decisions at a small or mid-sized business. No technical background is needed.' },
+  { q: 'Can you present to our association or staff?', a: 'Yes. We present to chambers, professional associations, nonprofits and staff meetings across Eagle County. Call (970) 446-9440 to request a date.' },
+];
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description), breadcrumbs(crumbs), faqPage(faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Chamber of Commerce IT workshops in the Vail Valley</h1>
+    <p class="answer">Vail Valley IT presents free, in-person technology and cybersecurity workshops for chamber members and local business groups across Eagle County. Sessions run 60 to 90 minutes, are written for owners and office managers rather than IT staff, and end with a checklist attendees can act on the same week.</p>
+  </div></header>
+  <section class="section"><div class="wrap prose">
+    <h2>Upcoming dates</h2>
+    <EventList kind="chamber" />
+    <h2>Session topics</h2>
+    <ul>{workshopTopics.map((t) => <li><strong>{t.h}.</strong> {t.p}</li>)}</ul>
+    <div style="margin-top:2.5rem"><Faq faqs={faqs} /></div>
+  </div></section>
+  <CtaBand title="Request a session" text="Tell us about your group and we will tailor a topic to your members." />
+</Base>

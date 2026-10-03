@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import SecurityQuiz from '../components/SecurityQuiz.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { breadcrumbs, faqPage, webPage } from '../lib/schema';
+const title = 'Free Small Business Cybersecurity Check | Vail Valley IT';
+const description = 'Take the free 2-minute cybersecurity check for small businesses. Get a risk score and a prioritized fix list from Vail Valley IT in Edwards, CO.';
+const path = '/security-check';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Free Security Check', path }];
+const faqs = [
+  { q: 'How do I know if my small business is secure?', a: 'Check the basics attackers exploit most: multi-factor authentication on email, tested and offsite backups, supported and patched computers, monitored endpoint protection, staff phishing training, email domain authentication, same-day offboarding, a written incident plan, and separated guest Wi-Fi. This free check scores all ten in about two minutes.' },
+  { q: 'Is this the same as a cybersecurity risk assessment?', a: 'No. This self-check is a quick screen based on your answers. A full risk assessment, which Vail Valley IT includes in its free cybersecurity assessment, inspects your actual systems, accounts and configurations and documents the findings.' },
+  { q: 'What are the most common ways small businesses get hacked?', a: 'Phishing emails that steal passwords, accounts without multi-factor authentication, unpatched computers, and fraudulent payment-change requests sent by email. Most can be prevented with a handful of basic controls.' },
+  { q: 'Is my information stored?', a: 'No. Your answers are scored in your browser. Nothing is sent unless you choose to email yourself the results.' },
+];
+const app = { '@type': 'WebApplication', name: 'Small Business Cybersecurity Check', url: `https://vailvalleyit.com${path}`, applicationCategory: 'SecurityApplication', operatingSystem: 'Any (web browser)', isAccessibleForFree: true, offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD' }, provider: { '@id': 'https://vailvalleyit.com/#organization' } };
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description), app, breadcrumbs(crumbs), faqPage(faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Free small business cybersecurity check</h1>
+    <p class="answer">Answer ten yes-or-no questions about your business’s security and get an instant risk score with your top fixes in priority order. It takes about two minutes, it is built around the controls cyber-insurers and regulators ask about most, and your answers never leave your browser.</p>
+  </div></header>
+  <section class="section"><div class="wrap narrow" style="max-width:820px">
+    <SecurityQuiz />
+    <div style="margin-top:3.5rem"><Faq faqs={faqs} /></div>
+  </div></section>
+  <CtaBand title="Want the real answer, not a self-check?" text="Our free cybersecurity assessment inspects your actual systems and accounts and gives you a written plan with a flat price." />
+</Base>

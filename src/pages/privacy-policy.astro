@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site } from '../data/site';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Privacy Policy', path: '/privacy-policy' }];
+// TODO: have counsel review; align with DubLow's published terms.
+---
+<Base title="Privacy Policy | Vail Valley IT" description="How Vail Valley IT collects, uses and protects information submitted through this website." path="/privacy-policy">
+  <header class="page-head"><div class="wrap"><Breadcrumbs items={crumbs} /><h1>Privacy policy</h1><p class="meta">Last updated {site.lastReviewed}</p></div></header>
+  <section class="section"><div class="wrap prose">
+    <p>{site.name} is a brand of {site.parentBrand} ("we", "us"). This policy explains what information this website collects and how we use it.</p>
+    <h2>Information we collect</h2>
+    <p>When you call us, book an assessment or submit a form, we collect the details you provide, such as your name, business, email, phone number and message. Our site may also collect basic, aggregated analytics such as pages visited and device type.</p>
+    <h2>How we use it</h2>
+    <p>We use your information to respond to you, provide the services you request, and send occasional updates you may opt out of at any time. We do not sell personal information.</p>
+    <h2>Service providers</h2>
+    <p>We use trusted vendors for scheduling, forms, email and analytics. They may process your information on our behalf under their own security and privacy commitments.</p>
+    <h2>Your choices</h2>
+    <p>You may request access to, correction of or deletion of your information by calling {site.phone}.</p>
+    <h2>Security</h2>
+    <p>We protect information with administrative, technical and physical safeguards appropriate to its sensitivity.</p>
+  </div></section>
+</Base>

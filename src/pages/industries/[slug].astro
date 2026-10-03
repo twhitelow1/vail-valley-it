@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { industries, type Industry } from '../../data/industries';
+import { serviceBySlug } from '../../data/services';
+import { locations } from '../../data/locations';
+import { frameworks } from '../../data/compliance';
+import { site, bookHref, telHref } from '../../data/site';
+import { breadcrumbs, faqPage, webPage } from '../../lib/schema';
+export function getStaticPaths() { return industries.map((i) => ({ params: { slug: i.slug }, props: { item: i } })); }
+const { item } = Astro.props as { item: Industry };
+const path = `/industries/${item.slug}`;
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Industries', path: '/industries' }, { name: item.name, path }];
+---
+<Base title={item.title} description={item.description} path={path} schema={[webPage(path, item.title, item.description), breadcrumbs(crumbs), faqPage(item.faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>{item.h1}</h1>
+    <p class="answer">{item.answer}</p>
+    <div class="btn-row" style="margin-top:1.5rem">
+      <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Get a free cybersecurity assessment</a>
+      <a class="btn btn-outline" href={telHref}><Icon name="phone" />{site.phone}</a>
+    </div>
+  </div></header>
+  <div class="section"><div class="wrap article">
+    <article class="prose">
+      {item.sections.map((s) => (<><h2>{s.h2}</h2><Fragment set:html={s.html} /></>))}
+      <h2>What {item.name.toLowerCase()} businesses need from IT</h2>
+      <ul class="included">{item.needs.map((n) => <li><Icon name="check" />{n}</li>)}</ul>
+      <div style="margin-top:2.5rem"><Faq faqs={item.faqs} /></div>
+    </article>
+    <aside class="aside">
+      <div class="box"><h3>Services for {item.name.toLowerCase()}</h3>
+        <ul class="linklist">{item.services.map((s) => <li><a href={`/${s}`}>{serviceBySlug[s].name}<Icon name="chevron" /></a></li>)}</ul>
+      </div>
+      <div class="box"><h3>Compliance guides</h3>
+        <ul class="linklist">{frameworks.filter((f) => f.industries.includes(item.slug)).map((f) => <li><a href={`/compliance/${f.slug}`}>{f.name}<Icon name="chevron" /></a></li>)}</ul>
+      </div>
+      <div class="box"><h3>Where we work</h3>
+        <ul class="linklist">{locations.map((l) => <li><a href={`/${l.slug}`}>IT support {l.town}<Icon name="chevron" /></a></li>)}</ul>
+      </div>
+    </aside>
+  </div></div>
+  <CtaBand />
+</Base>

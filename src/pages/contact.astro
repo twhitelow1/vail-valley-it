@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { site, bookHref, telHref } from '../data/site';
+import { breadcrumbs, webPage } from '../lib/schema';
+const title = 'Contact Vail Valley IT | Book a Free IT Checkup';
+const description = 'Contact Vail Valley IT in Edwards, CO. Call (970) 446-9440 or book a free cybersecurity assessment for your Vail Valley business.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }];
+---
+<Base title={title} description={description} path="/contact" schema={[webPage('/contact', title, description, 'ContactPage'), breadcrumbs(crumbs)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Contact Vail Valley IT</h1>
+    <p class="answer">Call <a href={telHref}>{site.phone}</a> to reach our Edwards-based team, or book a free cybersecurity assessment below. Current clients with an urgent issue should call the support line rather than use the form.</p>
+  </div></header>
+  <section class="section" id="book"><div class="wrap article">
+    <div>
+      <h2>Book your free cybersecurity assessment</h2>
+      {site.formEmbedUrl ? (
+        <iframe src={site.formEmbedUrl} title="Free cybersecurity assessment" style="width:100%;min-height:720px;border:0" loading="lazy"></iframe>
+      ) : site.bookingUrl ? (
+        <iframe src={site.bookingUrl} title="Free cybersecurity assessment" style="width:100%;min-height:720px;border:0" loading="lazy"></iframe>
+      ) : (
+        <div class="box">
+          <p>The fastest way to book is a quick call. We will ask about your team size, your current setup and what is bugging you, then schedule the assessment.</p>
+          <a class="btn btn-primary" href={telHref}><Icon name="phone" />Call {site.phone}</a>
+        </div>
+      )}
+      <h3 style="margin-top:2rem">What happens at the assessment</h3>
+      <ol>
+        <li>We inventory devices, accounts, licenses and backups.</li>
+        <li>We run a security risk assessment.</li>
+        <li>You get written findings and a flat monthly price. No obligation.</li>
+      </ol>
+      <p class="meta">Not ready to talk? Try the <a href="/security-check">free 2-minute security check</a>. See our <a href="/privacy-policy">privacy policy</a>.</p>
+    </div>
+    <aside class="aside">
+      <div class="box"><h3>{site.name}</h3>
+        <address class="nap" style="margin:0">A {site.parentBrand} brand<br />{site.address.locality}, {site.address.region} {site.address.postalCode}<br /><a href={telHref}>{site.phone}</a>{site.email && <><br /><a href={`mailto:${site.email}`}>{site.email}</a></>}</address>
+        <p class="meta">Hours: {site.hours.map((h) => `${h.days[0].slice(0,3)}–${h.days[h.days.length-1].slice(0,3)} ${h.opens}–${h.closes}`).join(', ')}. Monitoring runs 24/7.</p>
+        <a class="btn btn-outline" href={site.gbp.mapsUrl} rel="noopener"><Icon name="pin" />View on Google Maps</a>
+      </div>
+    </aside>
+  </div></section>
+</Base>

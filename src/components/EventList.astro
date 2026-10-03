@@ -1,0 +1,28 @@
+---
+import { events, type Event } from '../data/events';
+import { site, telHref } from '../data/site';
+import { ORG_ID } from '../lib/schema';
+interface Props { kind?: Event['kind'] }
+const { kind } = Astro.props;
+const now = Date.now();
+const list = events.filter((e) => (!kind || e.kind === kind) && new Date(e.end).getTime() > now).sort((a, b) => a.start.localeCompare(b.start));
+const fmt = (d: string) => new Date(d).toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Denver' });
+const ld = list.map((e) => ({
+  '@context': 'https://schema.org', '@type': 'Event', name: e.title, description: e.description, startDate: e.start, endDate: e.end,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: e.kind === 'webinar' ? 'https://schema.org/OnlineEventAttendanceMode' : 'https://schema.org/OfflineEventAttendanceMode',
+  location: e.kind === 'webinar' ? { '@type': 'VirtualLocation', url: e.url } : { '@type': 'Place', name: e.venue, address: e.address },
+  organizer: { '@id': ORG_ID }, isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: 0, priceCurrency: 'USD', url: e.url, availability: 'https://schema.org/InStock' },
+}));
+---
+{list.length ? (
+  <div class="grid">
+    {list.map((e) => (
+      <div class="box"><h3>{e.title}</h3><p style="margin:.2rem 0 .6rem"><strong>{fmt(e.start)}</strong>{e.venue ? ` · ${e.venue}` : ' · Online'}</p><p style="font-size:.95rem">{e.description}</p>{e.url && <a class="btn btn-primary" href={e.url}>Register free</a>}</div>
+    ))}
+    {ld.map((x) => <script type="application/ld+json" set:html={JSON.stringify(x)} />)}
+  </div>
+) : (
+  <div class="box"><p style="margin:0">New dates are being scheduled. Call <a href={telHref}>{site.phone}</a> to be notified, or to book a session for your group.</p></div>
+)}

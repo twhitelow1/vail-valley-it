@@ -1,0 +1,8 @@
+---
+// Gore Range-style ridgeline. Used as the transition into navy bands and the footer.
+interface Props { flip?: boolean; class?: string }
+const { flip = false, class: cls = '' } = Astro.props;
+---
+<svg class={`ridge ${flip ? 'flip' : ''} ${cls}`} viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+  <path fill="currentColor" d="M0 80V58 L70 38 L116 52 L180 18 L232 44 L270 32 L344 62 L402 22 L436 40 L486 6 L532 34 L572 24 L638 56 L690 34 L734 48 L804 4 L842 28 L884 20 L944 50 L992 32 L1048 52 L1112 14 L1154 36 L1190 30 L1248 56 L1298 40 L1350 58 L1400 44 L1440 54 V80z"/>
+</svg>

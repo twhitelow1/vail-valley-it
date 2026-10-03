@@ -1,0 +1,100 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { services } from '../data/services';
+import { locations } from '../data/locations';
+import { industries } from '../data/industries';
+import { frameworks } from '../data/compliance';
+import { bookHref, telHref } from '../data/site';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const groups = ['Managed IT', 'Security & Compliance', 'Networks & Communication', 'Support & Projects', 'Automation & AI'] as const;
+const cols = [[groups[0], groups[4]], [groups[1], groups[2]], [groups[3]]];
+const links = [
+  { href: '/about', label: 'About' },
+  { href: '/service-areas', label: 'Service Areas' },
+  { href: '/industries', label: 'Industries' },
+  { href: '/workshops-webinars', label: 'Workshops' },
+];
+---
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Vail Valley IT home"><Logo /></a>
+    <nav class="nav" aria-label="Main">
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+      <a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
+      <div class="dd">
+        <button type="button" aria-haspopup="true">Services <Icon name="chevron" /></button>
+        <div class="dd-panel">
+          {cols.map((col) => (
+            <div>
+              {col.map((g) => (
+                <div style="margin-bottom:.9rem">
+                  <h4>{g}</h4>
+                  {services.filter((s) => s.group === g).map((s) => <a href={`/${s.slug}`} aria-current={path === `/${s.slug}` ? 'page' : undefined}>{s.name}</a>)}
+                </div>
+              ))}
+            </div>
+          ))}
+          <a class="all" href="/services">All IT services</a>
+          <a class="all" href="/security-check" style="grid-column:auto;border:0;padding-top:0">Free security check</a>
+        </div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-haspopup="true">Service Areas <Icon name="chevron" /></button>
+        <div class="dd-panel dd-sm">
+          <div>
+            <h4>Eagle County</h4>
+            {locations.map((l) => <a href={`/${l.slug}`} aria-current={path === `/${l.slug}` ? 'page' : undefined}>IT support in {l.town}</a>)}
+          </div>
+          <a class="all" href="/service-areas">All service areas</a>
+        </div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-haspopup="true">Industries <Icon name="chevron" /></button>
+        <div class="dd-panel dd-sm">
+          <div>
+            <h4>Industries we serve</h4>
+            {industries.map((i) => <a href={`/industries/${i.slug}`} aria-current={path === `/industries/${i.slug}` ? 'page' : undefined}>{i.name}</a>)}
+          </div>
+          <a class="all" href="/industries">All industries</a>
+        </div>
+      </div>
+      <div class="dd">
+        <button type="button" aria-haspopup="true">Compliance <Icon name="chevron" /></button>
+        <div class="dd-panel dd-sm">
+          <div>
+            <h4>Compliance guides</h4>
+            {frameworks.map((f) => <a href={`/compliance/${f.slug}`} aria-current={path === `/compliance/${f.slug}` ? 'page' : undefined}>{f.name}</a>)}
+            <h4 style="margin-top:.8rem">Services</h4>
+            <a href="/cybersecurity-risk-assessment">Free cybersecurity assessment</a>
+            <a href="/penetration-testing-vulnerability-scanning">Pen testing & vulnerability scans</a>
+            <a href="/security-awareness-training">Security awareness training</a>
+          </div>
+          <a class="all" href="/compliance">All compliance</a>
+        </div>
+      </div>
+    </nav>
+    <div class="header-cta">
+      <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Book now</a>
+      <a class="btn btn-outline" href={telHref}><Icon name="phone" />Call us</a>
+    </div>
+    <details class="mobile-nav">
+      <summary aria-label="Open menu"><Icon name="menu" size={28} /></summary>
+      <div class="mnav-panel">
+        <a href="/">Home</a>
+        <a href="/services">IT Services</a>
+        <a href="/service-areas">Service Areas</a>
+        <a href="/industries">Industries</a>
+        <a href="/compliance">Compliance</a>
+        <a href="/security-check">Free Security Check</a>
+        <a href="/workshops-webinars">Workshops</a>
+        <a href="/about">About</a>
+        <a href="/reviews-testimonials">Reviews</a>
+        <a href="/contact">Contact</a>
+        <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />Get a free cybersecurity assessment</a>
+        <a class="btn btn-outline" href={telHref}><Icon name="phone" />Call (970) 446-9440</a>
+      </div>
+    </details>
+  </div>
+</header>

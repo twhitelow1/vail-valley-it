@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { industries } from '../../data/industries';
+import { breadcrumbs, webPage } from '../../lib/schema';
+const title = 'Industries We Serve | Vail Valley IT';
+const description = 'IT support built for Vail Valley healthcare practices, financial and insurance firms, professional offices, hospitality, real estate and contractors.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Industries', path: '/industries' }];
+---
+<Base title={title} description={description} path="/industries" schema={[webPage('/industries', title, description, 'CollectionPage'), breadcrumbs(crumbs)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>IT for the industries that run the Vail Valley</h1>
+    <p class="answer">Vail Valley IT specializes in businesses with sensitive data and little tolerance for downtime: healthcare practices under HIPAA, financial and insurance firms under the FTC Safeguards Rule, professional offices, lodging and restaurants, real estate and property management, and contractors.</p>
+  </div></header>
+  <section class="section"><div class="wrap"><div class="grid grid-3">
+    {industries.map((i) => (
+      <article class="card"><Icon name={i.icon} class="icon-lg" /><div><h3><a href={`/industries/${i.slug}`}>{i.name}</a></h3><p>{i.card}</p><span class="more">Learn more<Icon name="chevron" /></span></div></article>
+    ))}
+  </div></div></section>
+  <CtaBand />
+</Base>

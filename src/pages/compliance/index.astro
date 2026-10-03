@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Faq from '../../components/Faq.astro';
+import { frameworks } from '../../data/compliance';
+import { breadcrumbs, webPage, faqPage } from '../../lib/schema';
+const title = 'IT Compliance for HIPAA, GLBA, PCI & More | Vail Valley IT';
+const description = 'Plain-language guides and IT services for HIPAA, GLBA/FTC Safeguards, PCI DSS, SEC Reg S-P, Colorado breach law and cyber insurance in the Vail Valley.';
+const path = '/compliance';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Compliance', path }];
+const matrix = [
+  ['Written risk assessment', '✓', '✓', '—', '✓', '—', 'Often'],
+  ['MFA', 'Expected*', '✓', '✓ (admin/remote)', 'Expected', 'Reasonable security', '✓'],
+  ['Encryption', 'Addressable*', '✓', '✓ (card data)', 'Expected', 'Strongly favored', 'Often'],
+  ['Security awareness training', '✓', '✓', '✓', 'Expected', '—', '✓'],
+  ['Vulnerability scans / pen tests', 'Proposed*', '✓ (or monitoring)', '✓', '—', '—', 'Often'],
+  ['Incident response plan', '✓', '✓', '✓', '✓', 'Recommended', '✓'],
+  ['Breach notification deadline', '60 days', '30 days to FTC (500+)', 'Per card brands', '30 days', '30 days', 'Per policy'],
+];
+const faqs = [
+  { q: 'Which compliance rules apply to my small business?', a: 'It depends on the data you handle. Healthcare providers and their vendors follow HIPAA; tax preparers, lenders and many financial firms follow GLBA and the FTC Safeguards Rule; SEC-registered advisers follow Regulation S-P; anyone taking cards follows PCI DSS; and every Colorado business holding residents’ personal information falls under Colorado’s data security and breach law.' },
+  { q: 'Can an IT company make us compliant?', a: 'An IT provider implements and documents the technical safeguards, testing and training these rules require, which is most of the work. Legal determinations, such as whether a rule applies or whether an incident is a reportable breach, belong with your attorney or compliance officer. We work alongside them.' },
+  { q: 'What do most compliance frameworks have in common?', a: 'A risk assessment, access controls with MFA, encryption, patching, monitored endpoints, tested backups, security awareness training, vendor oversight, an incident response plan and documentation that proves all of it.' },
+];
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description, 'CollectionPage'), breadcrumbs(crumbs), faqPage(faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>IT compliance for regulated Vail Valley businesses</h1>
+    <p class="answer">Vail Valley IT helps Eagle County healthcare, financial, insurance, hospitality and professional firms meet the technical requirements of HIPAA, GLBA and the FTC Safeguards Rule, SEC Regulation S-P, PCI DSS, Colorado’s data security and breach notification law, and cyber insurance carriers. Most of these rules ask for the same core controls, so one well-run program can satisfy several at once.</p>
+    <div class="btn-row" style="margin-top:1.4rem"><a class="btn btn-primary" href="/cybersecurity-risk-assessment"><Icon name="gauge" />Get a free cybersecurity assessment</a></div>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <div class="grid grid-3">
+      {frameworks.map((f) => (
+        <article class="card"><Icon name={f.icon} class="icon-lg" /><div><h3><a href={`/compliance/${f.slug}`}>{f.name}</a></h3><p>{f.card}</p><span class="more">Read the guide<Icon name="chevron" /></span></div></article>
+      ))}
+    </div>
+  </div></section>
+  <section class="section tint" aria-labelledby="mx-h"><div class="wrap">
+    <div class="section-head"><h2 id="mx-h">What each rule asks for, side by side</h2><p>A simplified comparison of common technical requirements. Always confirm specifics for your firm.</p></div>
+    <div class="tablewrap"><table class="matrix">
+      <thead><tr><th scope="col">Control</th><th scope="col">HIPAA</th><th scope="col">FTC Safeguards</th><th scope="col">PCI DSS</th><th scope="col">SEC Reg S-P</th><th scope="col">Colorado law</th><th scope="col">Cyber insurance</th></tr></thead>
+      <tbody>{matrix.map((r) => <tr><th scope="row">{r[0]}</th>{r.slice(1).map((c) => <td>{c}</td>)}</tr>)}</tbody>
+    </table></div>
+    <p class="meta">* HIPAA treats encryption as “addressable” and does not name MFA or pen testing in the current rule; HHS’s proposed Security Rule update would make all three explicit. FTC Safeguards testing exemption applies to firms with fewer than 5,000 consumers. General information, not legal advice.</p>
+  </div></section>
+  <section class="section"><div class="wrap narrow">
+    <h2>The services behind compliance</h2>
+    <ul class="included cols">
+      <li><Icon name="check" /><a href="/cybersecurity-risk-assessment">Cybersecurity risk assessment</a></li>
+      <li><Icon name="check" /><a href="/penetration-testing-vulnerability-scanning">Penetration testing & vulnerability scanning</a></li>
+      <li><Icon name="check" /><a href="/security-awareness-training">Security awareness training</a></li>
+      <li><Icon name="check" /><a href="/compliance-cybersecurity">Compliance & cybersecurity program</a></li>
+      <li><Icon name="check" /><a href="/email-security-spam-protection">Email security</a></li>
+      <li><Icon name="check" /><a href="/it-data-protection">Backup & data protection</a></li>
+    </ul>
+    <div style="margin-top:2.5rem"><Faq faqs={faqs} /></div>
+  </div></section>
+  <CtaBand title="Find out where you stand" text="Our free cybersecurity assessment shows which rules apply to you and the gaps that matter most, with a flat price to fix them." />
+</Base>

@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { locations } from '../../data/locations';
+import { breadcrumbs, webPage } from '../../lib/schema';
+const title = 'IT Support Service Areas in Eagle County, CO | Vail Valley IT';
+const description = 'Local IT support for Vail, Avon, Edwards, Beaver Creek, Eagle-Vail, Minturn, Eagle and Gypsum. On-site help from our Edwards base plus remote support.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Service Areas', path: '/service-areas' }];
+---
+<Base title={title} description={description} path="/service-areas" schema={[webPage('/service-areas', title, description, 'CollectionPage'), breadcrumbs(crumbs)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>IT support across Eagle County, Colorado</h1>
+    <p class="answer">Vail Valley IT is based in Edwards and provides on-site and remote IT support to businesses in eight Eagle County communities, from East Vail to Gypsum along the I-70 corridor. Remote support is available anywhere in Colorado.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <div class="grid grid-2">
+      {locations.map((l) => (
+        <article class="card"><Icon name="pin" class="icon-lg" /><div>
+          <h3><a href={`/${l.slug}`}>IT support in {l.town}, CO</a></h3>
+          <p>{l.driveFromEdwards === 'local' ? 'Our home base.' : `On site from Edwards in ${l.driveFromEdwards}.`} Covers {l.neighborhoods.slice(0, 4).join(', ')}.</p>
+          <span class="more">View {l.town}<Icon name="chevron" /></span>
+        </div></article>
+      ))}
+    </div>
+    <div class="prose" style="margin-top:3rem">
+      <h2>Why local matters for IT support in the mountains</h2>
+      <p>Some IT companies serving Vail are based in Denver, Grand Junction or out of state. That works for remote tasks, but not when a firewall fails in Avon on a powder morning or a new office in Eagle needs cabling coordinated with the contractor. A provider based in the valley knows the buildings, the internet providers, the seasonal rhythm of the resort economy and how long the drive really takes in February.</p>
+      <p>Vail Valley IT covers the Town of Vail as one service area, including Vail Village, Lionshead Village, West Vail, East Vail and Cascade Village, and gives each surrounding community its own page with local details.</p>
+    </div>
+  </div></section>
+  <CtaBand />
+</Base>

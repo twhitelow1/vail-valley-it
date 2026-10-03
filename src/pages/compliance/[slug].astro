@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { frameworks, type Framework } from '../../data/compliance';
+import { industryBySlug } from '../../data/industries';
+import { serviceBySlug } from '../../data/services';
+import { site, telHref } from '../../data/site';
+import { breadcrumbs, faqPage, webPage, ORG_ID } from '../../lib/schema';
+export function getStaticPaths() { return frameworks.map((f) => ({ params: { slug: f.slug }, props: { f } })); }
+const { f } = Astro.props as { f: Framework };
+const path = `/compliance/${f.slug}`;
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Compliance', path: '/compliance' }, { name: f.short, path }];
+const reviewed = new Date(site.lastReviewed + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+const svc = { '@type': 'Service', '@id': `https://vailvalleyit.com${path}#service`, name: `${f.name} compliance IT services`, serviceType: 'IT compliance services', description: f.answer, provider: { '@id': ORG_ID }, areaServed: { '@type': 'AdministrativeArea', name: 'Eagle County, Colorado' } };
+const label = (l: string) => serviceBySlug[l.replace(/^\//, '')]?.name ?? 'Learn more';
+const others = frameworks.filter((x) => x.slug !== f.slug);
+---
+<Base title={f.title} description={f.description} path={path} schema={[webPage(path, f.title, f.description), svc, breadcrumbs(crumbs), faqPage(f.faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <span class="svc-badge"><Icon name={f.icon} /></span>
+    <h1>{f.h1}</h1>
+    <p class="answer">{f.answer}</p>
+    <div class="btn-row" style="margin-top:1.5rem">
+      <a class="btn btn-primary" href="/cybersecurity-risk-assessment" data-track="assessment_cta"><Icon name="gauge" />Get a free {f.short} gap assessment</a>
+      <a class="btn btn-outline" href={telHref}><Icon name="phone" />{site.phone}</a>
+    </div>
+    <p class="meta">Reviewed by <a href="/about">{site.founder.name}</a> · Updated {reviewed} · General information, not legal advice</p>
+  </div></header>
+  <div class="section"><div class="wrap article">
+    <article class="prose">
+      {f.status && <div class="status-note"><Icon name="clock" /><div><b>Regulatory update</b><p>{f.status}</p></div></div>}
+      <h2 id="who">Who {f.short} applies to</h2>
+      <ul>{f.appliesTo.map((a) => <li>{a}</li>)}</ul>
+      <h2 id="overview">What {f.short} means for a small business</h2>
+      <Fragment set:html={f.overview} />
+      <h2 id="controls">{f.short} requirements and how we meet them</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th scope="col">Requirement</th><th scope="col">How Vail Valley IT handles it</th></tr></thead>
+        <tbody>{f.controls.map((c) => <tr><td><strong>{c.req}</strong>{c.cite && <span class="cite">{c.cite}</span>}</td><td>{c.how}{c.link && <> <a href={c.link}>{label(c.link)}</a></>}</td></tr>)}</tbody>
+      </table></div>
+      <h2 id="gaps">Common {f.short} gaps we find in valley businesses</h2>
+      <ul class="signs">{f.gaps.map((g) => <li><Icon name="alert" />{g}</li>)}</ul>
+      <h2 id="evidence">Evidence to keep on file</h2>
+      <ul class="included cols">{f.evidence.map((e) => <li><Icon name="check" />{e}</li>)}</ul>
+      <h2 id="how">How we get you there</h2>
+      <ol class="steps steps-2">
+        <li><h3>Gap assessment</h3><p>We compare your current setup to {f.short} and list what is missing.</p></li>
+        <li><h3>Remediation plan</h3><p>Prioritized fixes with a flat price, in plain language.</p></li>
+        <li><h3>Implement & train</h3><p>Controls, policies and <a href="/security-awareness-training">staff training</a> put in place.</p></li>
+        <li><h3>Test & document</h3><p><a href="/penetration-testing-vulnerability-scanning">Scans, pen tests</a> and an evidence file you can hand to an auditor.</p></li>
+      </ol>
+      <div class="mini-check"><Icon name="shield" /><div><b>Not sure where you stand?</b><span>Take the free 2-minute security check.</span></div><a class="btn btn-primary" href="/security-check">Take the check</a></div>
+      <div style="margin-top:2rem"><Faq faqs={f.faqs} /></div>
+      <p class="meta">This page summarizes public regulations for general information and is not legal advice. Confirm obligations with your attorney or compliance advisor.</p>
+    </article>
+    <aside class="aside">
+      <div class="box dark">
+        <h3>Free {f.short} gap assessment</h3>
+        <p style="font-size:.95rem">Find out what’s missing before an auditor, insurer or attacker does.</p>
+        <a class="btn btn-light" href="/cybersecurity-risk-assessment"><Icon name="gauge" />Get my assessment</a>
+        <a class="btn btn-ghost-light" href={telHref}><Icon name="phone" />Call {site.phone}</a>
+      </div>
+      <div class="box"><h3>Industries</h3><ul class="linklist">{f.industries.map((i) => <li><a href={`/industries/${i}`}>{industryBySlug[i].name} IT<Icon name="chevron" /></a></li>)}</ul></div>
+      <div class="box"><h3>Other compliance guides</h3><ul class="linklist">{others.map((o) => <li><a href={`/compliance/${o.slug}`}>{o.name}<Icon name="chevron" /></a></li>)}</ul></div>
+    </aside>
+  </div></div>
+  <CtaBand title={`Get ${f.short}-ready without the guesswork`} text="Start with a free cybersecurity assessment. You get written findings and a flat price to close the gaps." />
+</Base>

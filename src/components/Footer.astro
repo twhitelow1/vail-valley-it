@@ -1,0 +1,59 @@
+---
+import Logo from './Logo.astro';
+import Ridge from './Ridge.astro';
+import { site, telHref, bookHref } from '../data/site';
+import { services } from '../data/services';
+import { locations } from '../data/locations';
+import { industries } from '../data/industries';
+import { frameworks } from '../data/compliance';
+const year = new Date().getFullYear();
+const top = ['managed-it-services', 'compliance-cybersecurity', 'it-data-protection', 'microsoft-365-email-migration', 'business-network-wifi-support', 'cybersecurity-risk-assessment', 'penetration-testing-vulnerability-scanning', 'security-awareness-training', 'automation-ai-enablement', 'emergency-it-support', 'it-projects'];
+---
+<footer class="site-footer">
+  <Ridge />
+  <div class="wrap foot">
+    <div>
+      <a class="brand" href="/" aria-label="Vail Valley IT home"><Logo light /></a>
+      <address class="nap">
+        <strong style="color:#fff">{site.name}</strong><br />
+        A {site.parentBrand} brand<br />
+        {site.address.locality}, {site.address.region} {site.address.postalCode}<br />
+        <a href={telHref}>{site.phone}</a>
+        {site.email && <><br /><a href={`mailto:${site.email}`}>{site.email}</a></>}
+      </address>
+      <p style="margin-top:1rem">Serving businesses across Eagle County, Colorado.</p>
+    </div>
+    <div>
+      <h2>IT services</h2>
+      <ul>{top.map((s) => <li><a href={`/${s}`}>{services.find((x) => x.slug === s)!.name}</a></li>)}<li><a href="/services">All services</a></li></ul>
+    </div>
+    <div>
+      <h2>Service areas</h2>
+      <ul>{locations.map((l) => <li><a href={`/${l.slug}`}>IT support {l.town}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2>Industries</h2>
+      <ul>{industries.map((i) => <li><a href={`/industries/${i.slug}`}>{i.name}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2>Compliance</h2>
+      <ul>{frameworks.map((f) => <li><a href={`/compliance/${f.slug}`}>{f.name}</a></li>)}<li><a href="/compliance">All compliance</a></li></ul>
+    </div>
+    <div>
+      <h2>Company</h2>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/reviews-testimonials">Reviews</a></li>
+        <li><a href="/case-studies">Case studies</a></li>
+        <li><a href="/security-check">Free security check</a></li>
+        <li><a href="/workshops-webinars">Workshops & webinars</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href={bookHref}>Free cybersecurity assessment</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© {year} {site.name}, a brand of {site.parentBrand}. All rights reserved.</span>
+    <span><a href="/privacy-policy">Privacy policy</a> &nbsp; <a href={site.parentUrl}>DubLow Digital</a></span>
+  </div>
+</footer>

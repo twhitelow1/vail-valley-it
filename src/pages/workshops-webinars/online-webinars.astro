@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import EventList from '../../components/EventList.astro';
+import Faq from '../../components/Faq.astro';
+import { workshopTopics } from '../../data/events';
+import { breadcrumbs, webPage, faqPage } from '../../lib/schema';
+const title = 'Small Business Technology Webinars | Vail Valley IT';
+const description = 'Free online cybersecurity and technology webinars for Colorado small business owners. Recurring 45 minute sessions from Vail Valley IT.';
+const path = '/workshops-webinars/online-webinars';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Workshops & Webinars', path: '/workshops-webinars' }, { name: 'Online webinars', path }];
+const faqs = [
+  { q: 'Are Vail Valley IT workshops free?', a: 'Yes. Workshops and webinars are free and educational. There is no sales pitch during the session.' },
+  { q: 'Who should attend?', a: 'Business owners, office managers and anyone responsible for technology decisions at a small or mid-sized business. No technical background is needed.' },
+  { q: 'Can you present to our association or staff?', a: 'Yes. We present to chambers, professional associations, nonprofits and staff meetings across Eagle County. Call (970) 446-9440 to request a date.' },
+];
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description), breadcrumbs(crumbs), faqPage(faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Online technology webinars for small business owners</h1>
+    <p class="answer">Vail Valley IT hosts a free, recurring online webinar series for small business owners in the Vail Valley and across Colorado. Each 45 minute session covers one practical topic, such as stopping phishing, preparing for cyber insurance or using AI safely, with time for live questions.</p>
+  </div></header>
+  <section class="section"><div class="wrap prose">
+    <h2>Upcoming dates</h2>
+    <EventList kind="webinar" />
+    <h2>Session topics</h2>
+    <ul>{workshopTopics.map((t) => <li><strong>{t.h}.</strong> {t.p}</li>)}</ul>
+    <div style="margin-top:2.5rem"><Faq faqs={faqs} /></div>
+  </div></section>
+  <CtaBand title="Request a session" text="Tell us about your group and we will tailor a topic to your members." />
+</Base>
