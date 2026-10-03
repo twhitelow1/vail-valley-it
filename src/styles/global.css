@@ -419,6 +419,15 @@ tr:last-child td { border-bottom: 0; }
 .nav { gap: 0; }
 @media (max-width: 1240px) { .nav > a, .nav .dd > button { padding-inline: .5rem; font-size: .92rem; } .header-cta .btn { padding-inline: .8rem; } .brand svg { width: 170px; } }
 @media (max-width: 1180px) { .nav, .header-cta { display: none; } .mobile-nav { display: block; } }
+/* DubLow Digital co-brand: slim strip on desktop, logo beside ours once the nav collapses */
+.topbar { background: #f4f2fd; border-bottom: 1px solid #e6e2f7; color: #4a4670; font-size: .82rem; font-weight: 500; }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 46px; }
+.topbar-parent { display: inline-flex; align-items: center; gap: .5rem; color: inherit; text-decoration: none; }
+.topbar-parent img { height: 34px; width: auto; }
+.brand-parent { display: none; flex: none; padding-left: 14px; border-left: 1px solid #d9d5f0; }
+.brand-parent img { height: 36px; width: auto; display: block; }
+@media (max-width: 1180px) { .topbar { display: none; } .brand-parent { display: block; } .site-header .wrap { gap: 14px; } }
+@media (max-width: 380px) { .brand svg { width: 140px; } .brand-parent img { height: 30px; } }
 .status-note { display: flex; gap: .9rem; padding: 1rem 1.2rem; border-radius: var(--radius); background: #fff8eb; border: 1px solid #f3d9b0; margin-bottom: 2rem; }
 .status-note > .icon { flex: none; width: 24px; height: 24px; color: #b7791f; margin-top: .15rem; }
 .status-note b { color: #5a3200; }

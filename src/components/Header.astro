@@ -5,7 +5,7 @@ import { services, serviceGroups as groups } from '../data/services';
 import { locations } from '../data/locations';
 import { industries } from '../data/industries';
 import { frameworks } from '../data/compliance';
-import { bookHref, telHref } from '../data/site';
+import { site, bookHref, telHref } from '../data/site';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const cols = [[groups[0], groups[4], groups[5]], [groups[1]], [groups[2], groups[3]]];
 const links = [
@@ -16,9 +16,16 @@ const links = [
 ];
 ---
 <a class="skip" href="#main">Skip to content</a>
+<div class="topbar">
+  <div class="wrap">
+    <a class="topbar-parent" href={site.parentUrl} rel="noopener">A <img src="/dublow-digital-logo.webp" alt={site.parentBrand} width="381" height="160" /> brand</a>
+    <span>IT · Cybersecurity · Digital Marketing · Eagle County, CO</span>
+  </div>
+</div>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Vail Valley IT home"><Logo /></a>
+    <a class="brand" href="/" aria-label="Vail Valley IT home"><Logo parent={false} /></a>
+    <a class="brand-parent" href={site.parentUrl} rel="noopener" aria-label={`A ${site.parentBrand} brand`}><img src="/dublow-digital-logo.webp" alt={site.parentBrand} width="381" height="160" /></a>
     <nav class="nav" aria-label="Main">
       <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
       <a href="/about" aria-current={path === '/about' ? 'page' : undefined}>About</a>
