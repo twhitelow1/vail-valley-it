@@ -64,7 +64,7 @@ const email = site.careersEmail || site.email;
 
         <h2 id="apply" style="scroll-margin-top:100px">Send us your resume</h2>
         {formUrl ? (
-          <iframe src={formUrl} title="Vail Valley IT job application" style="width:100%;min-height:900px;border:0" loading="lazy"></iframe>
+          <iframe data-attribution src={formUrl} title="Vail Valley IT job application" style="width:100%;min-height:900px;border:0" loading="lazy"></iframe>
         ) : email ? (
           <>
             <p>Email your resume and a few lines about yourself: what you are good at, what you want to learn and which part of the valley you live in.</p>
