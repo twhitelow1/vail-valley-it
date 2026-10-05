@@ -4,6 +4,11 @@ All IDs live in `src/data/site.ts` → `tracking`. Tags load only on the Vercel 
 deployment (never previews). Use GTM *or* raw GA4: if `gtmId` is set, the site does not load
 gtag.js, so configure GA4 inside GTM to avoid double counting.
 
+**Current setup:** GA4 runs directly via gtag.js (`ga4Id: G-D6EBR1JJ0X`, stream 16042332164); no GTM yet.
+`call_click` / `book_click` events and the `first_channel` / `first_source` user properties are sent
+automatically. Register `lead_channel`, `lead_source` and `first_channel` as custom dimensions (step 5 below)
+and mark `call_click` and `book_click` as key events in GA4. If GTM is added later, move GA4 into it.
+
 ## 1. Google Tag Manager + GA4
 1. GA4: create a property "Vail Valley IT" → Web data stream for `https://vailvalleyit.com` → copy the
    Measurement ID (`G-…`). Turn on Enhanced measurement.

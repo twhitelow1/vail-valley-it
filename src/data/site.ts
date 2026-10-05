@@ -25,7 +25,7 @@ export const site = {
   careersEmail: '', // optional: where resumes go if no form is set, e.g. careers@vailvalleyit.com
   // Tracking (14). Loaded only on the production build, only when an ID is set.
   tracking: {
-    ga4Id: '', // TODO 'G-XXXXXXX'
+    ga4Id: 'G-D6EBR1JJ0X', // GA4 stream "Vail Valley IT Website" (16042332164)
     gtmId: '', // optional: use GTM instead of raw GA4 if GHL/ads tags need it
     clarityId: '', // optional Microsoft Clarity heatmaps
     googleSiteVerification: '', // Search Console HTML-tag token (or verify by DNS — preferred)
