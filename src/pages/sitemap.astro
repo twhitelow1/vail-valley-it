@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { services, serviceGroups } from '../data/services';
+import { locations } from '../data/locations';
+import { industries } from '../data/industries';
+import { frameworks } from '../data/compliance';
+import { breadcrumbs, webPage } from '../lib/schema';
+const path = '/sitemap';
+const title = 'Site Map | Vail Valley IT';
+const description = 'Every page on vailvalleyit.com: IT services, digital marketing, service areas across Eagle County, industries, compliance guides and company pages.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Site map', path }];
+type L = { href: string; label: string };
+const svc = (g: string): L[] => services.filter((s) => s.group === g).map((s) => ({ href: `/${s.slug}`, label: s.name }));
+const sections: { icon: string; title: string; hub?: L; links: L[] }[] = [
+  { icon: 'compass', title: 'Company', links: [
+    { href: '/', label: 'Home' }, { href: '/about', label: 'About Vail Valley IT' }, { href: '/reviews-testimonials', label: 'Reviews & testimonials' },
+    { href: '/case-studies', label: 'Case studies' }, { href: '/careers', label: 'Careers' }, { href: '/contact', label: 'Contact' },
+  ] },
+  ...serviceGroups.filter((g) => g !== 'Digital Marketing').map((g) => ({ icon: services.find((s) => s.group === g)!.icon, title: g, links: svc(g) })),
+  { icon: 'megaphone', title: 'Digital marketing', hub: { href: '/digital-marketing', label: 'Digital marketing overview' }, links: svc('Digital Marketing') },
+  { icon: 'pin', title: 'Service areas', hub: { href: '/service-areas', label: 'All service areas' }, links: locations.map((l) => ({ href: `/${l.slug}`, label: `IT support in ${l.town}, CO` })) },
+  { icon: 'briefcase', title: 'Industries', hub: { href: '/industries', label: 'All industries' }, links: industries.map((i) => ({ href: `/industries/${i.slug}`, label: i.name })) },
+  { icon: 'shield', title: 'Compliance guides', hub: { href: '/compliance', label: 'Compliance hub' }, links: frameworks.map((f) => ({ href: `/compliance/${f.slug}`, label: f.name })) },
+  { icon: 'users', title: 'Free tools & events', links: [
+    { href: '/security-check', label: 'Free 2-minute security check' }, { href: '/cybersecurity-risk-assessment', label: 'Free cybersecurity assessment' },
+    { href: '/workshops-webinars', label: 'Workshops & webinars' }, { href: '/workshops-webinars/chamber-workshops', label: 'Chamber of Commerce workshops' },
+    { href: '/workshops-webinars/online-webinars', label: 'Online webinars' },
+  ] },
+  { icon: 'database', title: 'For search engines & AI', links: [
+    { href: '/sitemap-index.xml', label: 'XML sitemap' }, { href: '/llms.txt', label: 'llms.txt (AI summary)' }, { href: '/robots.txt', label: 'robots.txt' }, { href: '/privacy-policy', label: 'Privacy policy' },
+  ] },
+];
+const total = sections.reduce((n, s) => n + s.links.length + (s.hub ? 1 : 0), 0);
+const list = { '@type': 'ItemList', name: 'Site map', itemListElement: sections.flatMap((s) => [...(s.hub ? [s.hub] : []), ...s.links]).filter((l) => !l.href.endsWith('.xml') && !l.href.endsWith('.txt')).map((l, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://vailvalleyit.com${l.href === '/' ? '/' : l.href}`, name: l.label })) };
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description, 'CollectionPage'), breadcrumbs(crumbs), list]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Site map</h1>
+    <p class="answer">Everything on vailvalleyit.com in one place: {services.length} services, {locations.length} Eagle County towns, {industries.length} industries and {frameworks.length} compliance guides, {total} links in all.</p>
+  </div></header>
+  <section class="section"><div class="wrap">
+    <div class="smap">
+      {sections.map((s) => (
+        <section class="smap-card" aria-labelledby={`sm-${s.title.replace(/\W+/g, '-').toLowerCase()}`}>
+          <h2 id={`sm-${s.title.replace(/\W+/g, '-').toLowerCase()}`}><span class="smap-icon"><Icon name={s.icon} /></span>{s.title}</h2>
+          {s.hub && <a class="smap-hub" href={s.hub.href}>{s.hub.label}<Icon name="chevron" /></a>}
+          <ul>{s.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+        </section>
+      ))}
+    </div>
+  </div></section>
+</Base>
