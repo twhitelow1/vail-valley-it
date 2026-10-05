@@ -1,4 +1,5 @@
 ---
+import Attribution from '../components/Attribution.astro';
 import '@fontsource-variable/plus-jakarta-sans';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
@@ -19,7 +20,8 @@ const { title, description, path, schema = [], ogImage = '/og-default.png', noin
 const canonical = path === '/' ? `${site.url}/` : `${site.url}${path}`;
 // Indexable only when the production env flag is set AND the page allows it.
 const indexable = import.meta.env.PUBLIC_SITE_INDEXABLE === 'true' && !noindex;
-const prod = import.meta.env.PUBLIC_SITE_INDEXABLE === 'true';
+// Analytics run on the production deployment (vercel.app or custom domain), never on previews.
+const prod = process.env.VERCEL_ENV === 'production' || import.meta.env.PUBLIC_SITE_INDEXABLE === 'true';
 const t = site.tracking;
 const ld = graph(organization(), website(), ...schema);
 ---
@@ -54,13 +56,14 @@ const ld = graph(organization(), website(), ...schema);
     <script type="application/ld+json" set:html={JSON.stringify(ld)} />
     {t.googleSiteVerification && <meta name="google-site-verification" content={t.googleSiteVerification} />}
     {t.bingSiteVerification && <meta name="msvalidate.01" content={t.bingSiteVerification} />}
+    <Attribution />
     {prod && t.gtmId && (
       <script is:inline define:vars={{ id: t.gtmId }}>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',id);</script>
     )}
     {prod && t.ga4Id && !t.gtmId && (
       <>
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${t.ga4Id}`}></script>
-        <script is:inline define:vars={{ id: t.ga4Id }}>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config',id);</script>
+        <script is:inline define:vars={{ id: t.ga4Id }}>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());var at=window.vvitAttribution||{},f=at.first||{},l=at.last||{};gtag('set','user_properties',{first_channel:f.channel||'',first_source:f.utm_source||''});gtag('config',id,{lead_channel:l.channel||'',first_channel:f.channel||''});</script>
       </>
     )}
     {prod && t.clarityId && (
@@ -83,7 +86,8 @@ const ld = graph(organization(), website(), ...schema);
         var href = a.getAttribute('href') || '';
         var name = a.dataset.track || (href.indexOf('tel:') === 0 ? 'call_click' : (/book|contact#book|leadconnector/.test(href) ? 'book_click' : ''));
         if (!name) return;
-        var p = { link_text: (a.textContent || '').trim().slice(0, 60), page_path: location.pathname };
+        var at = window.vvitAttribution || {}, la = at.last || {}, fi = at.first || {};
+        var p = { link_text: (a.textContent || '').trim().slice(0, 60), page_path: location.pathname, lead_channel: la.channel || '', lead_source: la.utm_source || '', first_channel: fi.channel || '' };
         if (window.gtag) window.gtag('event', name, p);
         if (window.dataLayer) window.dataLayer.push(Object.assign({ event: name }, p));
       });

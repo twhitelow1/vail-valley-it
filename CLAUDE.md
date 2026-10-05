@@ -19,6 +19,7 @@ Pages are data-driven. Edit content in `src/data/`, not in page templates:
 - `projects.ts` → case studies
 - `src/lib/schema.ts` — JSON-LD builders; `src/layouts/Base.astro` — head, meta, tracking
 - `llms.txt.ts`, `robots.txt.ts` — generated endpoints
+- `src/components/Attribution.astro` — first-party lead source tracking (UTMs, click IDs, organic/AI/social) passed to GTM and GHL forms. Analytics setup steps: `docs/ANALYTICS.md`
 
 ## Rules
 - Canonicals, OG URLs and schema `@id`s always use `https://vailvalleyit.com`, even on previews.
