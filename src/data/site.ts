@@ -45,7 +45,7 @@ export const site = {
     mapsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJe5-12u0L_wARt6dTqHKHrWw',
   },
   sameAs: ['https://dublowdigital.com', 'https://www.instagram.com/dublowco/'],
-  lastReviewed: '2026-10-02',
+  lastReviewed: '2026-10-05',
 };
 
 export const bookHref = site.bookingUrl || '/contact#book';

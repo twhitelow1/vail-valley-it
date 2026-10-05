@@ -5,7 +5,7 @@ Astro 7 static site (Node ≥ 22), deployed on Vercel. Built for local SEO and A
 
 ## Commands
 - `npm run dev` — dev server on http://localhost:4321
-- `npm run build` — static build to `dist/` (62 pages). Run this before every push; it is the only check.
+- `npm run build` — static build to `dist/` (63 pages). Run this before every push; it is the only check.
 - `npm run build && python3 tools/preview_bundle.py dist preview.html` — single-file clickable preview
 
 ## Architecture
@@ -19,6 +19,7 @@ Pages are data-driven. Edit content in `src/data/`, not in page templates:
 - `projects.ts` → case studies
 - `src/lib/schema.ts` — JSON-LD builders; `src/layouts/Base.astro` — head, meta, tracking
 - `llms.txt.ts`, `robots.txt.ts` — generated endpoints
+- Sitemaps: `astro.config.mjs` splits `sitemap-index.xml` into section sitemaps (it-services, digital-marketing, service-areas, industries, compliance, pages) with priorities and `lastmod` from `site.lastReviewed`; `public/sitemap.xsl` styles them in browsers; `/sitemap` is the human site map. Bump `lastReviewed` when content changes
 - `src/components/Attribution.astro` — first-party lead source tracking (UTMs, click IDs, organic/AI/social) passed to GTM and GHL forms. Analytics setup steps: `docs/ANALYTICS.md`
 
 ## Rules
