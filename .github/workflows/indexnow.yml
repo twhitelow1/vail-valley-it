@@ -1,6 +1,6 @@
 # Tell IndexNow search engines (Bing → Copilot/ChatGPT search, Yandex, Seznam, Naver) about every URL
 # after each production deploy. Google does not use IndexNow; it reads the sitemap in Search Console.
-name: IndexNow ping
+name: Post-deploy SEO check + IndexNow ping
 
 on:
   push:
@@ -13,6 +13,21 @@ jobs:
     steps:
       - name: Wait for the Vercel production deploy
         run: sleep 120
+      - name: Check the live site is open to search engines
+        env:
+          HOST: vailvalleyit.com
+        run: |
+          set -euo pipefail
+          echo "--- robots.txt as served to Googlebot"
+          robots=$(curl -fsSL -A 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' "https://$HOST/robots.txt")
+          echo "$robots"
+          meta=$(curl -fsSL "https://$HOST/managed-it-services" | grep -oE '<meta name="robots" content="[^"]*"' || true)
+          echo "--- /managed-it-services: $meta"
+          for u in / /sitemap.xml /sitemap-index.xml /managed-it-services; do
+            echo "$u -> $(curl -s -o /dev/null -w '%{http_code}' -A 'Googlebot/2.1' "https://$HOST$u")"
+          done
+          if echo "$robots" | grep -qx 'Disallow: /'; then echo "::error::robots.txt blocks all crawlers"; exit 1; fi
+          if echo "$meta" | grep -q noindex; then echo "::error::pages are noindex"; exit 1; fi
       - name: Submit sitemap URLs
         env:
           HOST: vailvalleyit.com
