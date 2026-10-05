@@ -29,7 +29,7 @@ const sections: { icon: string; title: string; hub?: L; links: L[] }[] = [
     { href: '/workshops-webinars/online-webinars', label: 'Online webinars' },
   ] },
   { icon: 'database', title: 'For search engines & AI', links: [
-    { href: '/sitemap-index.xml', label: 'XML sitemap' }, { href: '/llms.txt', label: 'llms.txt (AI summary)' }, { href: '/robots.txt', label: 'robots.txt' }, { href: '/privacy-policy', label: 'Privacy policy' },
+    { href: '/sitemap.xml', label: 'XML sitemap' }, { href: '/llms.txt', label: 'llms.txt (AI summary)' }, { href: '/robots.txt', label: 'robots.txt' }, { href: '/privacy-policy', label: 'Privacy policy' },
   ] },
 ];
 const total = sections.reduce((n, s) => n + s.links.length + (s.hub ? 1 : 0), 0);

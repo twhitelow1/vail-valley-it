@@ -23,7 +23,7 @@ jobs:
           echo "$robots"
           meta=$(curl -fsSL "https://$HOST/managed-it-services" | grep -oE '<meta name="robots" content="[^"]*"' || true)
           echo "--- /managed-it-services: $meta"
-          for u in / /sitemap.xml /sitemap-index.xml /managed-it-services; do
+          for u in / /sitemap.xml /robots.txt /managed-it-services; do
             echo "$u -> $(curl -s -o /dev/null -w '%{http_code}' -A 'Googlebot/2.1' "https://$HOST$u")"
           done
           if echo "$robots" | grep -qx 'Disallow: /'; then echo "::error::robots.txt blocks all crawlers"; exit 1; fi
@@ -34,9 +34,7 @@ jobs:
           KEY: 238ee261fa58eda40fa48b2649ca8eda
         run: |
           set -euo pipefail
-          urls=$(for sm in $(curl -fsSL "https://$HOST/sitemap-index.xml" | grep -oE '<loc>[^<]+' | sed 's/<loc>//'); do
-            curl -fsSL "$sm" | grep -oE '<loc>[^<]+' | sed 's/<loc>//'
-          done | sort -u)
+          urls=$(curl -fsSL "https://$HOST/sitemap.xml" | grep -oE '<loc>[^<]+' | sed 's/<loc>//' | sort -u)
           count=$(echo "$urls" | wc -l)
           echo "Submitting $count URLs"
           body=$(jq -n --arg host "$HOST" --arg key "$KEY" --arg loc "https://$HOST/$KEY.txt" \

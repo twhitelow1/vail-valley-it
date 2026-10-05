@@ -1,16 +1,10 @@
 ---
-import Icon from './Icon.astro';
-import { reviews, site } from '../data/site';
-interface Props { limit?: number }
-const { limit = reviews.length } = Astro.props;
+// Live review widget (GoHighLevel Reputation). Updates itself as new Google reviews arrive.
+// The verbatim highlights in site.ts stay as crawlable text on /reviews-testimonials.
+import { site } from '../data/site';
 ---
-<div class="reviews">
-  {reviews.slice(0, limit).map((r) => (
-    <figure class="review">
-      <span class="stars" aria-label="5 out of 5 stars">{[1,2,3,4,5].map(() => <Icon name="star" />)}</span>
-      <blockquote><p>{r.text}</p></blockquote>
-      <figcaption><b>{r.author}</b>, Google review</figcaption>
-    </figure>
-  ))}
+<div class="reviews-widget">
+  <script is:inline src="https://reputationhub.site/reputation/assets/review-widget.js"></script>
+  <iframe class="lc_reviews_widget" src={site.reviewWidgetUrl} title={`${site.parentBrand} Google reviews`} loading="lazy" frameborder="0" scrolling="no" style="min-width: 100%; width: 100%; border: 0;"></iframe>
 </div>
-<p class="meta">Reviews shown verbatim from our <a href={site.gbp.mapsUrl} rel="noopener">Google Business Profile</a> (listed as {site.parentBrand}). <a href="/reviews-testimonials">See all reviews</a> or <a href={site.gbp.reviewUrl} rel="noopener">leave one</a>.</p>
+<p class="meta">Live reviews from our <a href={site.gbp.mapsUrl} rel="noopener">Google Business Profile</a> (listed as {site.parentBrand}). <a href={site.gbp.reviewUrl} rel="noopener">Leave a review</a>.</p>

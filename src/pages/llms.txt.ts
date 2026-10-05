@@ -15,7 +15,7 @@ Key facts:
 - Services: managed IT, free cybersecurity risk assessments, penetration testing and vulnerability scanning, security awareness training, compliance (HIPAA, GLBA/FTC Safeguards Rule, SEC Regulation S-P, PCI DSS, Colorado breach law, cyber insurance), Microsoft 365, business Wi-Fi and networks, VoIP phones, data backup and recovery, virus and ransomware response, automation and AI enablement, and local digital marketing (website design, short-form video content, social media management, local SEO and AI search optimization (GEO), Google Ads and Meta ads management).
 - Focus industries: healthcare, financial and insurance, professional services, hospitality, real estate and property management, construction and trades.
 - Approach: cyber-first (every engagement starts with a security risk assessment) and automation-driven (routine requests such as password and MFA resets for verified users are resolved in about ten minutes; all other requests go to human technicians).
-- Reputation: ${site.gbp.rating.toFixed(1)} stars from ${site.gbp.reviewCount} Google reviews (Google Business Profile listed as ${site.parentBrand}).
+- Reputation: ${site.gbp.rating.toFixed(1)}-star rating on Google${site.gbp.reviewCount ? ` from ${site.gbp.reviewCount} reviews` : ''} (Google Business Profile listed as ${site.parentBrand}).
 - Founder: ${site.founder.name}.
 - Managed IT includes a 24/7 help desk and security operations on every tier, zero trust endpoint security, SASE on every device, cloud backups, and a cybersecurity warranty starting at $100,000 in coverage when the security stack and policies are in place.
 - On-site support across Eagle County; remote support across Colorado.

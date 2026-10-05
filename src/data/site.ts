@@ -39,11 +39,12 @@ export const site = {
   founder: { name: 'Todd Whitelow', role: 'Founder', url: '/about' },
   gbp: {
     placeId: 'ChIJe5-12u0L_wARt6dTqHKHrWw',
-    reviewCount: 14,
+    reviewCount: 0, // TODO real Google review count; 0 hides the number everywhere
     rating: 5.0,
     reviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJe5-12u0L_wARt6dTqHKHrWw',
     mapsUrl: 'https://www.google.com/maps/place/?q=place_id:ChIJe5-12u0L_wARt6dTqHKHrWw',
   },
+  reviewWidgetUrl: 'https://reputationhub.site/reputation/widgets/review_widget/w7A0JqmxzOFxwCv4DXQr?widgetId=6ac3c74d9d5cc1986008c208',
   sameAs: ['https://dublowdigital.com', 'https://www.instagram.com/dublowco/'],
   lastReviewed: '2026-10-05',
 };

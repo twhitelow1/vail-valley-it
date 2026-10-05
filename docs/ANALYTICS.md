@@ -32,7 +32,7 @@ default group → add channel **AI Assistants** *above* Referral:
 
 ## 3. Google Search Console
 Add a **Domain** property for `vailvalleyit.com` and verify with the DNS **TXT** record (in the
-domain's DNS). Then submit `https://vailvalleyit.com/sitemap-index.xml`. Link Search Console to GA4
+domain's DNS). Then submit `https://vailvalleyit.com/sitemap.xml`. Link Search Console to GA4
 (GA4 Admin → Product links). If DNS isn't available, use the HTML-tag method and put the token in
 `googleSiteVerification`.
 

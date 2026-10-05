@@ -19,7 +19,7 @@ Pages are data-driven. Edit content in `src/data/`, not in page templates:
 - `projects.ts` → case studies
 - `src/lib/schema.ts` — JSON-LD builders; `src/layouts/Base.astro` — head, meta, tracking
 - `llms.txt.ts`, `robots.txt.ts` — generated endpoints
-- Sitemaps: `astro.config.mjs` splits `sitemap-index.xml` into section sitemaps (it-services, digital-marketing, service-areas, industries, compliance, pages) with priorities and `lastmod` from `site.lastReviewed`; `public/sitemap.xsl` styles them in browsers; `/sitemap` is the human site map. Bump `lastReviewed` when content changes
+- Sitemap: a plain `sitemap.xml` (loc + lastmod only) is written after each build by the `plain-sitemap` hook in `astro.config.mjs`, from the pages that were built. `/sitemap-index.xml` redirects to it. `/sitemap` is the human site map. Bump `site.lastReviewed` when content changes
 - `src/components/Attribution.astro` — first-party lead source tracking (UTMs, click IDs, organic/AI/social) passed to GTM and GHL forms. Analytics setup steps: `docs/ANALYTICS.md`
 
 ## Rules
