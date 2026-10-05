@@ -5,8 +5,8 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services, serviceGroups as groups } from '../../data/services';
 import { breadcrumbs, webPage } from '../../lib/schema';
-const title = 'IT & Digital Marketing Services for Vail Valley Businesses | Vail Valley IT';
-const description = 'Managed IT, cybersecurity, compliance, Microsoft 365, networks, VoIP, backup, AI automation and digital marketing for businesses across Vail, Avon, Edwards and Eagle County.';
+const title = 'IT & Marketing Services in Vail Valley, CO | Vail Valley IT';
+const description = 'Managed IT, cybersecurity, compliance, Microsoft 365, networks, VoIP, AI automation and digital marketing for businesses in Vail, Avon, Edwards and Eagle County.';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }];
 const list = { '@type': 'ItemList', itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: `https://vailvalleyit.com/${s.slug}`, name: s.name })) };
 ---

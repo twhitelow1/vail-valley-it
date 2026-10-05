@@ -1,10 +1,12 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { copyFile } from 'node:fs/promises';
 import { services } from './src/data/services.ts';
 import { site } from './src/data/site.ts';
 
 const SITE = 'https://vailvalleyit.com';
-const lastmod = new Date(site.lastReviewed + 'T12:00:00Z');
+// Midnight UTC on the review date: a lastmod in the future makes Google reject the sitemap.
+const lastmod = new Date(site.lastReviewed + 'T00:00:00Z');
 const path = (url) => url.replace(SITE, '').replace(/\/$/, '') || '/';
 const marketing = new Set(services.filter((s) => s.group === 'Digital Marketing').map((s) => '/' + s.slug));
 const itServices = new Map(services.filter((s) => s.group !== 'Digital Marketing').map((s) => ['/' + s.slug, s.tier]));
@@ -31,6 +33,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.includes('/404') && !page.includes('/thank-you'),
       xslURL: '/sitemap.xsl',
+      namespaces: { news: false, xhtml: false, image: false, video: false },
       lastmod,
       serialize(item) {
         const p = path(item.url);
@@ -45,5 +48,10 @@ export default defineConfig({
         compliance: pick((p) => p.startsWith('/compliance/') || p === '/compliance'),
       },
     }),
+    // Also publish the index at /sitemap.xml, the address most tools (and people) try first.
+    {
+      name: 'sitemap-xml-alias',
+      hooks: { 'astro:build:done': async ({ dir }) => { await copyFile(new URL('sitemap-index.xml', dir), new URL('sitemap.xml', dir)); } },
+    },
   ],
 });
