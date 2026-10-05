@@ -72,7 +72,7 @@ const faqs = [
           <tr><th scope="row">Serves</th><td>Eagle County, CO</td></tr>
           <tr><th scope="row">Phone</th><td>{site.phone}</td></tr>
           <tr><th scope="row">Careers</th><td><a href="/careers">Send us your resume</a></td></tr>
-          <tr><th scope="row">Reviews</th><td><a href="/reviews-testimonials">{site.gbp.rating.toFixed(1)} ★ ({site.gbp.reviewCount})</a></td></tr>
+          <tr><th scope="row">Reviews</th><td><a href="/reviews-testimonials">{site.gbp.rating.toFixed(1)} ★ on Google{site.gbp.reviewCount ? ` (${site.gbp.reviewCount})` : ''}</a></td></tr>
         </tbody></table>
       </div>
     </aside>

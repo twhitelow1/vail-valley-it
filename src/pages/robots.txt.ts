@@ -28,7 +28,7 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://vailvalleyit.com/sitemap-index.xml
+Sitemap: https://vailvalleyit.com/sitemap.xml
 `
     : `User-agent: *\nDisallow: /\n`;
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

@@ -3,7 +3,8 @@ import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Reviews from '../components/Reviews.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site } from '../data/site';
+import Icon from '../components/Icon.astro';
+import { site, reviews } from '../data/site';
 import { breadcrumbs, webPage } from '../lib/schema';
 const title = 'Client Reviews & Testimonials | Vail Valley IT';
 const description = 'See what Eagle County business owners say about working with Vail Valley IT for managed IT, cybersecurity and support services.';
@@ -13,9 +14,21 @@ const crumbs = [{ name: 'Home', path: '/' }, { name: 'Reviews', path: '/reviews-
   <header class="page-head"><div class="wrap">
     <Breadcrumbs items={crumbs} />
     <h1>Vail Valley IT reviews</h1>
-    <p class="answer">Vail Valley IT holds a {site.gbp.rating.toFixed(1)}-star rating from {site.gbp.reviewCount} Google reviews on its Google Business Profile, listed under parent company {site.parentBrand}. Clients consistently mention responsiveness, patience and security they did not know they were missing.</p>
+    <p class="answer">Vail Valley IT holds a {site.gbp.rating.toFixed(1)}-star rating{site.gbp.reviewCount ? ` from ${site.gbp.reviewCount} reviews` : ''} on its Google Business Profile, listed under parent company {site.parentBrand}. Clients consistently mention responsiveness, patience and security they did not know they were missing.</p>
     <p><a class="btn btn-outline" href={site.gbp.reviewUrl} rel="noopener">Leave a Google review</a></p>
   </div></header>
   <section class="section"><div class="wrap"><Reviews /></div></section>
+  <section class="section tint" aria-labelledby="hl-h"><div class="wrap">
+    <h2 id="hl-h">A few highlights</h2>
+    <div class="reviews">
+      {reviews.map((r) => (
+        <figure class="review">
+          <span class="stars" aria-label="5 out of 5 stars">{[1,2,3,4,5].map(() => <Icon name="star" />)}</span>
+          <blockquote><p>{r.text}</p></blockquote>
+          <figcaption><b>{r.author}</b>, Google review</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div></section>
   <CtaBand />
 </Base>

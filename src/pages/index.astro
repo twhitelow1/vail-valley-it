@@ -89,7 +89,7 @@ const nodes = [
           <a class="btn btn-outline" href={telHref}><Icon name="phone" />Talk to an expert</a>
         </div>
         <div class="hero-proof">
-          <span><span class="stars" aria-hidden="true">{[1,2,3,4,5].map(() => <Icon name="star" />)}</span><a href="/reviews-testimonials">{site.gbp.rating.toFixed(1)} from {site.gbp.reviewCount} Google reviews</a></span>
+          <span><span class="stars" aria-hidden="true">{[1,2,3,4,5].map(() => <Icon name="star" />)}</span><a href="/reviews-testimonials">{site.gbp.rating.toFixed(1)} on Google{site.gbp.reviewCount ? ` from ${site.gbp.reviewCount} reviews` : ' reviews'}</a></span>
           <span><Icon name="pin" />Based in Edwards, CO</span>
           <span><Icon name="shield" />Cyber-first since day one</span>
         </div>
@@ -276,7 +276,7 @@ const nodes = [
     <div class="wrap">
       <div class="section-head center"><span class="eyebrow">Real results for local businesses</span><h2 id="proof-h" class="sr-only">Results</h2><p><a href="/case-studies">See case studies</a></p></div>
       <div class="proof">
-        <div><Icon name="star" /><div><b>5.0 stars</b><span>{site.gbp.reviewCount} Google reviews</span><p>Every review from a real local client. <a href="/reviews-testimonials">Read them</a>.</p></div></div>
+        <div><Icon name="star" /><div><b>5.0 stars</b><span>{site.gbp.reviewCount ? `${site.gbp.reviewCount} Google reviews` : 'on Google'}</span><p>Every review from a real local client. <a href="/reviews-testimonials">Read them</a>.</p></div></div>
         <div><Icon name="clock" /><div><b>~10 minutes</b><span>Routine requests</span><p>New users and password or MFA resets for verified staff, versus 1–2 hours human-only.</p></div></div>
         <div><Icon name="shield" /><div><b>24/7</b><span>Monitoring</span><p>Devices, network and security alerts watched around the clock.</p></div></div>
         <div><Icon name="pin" /><div><b>Edwards-based</b><span>Local technicians</span><p>On site in Avon in about 10 minutes and Vail in about 20.</p></div></div>
@@ -321,7 +321,7 @@ const nodes = [
   <section class="section tint" aria-labelledby="rev-h">
     <div class="wrap">
       <div class="section-head"><span class="eyebrow">Reviews</span><h2 id="rev-h">What local business owners say</h2></div>
-      <Reviews limit={3} />
+      <Reviews />
     </div>
   </section>
 
