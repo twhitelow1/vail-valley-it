@@ -5,7 +5,7 @@ Astro 7 static site (Node ≥ 22), deployed on Vercel. Built for local SEO and A
 
 ## Commands
 - `npm run dev` — dev server on http://localhost:4321
-- `npm run build` — static build to `dist/` (63 pages). Run this before every push; it is the only check.
+- `npm run build` — static build to `dist/` (64 pages). Run this before every push; it is the only check.
 - `npm run build && python3 tools/preview_bundle.py dist preview.html` — single-file clickable preview
 
 ## Architecture

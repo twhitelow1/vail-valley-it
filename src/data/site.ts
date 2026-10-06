@@ -37,6 +37,8 @@ export const site = {
   // Credentials / memberships with logo files you own the right to use. Drop files in /public/logos/.
   credentials: [] as { name: string; logo?: string; url?: string }[], // e.g. { name: 'Vail Valley Partnership member', logo: '/logos/vvp.svg' }
   founder: { name: 'Todd Whitelow', role: 'Founder', url: '/about' },
+  // Referral program thank-you, e.g. 'a $250 Visa gift card' or 'one month of service free'. Empty hides the reward line.
+  referralReward: '', // TODO set real referral terms
   gbp: {
     placeId: 'ChIJe5-12u0L_wARt6dTqHKHrWw',
     reviewCount: 0, // TODO real Google review count; 0 hides the number everywhere
@@ -46,7 +48,7 @@ export const site = {
   },
   reviewWidgetUrl: 'https://reputationhub.site/reputation/widgets/review_widget/w7A0JqmxzOFxwCv4DXQr?widgetId=6ac3c74d9d5cc1986008c208',
   sameAs: ['https://dublowdigital.com', 'https://www.instagram.com/dublowco/'],
-  lastReviewed: '2026-10-05',
+  lastReviewed: '2026-10-06',
 };
 
 export const bookHref = site.bookingUrl || '/contact#book';

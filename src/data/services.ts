@@ -74,10 +74,10 @@ export const services: Service[] = [
         h2: 'How onboarding works',
         html: `<p>Switching to managed IT, or switching providers, follows the same four steps:</p>
 <ol>
-<li><strong>Free cybersecurity assessment.</strong> We inventory devices, accounts, licenses and backups, and run a security risk assessment.</li>
+<li><strong>Goals and a free technology assessment.</strong> We learn where the business is going, then inventory devices, accounts, licenses and backups, and run a security risk assessment.</li>
 <li><strong>Written findings and a flat quote.</strong> You see what is at risk, what is wasted and exactly what the monthly price covers.</li>
 <li><strong>Onboarding.</strong> Monitoring agents, security tools and documentation go in, usually within two to three weeks, with no disruption to your day.</li>
-<li><strong>Quarterly reviews.</strong> We meet every quarter to review tickets, risks and the next twelve months of technology spending.</li>
+<li><strong>Quarterly payback reviews.</strong> We meet every quarter to review what we fixed, what we cleaned up or cancelled, what we automated, open risks and the next twelve months of technology spending.</li>
 </ol>`,
       },
     ],
@@ -95,7 +95,7 @@ export const services: Service[] = [
       'Quarterly technology roadmap and budget planning',
     ],
     faqs: [
-      { q: 'How much do managed IT services cost for a small business in Vail?', a: 'Vail Valley IT managed IT plans start at $297 a month, including a secure business email and productivity suite, endpoint protection and a secure AI platform. The final price depends on the number of users and devices, servers, locations and compliance requirements, and is quoted as a flat monthly fee after a free cybersecurity assessment.' },
+      { q: 'How much do managed IT services cost for a small business in Vail?', a: 'Vail Valley IT managed IT plans start at $297 a month, including a secure business email and productivity suite, endpoint protection and a secure AI platform. The final price depends on the number of users and devices, servers, locations and compliance requirements, and is quoted as a flat monthly fee after a free technology assessment.' },
       { q: 'What is the difference between managed IT and break-fix support?', a: 'Break-fix support bills by the hour after something breaks. Managed IT is a flat monthly fee for monitoring, maintenance, security and help desk, which shifts the incentive toward preventing problems rather than billing for them.' },
       { q: 'Do you offer managed IT for businesses with fewer than 10 employees?', a: 'Yes. Most of our clients are offices with roughly 5 to 50 people, and many have about ten users and devices. Small teams often benefit most because nobody on staff has time to be the part-time IT person.' },
       { q: 'Can you work alongside our existing IT person?', a: 'Yes. We often run co-managed IT, where we provide monitoring, security tooling and after-hours coverage while your internal person handles day-to-day requests and local knowledge.' },

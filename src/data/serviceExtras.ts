@@ -695,3 +695,145 @@ export const extras: Record<string, Extra> = {
     ],
   },
 };
+
+// "How it pays you back": the concrete ways each service returns money, time or revenue.
+// Mechanisms only. No invented dollar figures or ROI percentages.
+export const payback: Record<string, [string, string][]> = {
+  'managed-it-services': [
+    ['One flat number instead of surprise invoices', 'Support, security and monitoring are budgeted as one monthly line item, so a bad week does not become a big bill.'],
+    ['Licenses and subscriptions right-sized', 'We track every seat and subscription and cancel or downgrade the ones nobody uses, then review them again each quarter.'],
+    ['Your people stop being the IT department', 'Owners and office managers get back the hours they spend fixing printers, chasing passwords and calling vendors.'],
+    ['Problems fixed before they cost you a day', '24/7 monitoring and patching catch failing drives, full disks and missed updates before they turn into downtime.'],
+  ],
+  'it-consulting-support': [
+    ['Avoid the expensive wrong decision', 'An independent review before you sign catches oversized quotes, overlapping tools and hardware you do not need.'],
+    ['Vendor quotes, pressure-tested', 'We check pricing and scope against what the job actually requires, so you negotiate from facts.'],
+    ['Find the subscriptions nobody can explain', 'We list every software charge, who uses it and what it overlaps with, then recommend what to cut.'],
+    ['A roadmap you can budget around', 'Planned spending replaces emergency purchases, which almost always cost more.'],
+  ],
+  'business-network-wifi-support': [
+    ['Busy days stay busy', 'A stable network keeps point of sale, booking and phones running when you have the most customers.'],
+    ['Fewer “the internet is down” calls', 'Monitoring flags failing equipment and congestion early, before staff lose time to it.'],
+    ['Guest Wi-Fi that helps, not hurts', 'Separated guest networks protect payment systems and keep reviews about slow Wi-Fi off your profile.'],
+    ['Spend on gear only when it matters', 'We tell you what can stay, what to tune and what truly needs replacing.'],
+  ],
+  'microsoft-365-email-migration': [
+    ['License right-sizing on day one', 'We match each person to the plan they need, so you are not paying premium licenses for basic mailboxes.'],
+    ['Retire tools you no longer need', 'Teams, OneDrive and SharePoint often replace separate file-sharing, chat and meeting subscriptions.'],
+    ['No lost mail, no lost day', 'Pre-staged migration and an after-hours cut-over mean staff log in the next morning and keep working.'],
+    ['Security that lowers your risk', 'MFA, conditional access and email authentication go in from the start, closing the most common entry points for fraud.'],
+  ],
+  'email-security-spam-protection': [
+    ['Stop the wire-fraud email', 'Impersonation and invoice-fraud filtering targets the messages that cost businesses real money.'],
+    ['Less time in the junk folder', 'Staff stop sorting spam and second-guessing suspicious messages.'],
+    ['Your mail reaches customers', 'Correct SPF, DKIM and DMARC keep your invoices and quotes out of other people’s spam folders.'],
+    ['Fewer incidents to clean up', 'Blocking phishing at the inbox avoids the time and cost of a compromised account.'],
+  ],
+  'voip-phone-systems': [
+    ['Missed calls become booked jobs', 'Call routing, ring groups and voicemail-to-email get every caller to someone who can help, even after hours.'],
+    ['Drop the legacy phone bill', 'Cloud phones usually replace on-site phone hardware, maintenance contracts and per-line charges.'],
+    ['Seasonal staff in minutes', 'Add or remove extensions as staffing changes, without a technician visit.'],
+    ['Answer from anywhere', 'Your business number rings on desk phones, laptops and mobiles, so a closed office is not a missed customer.'],
+  ],
+  'it-data-protection': [
+    ['A lost laptop is an inconvenience, not a crisis', 'Tested backups mean restoring files instead of rebuilding them by hand.'],
+    ['No ransom to pay', 'Immutable offsite copies give you a clean way back that does not depend on paying an attacker.'],
+    ['Back to work on a known timeline', 'Defined recovery times tell you how quickly the business is running again, before you ever need it.'],
+    ['Answers for your insurer', 'Backup reports and restore tests are the evidence cyber-insurance and compliance reviews ask for.'],
+  ],
+  'remote-it-consultation': [
+    ['Expert answers without a site visit', 'Remote sessions cut out travel time, so you pay for advice, not driving.'],
+    ['Decide before you spend', 'Talk through a purchase or project first and avoid buying the wrong thing.'],
+    ['A second opinion on your current setup', 'Find out whether what you are paying for today is what you actually need.'],
+  ],
+  'remote-tech-support': [
+    ['Fixed while you watch', 'Most issues are solved in one secure session, without waiting for a visit.'],
+    ['Less time stuck', 'Same-day fixes keep staff productive instead of working around a broken tool.'],
+    ['Pay for the fix, not the travel', 'Remote work avoids trip charges for problems that do not need hands on a keyboard.'],
+  ],
+  'hardware-upgrades': [
+    ['Buy once, buy right', 'Business-grade devices sized to the job last longer and avoid the hidden cost of cheap retail machines.'],
+    ['Predictable refresh budgets', 'A rolling replacement plan spreads costs evenly instead of forcing a big purchase when several machines fail at once.'],
+    ['New staff productive on day one', 'Pre-configured devices arrive ready to work, not ready to set up.'],
+    ['Warranties that get used', 'We track coverage and handle claims, so repairs under warranty are not paid out of pocket.'],
+  ],
+  'network-wifi-setup': [
+    ['Right-sized from the start', 'A site survey designs coverage for your space, so you buy the access points you need and no more.'],
+    ['Built once, built properly', 'Clean cabling, labeling and documentation make future changes faster and cheaper.'],
+    ['Customers and payments kept apart', 'Segmented networks protect card data and reduce compliance risk from day one.'],
+  ],
+  'virus-malware-removal': [
+    ['Stop the damage spreading', 'Fast isolation limits how many devices and accounts need cleaning, which limits the bill.'],
+    ['Back to work, not starting over', 'We clean and restore instead of rebuilding from scratch where it is safe to do so.'],
+    ['Close the door it came through', 'Fixing the root cause means you do not pay for the same cleanup twice.'],
+  ],
+  'compliance-cybersecurity': [
+    ['Avoid fines and breach costs', 'Required safeguards in place and documented reduce the chance and the cost of a reportable incident.'],
+    ['Insurance applications you can answer “yes” to', 'Controls insurers ask about are in place before renewal, which helps with eligibility and coverage.'],
+    ['Win the clients who ask', 'Larger clients and partners increasingly send security questionnaires; documented controls let you say yes.'],
+    ['Audits without the scramble', 'Evidence is kept on file all year, so staff are not pulled off work to rebuild it.'],
+  ],
+  'cybersecurity-risk-assessment': [
+    ['Spend on the risks that matter', 'A prioritized list tells you what to fix first, so the budget goes where it reduces the most risk.'],
+    ['Find what you are paying for but not using', 'The inventory covers licenses, subscriptions and tools, not just threats.'],
+    ['A record that satisfies insurers and regulators', 'Written findings document that a risk assessment was done, which many rules and policies require.'],
+  ],
+  'penetration-testing-vulnerability-scanning': [
+    ['Find the gap before an attacker does', 'Fixing a weakness found in a test costs far less than responding to one found in a breach.'],
+    ['Proof for clients and insurers', 'Test reports answer security questionnaires and support compliance requirements.'],
+    ['Fix what is real, skip what is not', 'Results are ranked by actual exposure, so you do not spend on low-risk findings.'],
+  ],
+  'security-awareness-training': [
+    ['Your staff become a filter, not a target', 'Trained employees report the phishing email instead of clicking it, which avoids costly incidents.'],
+    ['Fewer fraudulent payments', 'Staff learn to verify invoice and banking changes before money leaves the account.'],
+    ['Training records on file', 'Completion reports are the evidence insurers and regulators ask for.'],
+  ],
+  'emergency-it-support': [
+    ['Every hour down costs you', 'Fast local response shortens the outage and gets your team back to customers.'],
+    ['The right fix the first time', 'Experienced technicians diagnose before replacing, so you do not pay for parts you did not need.'],
+    ['A plan so it does not happen again', 'After the emergency, you get clear recommendations to prevent a repeat.'],
+  ],
+  'it-projects': [
+    ['A fixed price, in writing', 'Projects are quoted up front, so there is no open-ended hourly bill.'],
+    ['No lost business days', 'Cut-overs are scheduled around your hours and your season.'],
+    ['Done once, documented', 'Clean documentation makes the next change faster and cheaper, whoever does it.'],
+  ],
+  'automation-ai-enablement': [
+    ['Hours back every week', 'Automations handle data entry, follow-ups, reminders and handoffs that staff now do by hand.'],
+    ['Leads answered instantly', 'Automatic follow-up reaches new inquiries while they are still deciding, not the next morning.'],
+    ['Fewer costly mistakes', 'Data entered once and passed between systems removes retyping errors in quotes, invoices and schedules.'],
+    ['AI without the data risk', 'Business-grade AI tools with access controls and a usage policy let staff move faster without leaking client data.'],
+  ],
+  'website-design': [
+    ['Visitors become calls and bookings', 'Clear calls to action, click-to-call and online booking turn traffic into revenue.'],
+    ['Leads followed up automatically', 'Lead Alchemist follow-up, included with every marketing package, responds to new inquiries right away.'],
+    ['No plugins to patch, no surprise fixes', 'Fast, secure hosting avoids the maintenance bills and break-ins common with plugin-heavy sites.'],
+    ['Built to be found', 'Local SEO foundations and schema help you show up in Google and AI answers without paying for every click.'],
+  ],
+  'short-form-video-content': [
+    ['One shoot, many uses', 'Each shoot day produces versions for Reels, TikTok, Shorts and Facebook, plus footage you keep for your website and ads.'],
+    ['Show up where locals and visitors scroll', 'Short video reaches people who never see a print ad or a static post.'],
+    ['Better ads for the same budget', 'Real, local video gives Meta and Google ads more to work with than stock images.'],
+  ],
+  'social-media-management': [
+    ['Your time back', 'Planning, posting and replies are handled, so you are not writing captions after closing.'],
+    ['Stay top of mind between visits', 'A consistent presence keeps past customers coming back and supports referrals.'],
+    ['Inquiries followed up, not missed', 'Lead Alchemist follow-up, included with every marketing package, responds to new inquiries right away.'],
+  ],
+  'seo-ai-search-optimization': [
+    ['Customers who find you for free', 'Ranking in Google, Maps and AI answers brings in leads you do not pay for per click.'],
+    ['An asset that compounds', 'Strong pages and a well-kept Google Business Profile keep working month after month.'],
+    ['Less dependence on ads', 'Organic visibility lowers how much you need to spend on paid campaigns to stay busy.'],
+  ],
+  'google-ads-management': [
+    ['Stop paying for the wrong clicks', 'Negative keywords and town-level targeting cut spend on searches that will never become customers.'],
+    ['Know what every dollar returned', 'Call, form and booking tracking show which campaigns produce real leads.'],
+    ['Budget follows your season', 'Spend rises for peak season and drops in the shoulder, instead of running flat all year.'],
+    ['Leads answered fast', 'Lead Alchemist follow-up responds to new inquiries before they call the next business.'],
+  ],
+  'meta-ads-management': [
+    ['Reach the right people, not everyone', 'Targeting by location, interest and visitor markets keeps budget off audiences that will never book.'],
+    ['Know what is working', 'Pixel and conversion tracking connect ad spend to leads and sales.'],
+    ['Creative that earns attention', 'Local video and tested ad variations improve results without raising the budget.'],
+  ],
+};

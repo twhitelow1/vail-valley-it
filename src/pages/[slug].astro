@@ -9,7 +9,7 @@ import Reviews from '../components/Reviews.astro';
 import { services, serviceBySlug, type Service } from '../data/services';
 import { locations, locationBySlug, type Location } from '../data/locations';
 import { industries } from '../data/industries';
-import { extras } from '../data/serviceExtras';
+import { extras, payback } from '../data/serviceExtras';
 import { reviews } from '../data/site';
 import { site, bookHref, telHref } from '../data/site';
 import { breadcrumbs, faqPage, webPage, serviceSchema, localServiceSchema } from '../lib/schema';
@@ -27,6 +27,7 @@ const path = `/${item.slug}`;
 const reviewed = new Date(site.lastReviewed + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
 const ex = kind === 'service' ? extras[item.slug] : undefined;
+const pays = kind === 'service' ? payback[item.slug] : undefined;
 const allFaqs = [...item.faqs, ...(ex?.faqs ?? [])];
 const slugify = (t: string) => t.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const featuredReview = ex?.review ? reviews.find((r) => r.author === ex.review) : undefined;
@@ -59,7 +60,7 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
           </>
         ) : (
           <>
-            <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />{mkt ? 'Get a free marketing review' : 'Get a free cybersecurity assessment'}</a>
+            <a class="btn btn-primary" href={bookHref}><Icon name="calendar" />{mkt ? 'Get a free marketing review' : 'Get a free technology assessment'}</a>
             <a class="btn btn-outline" href={telHref}><Icon name="phone" />{site.phone}</a>
           </>
         )}
@@ -78,6 +79,7 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
             <b>On this page</b>
             <ol>
               {item.sections.map((s) => <li><a href={`#${slugify(s.h2)}`}>{s.h2}</a></li>)}
+              {pays && <li><a href="#payback">How it pays you back</a></li>}
               <li><a href="#signs">Signs you need it</a></li>
               {ex.process && <li><a href="#process">How it works</a></li>}
               <li><a href="#included">What’s included</a></li>
@@ -88,13 +90,21 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
         )}
         {item.sections.map((s) => (<><h2 id={slugify(s.h2)}>{s.h2}</h2><Fragment set:html={s.html} /></>))}
 
+        {svc && pays && (
+          <section class="payback" aria-labelledby="payback">
+            <h2 id="payback">How it pays you back</h2>
+            <p>Protecting your business is the minimum. Here is how {svc.name} returns time, money or revenue to it.</p>
+            <ul class="included">{pays.map(([h, p]) => <li><Icon name="check" /><span><strong>{h}</strong>{p}</span></li>)}</ul>
+          </section>
+        )}
+
         {svc && ex && (
           <>
             <h2 id="signs">Signs it’s time for {svc.name}</h2>
             <ul class="signs">{ex.signs.map((x) => <li><Icon name="check" />{x}</li>)}</ul>
             {mkt
               ? <p>If two or more of these sound familiar, <a href={bookHref}>book a free marketing review</a> or call <a href={telHref}>{site.phone}</a>.</p>
-              : <p>If two or more of these sound familiar, <a href="/security-check">take the free security check</a> or <a href={bookHref}>book a free cybersecurity assessment</a>.</p>}
+              : <p>If two or more of these sound familiar, <a href="/security-check">take the free security check</a> or <a href={bookHref}>book a free technology assessment</a>.</p>}
 
             {ex.process && (
               <>
@@ -199,8 +209,8 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
             </>
           ) : (
             <>
-              <h3>Free cybersecurity assessment</h3>
-              <p style="font-size:.95rem">We review your devices, accounts, backups and security, then send a written plan with a flat price.</p>
+              <h3>Free technology assessment</h3>
+              <p style="font-size:.95rem">We review your devices, accounts, licenses, backups and security, then show you what’s at risk, what you’re paying for but not using, and a flat price.</p>
               <a class="btn btn-light" href={bookHref}><Icon name="calendar" />Book my assessment</a>
             </>
           )}
@@ -242,6 +252,6 @@ const industryLinks = svc ? industries.filter((i) => i.services.includes(svc.slu
   )}
 
   {mkt
-    ? <CtaBand title={`Talk to us about ${svc!.name.toLowerCase()}`} text="Get a free local marketing review. We look at your website, Google Business Profile, search rankings, social and ads, then give you a written plan and a flat price." button="Get a free marketing review" />
-    : <CtaBand title={loc ? `Get local IT support in ${loc.town}` : `Talk to us about ${svc!.name.toLowerCase()}`} />}
+    ? <CtaBand title={`Talk to us about ${svc!.name}`} text="Get a free local marketing review. We look at your website, Google Business Profile, search rankings, social and ads, then give you a written plan and a flat price." button="Get a free marketing review" />
+    : <CtaBand title={loc ? `Get local IT support in ${loc.town}` : `Talk to us about ${svc!.name}`} />}
 </Base>

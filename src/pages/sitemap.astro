@@ -16,7 +16,7 @@ const svc = (g: string): L[] => services.filter((s) => s.group === g).map((s) =>
 const sections: { icon: string; title: string; hub?: L; links: L[] }[] = [
   { icon: 'compass', title: 'Company', links: [
     { href: '/', label: 'Home' }, { href: '/about', label: 'About Vail Valley IT' }, { href: '/reviews-testimonials', label: 'Reviews & testimonials' },
-    { href: '/case-studies', label: 'Case studies' }, { href: '/careers', label: 'Careers' }, { href: '/contact', label: 'Contact' },
+    { href: '/case-studies', label: 'Case studies' }, { href: '/referral-program', label: 'Referral program' }, { href: '/careers', label: 'Careers' }, { href: '/contact', label: 'Contact' },
   ] },
   ...serviceGroups.filter((g) => g !== 'Digital Marketing').map((g) => ({ icon: services.find((s) => s.group === g)!.icon, title: g, links: svc(g) })),
   { icon: 'megaphone', title: 'Digital marketing', hub: { href: '/digital-marketing', label: 'Digital marketing overview' }, links: svc('Digital Marketing') },
