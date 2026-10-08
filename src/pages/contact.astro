@@ -5,22 +5,22 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { site, bookHref, telHref } from '../data/site';
 import { breadcrumbs, webPage } from '../lib/schema';
 const title = 'Contact Vail Valley IT | Book a Free IT Checkup';
-const description = 'Contact Vail Valley IT in Edwards, CO. Call (970) 446-9440 or book a free cybersecurity assessment for your Vail Valley business.';
+const description = 'Contact Vail Valley IT in Edwards, CO. Call (970) 446-9440 or book a free technology assessment for your Vail Valley business.';
 const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }];
 ---
 <Base title={title} description={description} path="/contact" schema={[webPage('/contact', title, description, 'ContactPage'), breadcrumbs(crumbs)]}>
   <header class="page-head"><div class="wrap">
     <Breadcrumbs items={crumbs} />
     <h1>Contact Vail Valley IT</h1>
-    <p class="answer">Call <a href={telHref}>{site.phone}</a> to reach our Edwards-based team, or book a free cybersecurity assessment below. Current clients with an urgent issue should call the support line rather than use the form.</p>
+    <p class="answer">Call <a href={telHref}>{site.phone}</a> to reach our Edwards-based team, or book a free technology assessment below. Current clients with an urgent issue should call the support line rather than use the form.</p>
   </div></header>
   <section class="section" id="book"><div class="wrap article">
     <div>
-      <h2>Book your free cybersecurity assessment</h2>
+      <h2>Book your free technology assessment</h2>
       {site.formEmbedUrl ? (
-        <iframe data-attribution src={site.formEmbedUrl} title="Free cybersecurity assessment" style="width:100%;min-height:720px;border:0" loading="lazy"></iframe>
+        <iframe data-attribution src={site.formEmbedUrl} title="Free technology assessment" style="width:100%;min-height:720px;border:0" loading="lazy"></iframe>
       ) : site.bookingUrl ? (
-        <iframe data-attribution src={site.bookingUrl} title="Free cybersecurity assessment" style="width:100%;min-height:720px;border:0" loading="lazy"></iframe>
+        <iframe data-attribution src={site.bookingUrl} title="Free technology assessment" style="width:100%;min-height:720px;border:0" loading="lazy"></iframe>
       ) : (
         <div class="box">
           <p>The fastest way to book is a quick call. We will ask about your team size, your current setup and what is bugging you, then schedule the assessment.</p>

@@ -141,6 +141,15 @@ strong { color: var(--ink); font-weight: 700; }
 .pillar p { font-size: .93rem; margin: 0; }
 @media (max-width: 960px) { .pillars { grid-template-columns: repeat(2, 1fr); gap: 2rem 0; } .pillar:nth-child(odd) { border-left: 0; } .pillar:last-child { grid-column: 1 / -1; } }
 @media (max-width: 560px) { .pillars { grid-template-columns: 1fr; } .pillar { border-left: 0; } }
+.baseline { max-width: 900px; margin: 0 auto 2.2rem; padding: 1.2rem 1.4rem; border: 1px solid rgba(255,255,255,.16); border-radius: 16px; background: rgba(255,255,255,.04); text-align: center; }
+.baseline b { display: block; color: #fff; margin-bottom: .7rem; }
+.baseline ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .45rem .6rem; }
+.baseline li { display: inline-flex; align-items: center; gap: .35rem; margin: 0; padding: .3rem .75rem; border-radius: 999px; background: rgba(255,255,255,.08); font-size: .88rem; color: #d9d6f5; }
+.baseline .icon { width: 14px; height: 14px; color: #8fc1ff; }
+.payback-turn { max-width: 760px; margin: 0 auto 2.4rem; text-align: center; font-size: 1.15rem; color: #fff; font-weight: 600; }
+.payback-turn span { display: block; margin-top: .4rem; color: #b9adff; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; }
+.payback { margin: 2.2rem 0; }
+.payback li strong { display: block; }
 
 /* Automation hub diagram */
 .auto { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3rem; align-items: center; }
@@ -262,6 +271,8 @@ tr:last-child td { border-bottom: 0; }
 .founder-tags li { display: inline-flex; align-items: center; gap: .35rem; margin: 0; padding: .3rem .7rem; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); color: #fff; font-size: .8rem; font-weight: 600; }
 .founder-tags .icon { width: 14px; height: 14px; color: #8fc1ff; }
 .founder-focus { padding-left: .9rem; border-left: 3px solid #b44fe8; color: #fff; font-weight: 600; }
+.founder-quote { font-style: italic; color: #d9d6f5; }
+.founder-quote span { font-style: normal; font-size: .85rem; color: #b9b3ee; }
 .founder-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: 0 !important; }
 .founder-links a { color: #8fc1ff; font-weight: 600; font-size: .9rem; text-decoration: none; }
 .founder-links a:hover { color: #fff; text-decoration: underline; }
@@ -478,3 +489,4 @@ a[href^="tel:"] { white-space: nowrap; }
 .smap-card li:first-child { border-top: 0; }
 .smap-card li a { display: block; padding: .45rem 0; color: var(--text); text-decoration: none; font-size: .93rem; }
 .smap-card li a:hover { color: var(--violet); }
+.payback .included li { margin-bottom: .75rem; }

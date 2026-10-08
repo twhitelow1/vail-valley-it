@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import { site, telHref } from '../data/site';
+import { breadcrumbs, webPage, faqPage } from '../lib/schema';
+const path = '/referral-program';
+const title = 'Referral Program | Vail Valley IT';
+const description = 'Know a Vail Valley business whose IT costs more than it gives back? Introduce them to Vail Valley IT. No pressure for them, and a thank-you from us.';
+const crumbs = [{ name: 'Home', path: '/' }, { name: 'Referral Program', path }];
+const reward = site.referralReward;
+const referHref = site.email ? `mailto:${site.email}?subject=${encodeURIComponent('Referral — Vail Valley IT')}` : '/contact';
+const steps = [
+  { h: 'Make the introduction', p: 'Call us or send their name and how to reach them. Let them know we will be in touch.' },
+  { h: 'We have a no-pressure conversation', p: 'We learn what is frustrating them and offer a free technology assessment. If we are not the right fit, we say so.' },
+  { h: 'You get our thanks', p: reward ? `When they become a managed IT or marketing client, we send you ${reward}.` : 'When they become a client, we thank you personally. Your referral is the best compliment a local business can get.' },
+];
+const faqs = [
+  { q: 'Who can I refer to Vail Valley IT?', a: 'Any business that could use better IT, cybersecurity, automation or marketing, in Eagle County or anywhere our parent company DubLow Digital supports. You do not need to be a client to refer someone.' },
+  { q: 'Will the business I refer be pressured to sign up?', a: 'No. We start with a conversation and a free technology assessment. If we are not a fit, we tell them, and you will not hear that we pushed.' },
+  { q: 'How do I make a referral?', a: `Call ${site.phone}${site.email ? ` or email ${site.email}` : ' or use our contact page'} with the business name and how to reach them.` },
+];
+---
+<Base title={title} description={description} path={path} schema={[webPage(path, title, description), breadcrumbs(crumbs), faqPage(faqs, path)]}>
+  <header class="page-head"><div class="wrap">
+    <Breadcrumbs items={crumbs} />
+    <h1>Refer a business, help a neighbor</h1>
+    <p class="answer">Introductions from other business owners are how a local company grows. If you know a business whose IT is more firefighting than foresight, or whose technology costs more than it gives back, introduce them to Vail Valley IT.{reward && ` When they become a client, we send you ${reward}.`}</p>
+    <div class="btn-row" style="margin-top:1.5rem">
+      <a class="btn btn-primary" href={referHref}><Icon name="users" />Send a referral</a>
+      <a class="btn btn-outline" href={telHref}><Icon name="phone" />{site.phone}</a>
+    </div>
+  </div></header>
+
+  <section class="section" aria-labelledby="how-h">
+    <div class="wrap">
+      <h2 id="how-h">How it works</h2>
+      <ol class="steps">{steps.map((st) => <li><h3>{st.h}</h3><p>{st.p}</p></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="wrap narrow"><Faq faqs={faqs} /></div>
+  </section>
+</Base>
